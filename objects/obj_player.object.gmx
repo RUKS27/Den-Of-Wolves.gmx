@@ -35,6 +35,15 @@ rSpd = 4;
 mSpd = 3;
 sSpd = 2;
 
+// States
+enum p_states {
+    normal = 0,
+    cutscene = 1,
+    dead = 2
+}
+
+p_state = p_states.normal;
+
 // Inventory
 global.keyitems = ds_list_create();
 global.consumables = ds_list_create();
@@ -52,6 +61,30 @@ eq_consumable = 0;
 consum_pos = 0;
 
 eq_passive = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="6">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// Call Stealth Kill Script
+StealthKill(obj_enemy);
 </string>
           </argument>
         </arguments>
@@ -82,104 +115,29 @@ UpMove = keyboard_check(vk_up);
 
 Sneak = keyboard_check(vk_control);
 Run = keyboard_check(vk_shift);
-UseConsumable = keyboard_check(ord("X"));
 
-// Manage Acceleration And Deceleration
-xSpd = 0;
-ySpd = 0;
+Attack = keyboard_check_pressed(ord("X"))
+Attack_RLS = keyboard_check_released(ord("X"))
 
-xSpd = (RightMove - LeftMove) * mSpd; 
-if(xSpd == 0) ySpd = (DownMove - UpMove) * mSpd; 
+UseConsumable = keyboard_check(ord("C"));
 
-if(Run || Sneak){
-    mSpd = abs((Sneak * sSpd) - (Run * rSpd));
-} else {
-    mSpd = 3;
+// Switch State If Player Is Dead
+if(Health &lt;= 0){
+    p_state = p_states.dead;
 }
 
-// Collision Detection
-if place_meeting(x+xSpd, y, obj_wall)
-{
-    repeat(abs(xSpd)){
-        if !place_meeting(x+sign(xSpd),y,obj_wall)
-        {
-               x+=sign(xSpd);
-        } else {
-            break;
-        }
-    }
+switch(p_state){
+    case 0:
+        PlayerNormal();
+    break;
     
-    xSpd=0;
-}
-
-if place_meeting(x, y+ySpd, obj_wall)
-{
-    repeat(abs(ySpd)){
-        if !place_meeting(x,y+sign(ySpd),obj_wall)
-        {
-            y+=sign(ySpd);
-        } else {
-            break;
-        }
-    }
-    ySpd=0;
-}
-
-// Move Player Along The Axes
-x += xSpd;
-y += ySpd;
-
-// Change Items
-if(keyboard_check_pressed(ord("1"))){
-    show_debug_message("1");
-
-    if(eq_key &lt; ds_list_size(global.keyitems))
-        eq_key = ds_list_find_value(global.keyitems, eq_key+1);
-    else eq_key = ds_list_find_value(global.keyitems, 0);
-}
-
-if(keyboard_check_pressed(ord("2"))){
-    show_debug_message(eq_consumable);
-    consum_pos++;
+    case 1:
+        
+    break;
     
-    if(consum_pos &lt; ds_list_size(global.consumables))
-        eq_consumable = ds_list_find_value(global.consumables, consum_pos);
-    else {
-        eq_consumable = ds_list_find_value(global.consumables, 0);
-        consum_pos = 0;    
-    }
-}
-
-if(keyboard_check_pressed(ord("3"))){
-    if(eq_passive &lt; ds_list_size(global.passiveitems)){
-        eq_passive = ds_list_find_value(global.passiveitems, eq_passive+1);
-        show_debug_message(eq_passive);
-    } else eq_passive = ds_list_find_value(global.passiveitems, 0);
-}
-
-// Use Consumable Items
-if(UseConsumable){
-    if(eq_consumable &gt; 0){
-        UseCItem(eq_consumable);
+    case 2:
     
-        ds_list_delete(global.consumables, eq_consumable);
-    }
-}
-
-
-
-
-// Combat
-
-// Stealth Kill
-if((place_meeting(x, y-32, obj_enemy) &amp;&amp; instance_place(x, y-32, obj_enemy).lookDir = e_lookdir.forward) 
-|| (place_meeting(x, y+32, obj_enemy) &amp;&amp; instance_place(x, y+32, obj_enemy).lookDir = e_lookdir.down)){
-    show_debug_message("enemy killed");
-}
-
-if((place_meeting(x-32, y, obj_enemy) &amp;&amp; instance_place(x-32, y, obj_enemy).lookDir = e_lookdir.forward) 
-|| (place_meeting(x+32, y, obj_enemy) &amp;&amp; instance_place(x+32, y, obj_enemy).lookDir = e_lookdir.down)){
-    show_debug_message("enemy killed");
+    break;
 }
 </string>
           </argument>
