@@ -49,7 +49,7 @@
     <object>objects\obj_exit</object>
     <object>objects\obj_spawn</object>
     <object>objects\obj_camera</object>
-    <object>objects\obj_</object>
+    <object>objects\obj_controller</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
