@@ -24,6 +24,7 @@
   </sprites>
   <backgrounds name="background">
     <background>background\ts_exterior_den_01</background>
+    <background>background\ts_interior_house_01</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
