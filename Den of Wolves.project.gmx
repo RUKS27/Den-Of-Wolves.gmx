@@ -12,15 +12,18 @@
     <sprite>sprites\Health_Injection</sprite>
     <sprite>sprites\spr_dialoguebox</sprite>
     <sprite>sprites\spr_cursor</sprite>
-    <sprite>sprites\spr_title</sprite>
     <sprite>sprites\spr_invsquare</sprite>
     <sprite>sprites\spr_mshard</sprite>
     <sprite>sprites\spr_tstkey</sprite>
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_areaeditor</sprite>
+    <sprites name="Text">
+      <sprite>sprites\spr_gameover</sprite>
+      <sprite>sprites\spr_title</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
-    <background>background\ts_incompletefloors</background>
+    <background>background\ts_exterior_den_01</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -31,6 +34,8 @@
       <script>scripts\CheckInventoryForItem.gml</script>
       <script>scripts\UseCItem.gml</script>
     </scripts>
+    <script>scripts\PlayerNormal.gml</script>
+    <script>scripts\StealthKill.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
@@ -59,6 +64,7 @@
     <room>rooms\rm_general_house_interiors</room>
     <room>rooms\rm_important_interiors</room>
     <room>rooms\rm_startingarea</room>
+    <room>rooms\rm_gameover</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

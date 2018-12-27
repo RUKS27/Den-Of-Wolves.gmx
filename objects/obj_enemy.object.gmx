@@ -46,7 +46,7 @@ enum e_states {
     idle = 0,
     alert = 1,
     attacking = 2,
-    grappling = 3,
+    cutscene = 3,
     dead = 4
 } 
 
