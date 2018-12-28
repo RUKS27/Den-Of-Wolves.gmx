@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -30,6 +30,11 @@
 
 //Access Variables Use these when adding inputs into the game
 //so that it will detect regardless of what you're using
+
+//_Release = check if the button was released on that frame
+//_Press = check if the button is being held down
+//_Pressed = check if the button was pressed on that frame
+
 
 //Access Controls
 
@@ -77,13 +82,16 @@ global.Aim_Release = false;
 global.Aim_Press = false;
 global.Aim_Pressed = false;
 
+global.Pause_Release = false;
+global.Pause_Press = false;
+global.Pause_Pressed = false;
 //xinput Controls
 
 //stick mode is an option that can be used to use the stick instead of the dpad
 // 0 = dpad
 // 1 = left stick
 // 2 = right stick
-stickMode = 0;
+stickMode = 1;
 xi_Up = gp_padu
 xi_Down = gp_padd
 xi_Left = gp_padl
@@ -94,7 +102,7 @@ xi_Attack = gp_face3;
 xi_Item = gp_face4;
 xi_Context = gp_face1;
 xi_Run = gp_shoulderl;
-xi_Aim_Pres_s = gp_shoulderr;
+xi_Aim = gp_shoulderr;
 xi_Pause = gp_start;
 //Keyboard Controls
 
@@ -107,9 +115,9 @@ kb_Cancel = ord('X');
 kb_Attack = ord('X');
 kb_Item = ord('C');
 kb_Context = ord('Z');
-kb_Run = ord(vk_shift);
-kb_Aim = ord(vk_control);
-kb_Pause = ord(vk_enter);
+kb_Run = vk_shift;
+kb_Aim = vk_control;
+kb_Pause = vk_enter;
 
 // Music
 global.BGM = noone;
@@ -142,86 +150,163 @@ global.BGM = noone;
 switch(stickMode)
 {
     case 0:
-        global.Up_Release = keyboard_check_released(kb_Up)||gamepad_button_check_released(xi_Up);
-        global.Up_Press = keyboard_check_released(kb_Up)||gamepad_button_check_released(xi_Up);
-        global.Up_Pressed = keyboard_check_released(kb_Up)||gamepad_button_check_released(xi_Up);
+        global.Up_Release = keyboard_check_released(kb_Up)||gamepad_button_check_released(0,xi_Up);
+        global.Up_Press = keyboard_check(kb_Up)||gamepad_button_check(0,xi_Up);
+        global.Up_Pressed = keyboard_check_pressed(kb_Up)||gamepad_button_check_pressed(0,xi_Up);
 
-        global.Down_Release = keyboard_check_released(kb_Down)||gamepad_button_check_released(xi_Down);
-        global.Down_Press = keyboard_check_released(kb_Down)||gamepad_button_check_released(xi_Down);
-        global.Down_Pressed = keyboard_check_released(kb_Down)||gamepad_button_check_released(xi_Down);
+        global.Down_Release = keyboard_check_released(kb_Down)||gamepad_button_check_released(0,xi_Down);
+        global.Down_Press = keyboard_check(kb_Down)||gamepad_button_check(0,xi_Down);
+        global.Down_Pressed = keyboard_check_pressed(kb_Down)||gamepad_button_check_pressed(0,xi_Down);
 
-        global.Left_Release = keyboard_check_released(kb_Left)||gamepad_button_check_released(xi_Left);
-        global.Left_Press = keyboard_check_released(kb_Left)||gamepad_button_check_released(xi_Left);
-        global.Left_Pressed = keyboard_check_released(kb_Left)||gamepad_button_check_released(xi_Left);
+        global.Left_Release = keyboard_check_released(kb_Left)||gamepad_button_check_released(0,xi_Left);
+        global.Left_Press = keyboard_check(kb_Left)||gamepad_button_check(0,xi_Left);
+        global.Left_Pressed = keyboard_check_pressed(kb_Left)||gamepad_button_check_pressed(0,xi_Left);
 
-        global.Right_Release = keyboard_check_released(kb_Right)||gamepad_button_check_released(xi_Right);
-        global.Right_Press = keyboard_check_released(kb_Right)||gamepad_button_check_released(xi_Right);
-        global.Right_Pressed = keyboard_check_released(kb_Right)||gamepad_button_check_released(xi_Right);
+        global.Right_Release = keyboard_check_released(kb_Right)||gamepad_button_check_released(0,xi_Right);
+        global.Right_Press = keyboard_check(kb_Right)||gamepad_button_check(0,xi_Right);
+        global.Right_Pressed = keyboard_check_pressed(kb_Right)||gamepad_button_check_pressed(0,xi_Right);
     break;
     case 1:
         global.Up_Release = keyboard_check_released(kb_Up)||(!lstick_up()&amp;&amp;global.Up_Press);
-        global.Up_Pressed = keyboard_check_released(kb_Up)||(lstick_up()&amp;&amp;!global.Up_Press);
-        global.Up_Press = keyboard_check_released(kb_Up)||(lstick_up());
+        global.Up_Pressed = keyboard_check(kb_Up)||(lstick_up()&amp;&amp;!global.Up_Press);
+        global.Up_Press = keyboard_check_pressed(kb_Up)||(lstick_up());
 
         global.Down_Release = keyboard_check_released(kb_Down)||(!lstick_down()&amp;&amp;global.Down_Press);
-        global.Down_Pressed = keyboard_check_released(kb_Down)||(lstick_down()&amp;&amp;!global.Down_Press);
-        global.Down_Press = keyboard_check_released(kb_Down)||(lstick_down());
+        global.Down_Pressed = keyboard_check(kb_Down)||(lstick_down()&amp;&amp;!global.Down_Press);
+        global.Down_Press = keyboard_check_pressed(kb_Down)||(lstick_down());
 
         global.Left_Release = keyboard_check_released(kb_Left)||(!lstick_left()&amp;&amp;global.Left_Press);
-        global.Left_Pressed = keyboard_check_released(kb_Left)||(lstick_left()&amp;&amp;!global.Left_Press);
-        global.Left_Press = keyboard_check_released(kb_Left)||(lstick_left());
+        global.Left_Pressed = keyboard_check(kb_Left)||(lstick_left()&amp;&amp;!global.Left_Press);
+        global.Left_Press = keyboard_check_pressed(kb_Left)||(lstick_left());
 
-        global.Right_Release = keyboard_check_released(kb_Right)||(!lstick_right()&amp;&amp;lstick_right());
-        global.Right_Pressed = keyboard_check_released(kb_Right)||(lstick_right()&amp;&amp;!lstick_right());
-        global.Right_Press = keyboard_check_released(kb_Right)||(lstick_right());
+        global.Right_Release = keyboard_check_released(kb_Right)||(!lstick_right()&amp;&amp;global.Right_Press);
+        global.Right_Pressed = keyboard_check(kb_Right)||(lstick_right()&amp;&amp;!global.Right_Press);
+        global.Right_Press = keyboard_check_pressed(kb_Right)||(lstick_right());
     break;
     case 2:
         global.Up_Release = keyboard_check_released(kb_Up)||(!rstick_up()&amp;&amp;global.Up_Press);
-        global.Up_Pressed = keyboard_check_released(kb_Up)||(rstick_up()&amp;&amp;!global.Up_Press);
-        global.Up_Press = keyboard_check_released(kb_Up)||(rstick_up());
+        global.Up_Pressed = keyboard_check(kb_Up)||(rstick_up()&amp;&amp;!global.Up_Press);
+        global.Up_Press = keyboard_check_pressed(kb_Up)||(rstick_up());
 
         global.Down_Release = keyboard_check_released(kb_Down)||(!rstick_down()&amp;&amp;global.Down_Press);
-        global.Down_Pressed = keyboard_check_released(kb_Down)||(rstick_down()&amp;&amp;!global.Down_Press);
-        global.Down_Press = keyboard_check_released(kb_Down)||(rstick_down());
+        global.Down_Pressed = keyboard_check(kb_Down)||(rstick_down()&amp;&amp;!global.Down_Press);
+        global.Down_Press = keyboard_check_pressed(kb_Down)||(rstick_down());
 
         global.Left_Release = keyboard_check_released(kb_Left)||(!rstick_left()&amp;&amp;global.Left_Press);
-        global.Left_Pressed = keyboard_check_released(kb_Left)||(rstick_left()&amp;&amp;!global.Left_Press);
-        global.Left_Press = keyboard_check_released(kb_Left)||(rstick_left());
+        global.Left_Pressed = keyboard_check(kb_Left)||(rstick_left()&amp;&amp;!global.Left_Press);
+        global.Left_Press = keyboard_check_pressed(kb_Left)||(rstick_left());
 
-        global.Right_Release = keyboard_check_released(kb_Right)||(!rstick_right()&amp;&amp;lstick_right());
-        global.Right_Pressed = keyboard_check_released(kb_Right)||(rstick_right()&amp;&amp;!lstick_right());
-        global.Right_Press = keyboard_check_released(kb_Right)||(rstick_right());
+        global.Right_Release = keyboard_check_released(kb_Right)||(!rstick_right()&amp;&amp;global.Right_Press);
+        global.Right_Pressed = keyboard_check(kb_Right)||(rstick_right()&amp;&amp;!global.Right_Press);
+        global.Right_Press = keyboard_check_pressed(kb_Right)||(rstick_right());
     break;
 }
 
 
-global.Confirm_Release = keyboard_check_released(kb_Confirm)||gamepad_button_check_released(xi_Confirm);
-global.Confirm_Press = keyboard_check(kb_Confirm)||gamepad_button_check(xi_Confirm);
-global.Confirm_Pressed = keyboard_check_pressed(kb_Confirm)||gamepad_button_check_pressed(xi_Confirm);
+global.Confirm_Release = keyboard_check_released(kb_Confirm)||gamepad_button_check_released(0,xi_Confirm);
+global.Confirm_Press = keyboard_check(kb_Confirm)||gamepad_button_check(0,xi_Confirm);
+global.Confirm_Pressed = keyboard_check_pressed(kb_Confirm)||gamepad_button_check_pressed(0,xi_Confirm);
 
-global.Cancel_Release = keyboard_check_released(kb_Cancel)||gamepad_button_check_released(xi_Cancel);
-global.Cancel_Press = keyboard_check(kb_Cancel)||gamepad_button_check(xi_Cancel);
-global.Cancel_Pressed = keyboard_check_pressed(kb_Cancel)||gamepad_button_check_pressed(xi_Cancel);
+global.Cancel_Release = keyboard_check_released(kb_Cancel)||gamepad_button_check_released(0,xi_Cancel);
+global.Cancel_Press = keyboard_check(kb_Cancel)||gamepad_button_check(0,xi_Cancel);
+global.Cancel_Pressed = keyboard_check_pressed(kb_Cancel)||gamepad_button_check_pressed(0,xi_Cancel);
 
-global.Attack_Release = keyboard_check_released(kb_Attack)||gamepad_button_check_released(xi_Attack);
-global.Attack_Press = keyboard_check(kb_Attack)||gamepad_button_check(xi_Attack);
-global.Attack_Pressed = keyboard_check_pressed(kb_Attack)||gamepad_button_check_pressed(xi_Attack);
+global.Attack_Release = keyboard_check_released(kb_Attack)||gamepad_button_check_released(0,xi_Attack);
+global.Attack_Press = keyboard_check(kb_Attack)||gamepad_button_check(0,xi_Attack);
+global.Attack_Pressed = keyboard_check_pressed(kb_Attack)||gamepad_button_check_pressed(0,xi_Attack);
 
-global.Item_Release = keyboard_check_released(kb_Item)||gamepad_button_check_released(xi_Item);
-global.Item_Press = keyboard_check(kb_Item)||gamepad_button_check(xi_Item);
-global.Item_Pressed = keyboard_check_pressed(kb_Item)||gamepad_button_check_pressed(xi_Item);
+global.Item_Release = keyboard_check_released(kb_Item)||gamepad_button_check_released(0,xi_Item);
+global.Item_Press = keyboard_check(kb_Item)||gamepad_button_check(0,xi_Item);
+global.Item_Pressed = keyboard_check_pressed(kb_Item)||gamepad_button_check_pressed(0,xi_Item);
 
-global.Context_Release = keyboard_check_released(kb_Context)||gamepad_button_check_released(xi_Context);
-global.Context_Press = keyboard_check(kb_Context)||gamepad_button_check(xi_Context);
-global.Context_Pressed = keyboard_check_pressed(kb_Context)||gamepad_button_check_pressed(xi_Context);
+global.Context_Release = keyboard_check_released(kb_Context)||gamepad_button_check_released(0,xi_Context);
+global.Context_Press = keyboard_check(kb_Context)||gamepad_button_check(0,xi_Context);
+global.Context_Pressed = keyboard_check_pressed(kb_Context)||gamepad_button_check_pressed(0,xi_Context);
 
-global.Run_Release = keyboard_check_released(kb_Run)||gamepad_button_check_released(xi_Run);
-global.Run_Press = keyboard_check(kb_Run)||gamepad_button_check(xi_Run);
-global.Run_Pressed = keyboard_check_pressed(kb_Run)||gamepad_button_check_pressed(xi_Run);
+global.Run_Release = keyboard_check_released(kb_Run)||gamepad_button_check_released(0,xi_Run);
+global.Run_Press = keyboard_check(kb_Run)||gamepad_button_check(0,xi_Run);
+global.Run_Pressed = keyboard_check_pressed(kb_Run)||gamepad_button_check_pressed(0,xi_Run);
 
-global.Aim_Release = keyboard_check_released(kb_Aim)||gamepad_button_check_released(xi_Aim);
-global.Aim_Press = keyboard_check(kb_Aim)||gamepad_button_check(xi_Aim);
-global.Aim_Pressed = keyboard_check_pressed(kb_Aim)||gamepad_button_check_pressed(xi_Aim);
+global.Aim_Release = keyboard_check_released(kb_Aim)||gamepad_button_check_released(0,xi_Aim);
+global.Aim_Press = keyboard_check(kb_Aim)||gamepad_button_check(0,xi_Aim);
+global.Aim_Pressed = keyboard_check_pressed(kb_Aim)||gamepad_button_check_pressed(0,xi_Aim);
+
+global.Pause_Release = keyboard_check_released(kb_Pause)||gamepad_button_check_released(0,xi_Pause);
+global.Pause_Press = keyboard_check(kb_Pause)||gamepad_button_check(0,xi_Pause);
+global.Pause_Pressed = keyboard_check_pressed(kb_Pause)||gamepad_button_check_pressed(0,xi_Pause);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>inputDisplay = ""
+
+if (global.Up_Release){print("DUR")}
+if (global.Up_Press){inputDisplay = inputDisplay+"DU";}
+if (global.Up_Pressed){print("DUP")}
+
+if (global.Down_Release){print("DDR")}
+if (global.Down_Press){inputDisplay = inputDisplay+"DD";}
+if (global.Down_Pressed){print("DDP")}
+
+if (global.Left_Release){print("DLR")}
+if (global.Left_Press){inputDisplay = inputDisplay+"DL";}
+if (global.Left_Pressed){print("DLP")}
+
+if (global.Right_Release){print("DRR")}
+if (global.Right_Press){inputDisplay = inputDisplay+"DR";}
+if (global.Right_Pressed){print("DRP")}
+
+if (global.Confirm_Release){print("CMR")}
+if (global.Confirm_Press){inputDisplay = inputDisplay+"CM";}
+if (global.Confirm_Pressed){print("CMP")}
+
+if (global.Cancel_Release){print("CLR")}
+if (global.Cancel_Press){inputDisplay = inputDisplay+"CL";}
+if (global.Cancel_Pressed){print("CLP")}
+
+if (global.Attack_Release){print("ATR")}
+if (global.Attack_Press){inputDisplay = inputDisplay+"AT";}
+if (global.Attack_Pressed){print("ATP")}
+
+if (global.Item_Release){print("IR")}
+if (global.Item_Press){inputDisplay = inputDisplay+"IR";}
+if (global.Item_Pressed){print("IP")}
+
+if (global.Context_Release){print("CTR")}
+if (global.Context_Press){inputDisplay = inputDisplay+"CT";}
+if (global.Context_Pressed){print("CTP")}
+
+if (global.Run_Release){print("RNR")}
+if (global.Run_Press){inputDisplay = inputDisplay+"RN";}
+if (global.Run_Pressed){print("RNP")}
+
+if (global.Aim_Release){print("AMR")}
+if (global.Aim_Press){inputDisplay = inputDisplay+"AM";}
+if (global.Aim_Pressed){print("AMP")}
+
+if (global.Pause_Release){print("PAR")}
+if (global.Pause_Press){inputDisplay = inputDisplay+"PA";}
+if (global.Pause_Pressed){print("PAP")}
+
+draw_text(10,10,inputDisplay)
 </string>
           </argument>
         </arguments>

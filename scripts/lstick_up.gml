@@ -1,1 +1,1 @@
-return (gamepad_axis_value(0,gp_axislv)>.15)
+return (gamepad_axis_value(0,gp_axislv)<-.15)
