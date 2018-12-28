@@ -37,6 +37,7 @@
     </scripts>
     <script>scripts\PlayerNormal.gml</script>
     <script>scripts\StealthKill.gml</script>
+    <script>scripts\setBGM.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>

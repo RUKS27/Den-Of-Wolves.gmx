@@ -27,6 +27,9 @@
             <kind>1</kind>
             <string>//Hello Rusty!
 //Hello Cookie!
+
+// Music
+global.BGM = noone;
 </string>
           </argument>
         </arguments>
