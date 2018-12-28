@@ -110,6 +110,10 @@ kb_Context = ord('Z');
 kb_Run = ord(vk_shift);
 kb_Aim = ord(vk_control);
 kb_Pause = ord(vk_enter);
+
+// Music
+global.BGM = noone;
+
 </string>
           </argument>
         </arguments>
