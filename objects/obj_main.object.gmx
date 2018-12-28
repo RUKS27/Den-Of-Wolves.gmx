@@ -35,36 +35,15 @@
 
 window_set_size(800, 600);
 
+if(instance_exists(obj_main)){
+    instance_destroy();
+}
+
 go_a = 0; 
 bs_a = 0;
 
 map = ds_grid_create(20, 20);
 curArea = 000000;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(instance_exists(obj_main)){
-    instance_destroy();
-}
 </string>
           </argument>
         </arguments>
