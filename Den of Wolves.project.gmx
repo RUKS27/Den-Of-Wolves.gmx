@@ -18,6 +18,7 @@
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_areaeditor</sprite>
     <sprite>sprites\spr_dEvent</sprite>
+    <sprite>sprites\spr_exit</sprite>
     <sprites name="Text">
       <sprite>sprites\spr_gameover</sprite>
       <sprite>sprites\spr_title</sprite>
@@ -44,6 +45,7 @@
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
+    <font>fonts\f_dialogue</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
