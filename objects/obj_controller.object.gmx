@@ -27,7 +27,112 @@
             <kind>1</kind>
             <string>//Hello Rusty!
 //Hello Cookie!
+
+//Access Variables Use these when adding inputs into the game
+//so that it will detect regardless of what you're using
+
+//Access Controls
+
+global.Up_Release = false;
+global.Up_Press = false;
+global.Up_Pressed = false;
+
+global.Down_Release = false;
+global.Down_Press = false;
+global.Down_Pressed = false;
+
+global.Left_Release = false;
+global.Left_Press = false;
+global.Left_Pressed = false;
+
+global.Right_Release = false;
+global.Right_Press = false;
+global.Right_Pressed = false;
+
+global.Confirm_Release = false;
+global.Confirm_Press = false;
+global.Confirm_Pressed = false;
+
+global.Cancel_Release = false;
+global.Cancel_Press = false;
+global.Cancel_Pressed = false;
+
+global.Attack_Release = false;
+global.Attack_Press = false;
+global.Attack_Pressed = false;
+
+global.Item_Release = false;
+global.Item_Press = false;
+global.Item_Pressed = false;
+
+global.Context_Release = false;
+global.Context_Press = false;
+global.Context_Pressed = false;
+
+global.Run_Release = false;
+global.Run_Press = false;
+global.Run_Pressed = false;
+
+global.Aim_Release = false;
+global.Aim_Press = false;
+global.Aim_Pressed = false;
+
+//xinput Controls
+
+//stick mode is an option that can be used to use the stick instead of the dpad
+// 0 = dpad
+// 1 = left stick
+// 2 = right stick
+stickMode = false;
+xi_Up = gp_padu
+xi_Down = gp_padd
+xi_Left = gp_padl
+xi_Right = gp_padr
+xi_Confirm = gp_face1;
+xi_Cancel = gp_face3;
+xi_Attack = gp_face3;
+xi_Item = gp_face4;
+xi_Context = gp_face1;
+xi_Run = gp_shoulderl;
+xi_Aim_Pres_s = gp_shoulderr;
+xi_Pause = gp_start;
+//Keyboard Controls
+
+kb_Up = vk_up;
+kb_Down =  vk_down;
+kb_Left = vk_left;
+kb_Right = vk_right;
+kb_Confirm = ord('Z');
+kb_Cancel = ord('X');
+kb_Attack = ord('X');
+kb_Item = ord('C');
+kb_Context = ord('Z');
+kb_Run = ord(vk_shift);
+kb_Aim = ord(vk_control);
+kb_Pause = ord(vk_enter);
 </string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>
