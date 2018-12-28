@@ -2,13 +2,26 @@
 xSpd = 0;
 ySpd = 0;
 
-xSpd = (RightMove - LeftMove) * mSpd; 
-if(xSpd == 0) ySpd = (DownMove - UpMove) * mSpd; 
-
 if(Run || Sneak){
     mSpd = abs((Sneak * sSpd) - (Run * rSpd));
-} else {
+} else if(!Run && !Sneak){
     mSpd = 3;
+}
+
+xSpd = (RightMove - LeftMove) * mSpd; 
+ySpd = (DownMove - UpMove) * mSpd;
+
+// Ensure that aim does not change if sneak is enabled
+if(!Sneak){
+    if(UpMove || (UpMove && LeftMove) || (UpMove && RightMove)){
+        p_dir = p_dirs.forward;
+    } else if (DownMove || (DownMove && LeftMove) || (DownMove && RightMove)) {
+        p_dir = p_dirs.down;
+    } else if (RightMove) {
+        p_dir = p_dirs.right;
+    } else if (LeftMove){
+        p_dir = p_dirs.left;
+    }
 }
 
 // Collision Detection
@@ -80,19 +93,52 @@ if(UseConsumable){
     }
 }
 
-// Combat
+// Combat    
 
 // Stealth Kill
 // HOLY SHIT LOOK AT ALL OF THESE CONDITIONS
 if((place_meeting(x, y-32, obj_enemy) && instance_place(x, y-32, obj_enemy).lookDir = e_lookdir.forward) 
 || (place_meeting(x, y+32, obj_enemy) && instance_place(x, y+32, obj_enemy).lookDir = e_lookdir.down) 
-|| (place_meeting(x-32, y, obj_enemy) && instance_place(x-32, y, obj_enemy).lookDir = e_lookdir.forward)
-|| (place_meeting(x+32, y, obj_enemy) && instance_place(x+32, y, obj_enemy).lookDir = e_lookdir.down)){
-    show_debug_message("enemy in range.");
-    
-    if(Attack){
-        alarm[6] = 30;
-    } else if (Attack_RLS){
-        alarm[6] = -1;
+|| (place_meeting(x-32, y, obj_enemy) && instance_place(x-32, y, obj_enemy).lookDir = e_lookdir.right)
+|| (place_meeting(x+32, y, obj_enemy) && instance_place(x+32, y, obj_enemy).lookDir = e_lookdir.left)){
+    switch(p_dir){
+            case p_dirs.forward:
+                var enemy = instance_place(x, y-32, obj_enemy);    
+            break;
+            
+            case p_dirs.down:
+                var enemy = instance_place(x, y+32, obj_enemy);
+            break;
+            
+            case p_dirs.right:
+                var enemy = instance_place(x+32, y, obj_enemy);
+            break;
+            
+            case p_dirs.left:
+                var enemy = instance_place(x-32, y, obj_enemy);
+            break;
+    }
+        
+    if(enemy != noone) && (enemy.e_state != e_states.dead) {
+        show_debug_message("enemy in range.");
+        
+        if(Sneak){
+            show_debug_message("Butcher him.");
+            
+            // Lock on to enemy
+            locked_on = enemy;
+            
+            if(Attack){
+                show_debug_message("Gaining composure...");
+                
+                alarm[6] = 30;
+            } else if (Attack_RLS){
+                show_debug_message("Released.");
+                
+                alarm[6] = -1;
+            }
+        }
     }
 }
+
+enemy = noone;
