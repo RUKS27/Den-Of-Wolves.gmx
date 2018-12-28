@@ -35,9 +35,20 @@
 
 window_set_size(800, 600);
 
-if(instance_exists(obj_main)){
-    instance_destroy();
+print(instance_number(obj_main))
+if(instance_number(obj_main)&gt;1){
+print("Deleted main")
+    instance_destroy(self);
+    exit;
 }
+print("Created main")
+
+//create the controller Later we will want a way to load the user's default settings
+controller = instance_create(0,0,obj_controller)
+controller.persistent = true;
+
+
+
 
 go_a = 0; 
 bs_a = 0;

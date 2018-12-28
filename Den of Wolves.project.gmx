@@ -40,6 +40,17 @@
     <script>scripts\PlayerNormal.gml</script>
     <script>scripts\StealthKill.gml</script>
     <script>scripts\setBGM.gml</script>
+    <scripts name="controller scripts">
+      <script>scripts\lstick_up.gml</script>
+      <script>scripts\rstick_up.gml</script>
+      <script>scripts\lstick_down.gml</script>
+      <script>scripts\rstick_down.gml</script>
+      <script>scripts\lstick_left.gml</script>
+      <script>scripts\rstick_left.gml</script>
+      <script>scripts\lstick_right.gml</script>
+      <script>scripts\rstick_right.gml</script>
+      <script>scripts\print.gml</script>
+    </scripts>
     <script>scripts\getAreaBGM.gml</script>
     <script>scripts\CreateDialogue.gml</script>
   </scripts>
