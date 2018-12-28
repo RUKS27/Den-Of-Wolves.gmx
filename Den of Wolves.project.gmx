@@ -48,6 +48,7 @@
       <script>scripts\rstick_left.gml</script>
       <script>scripts\lstick_right.gml</script>
       <script>scripts\rstick_right.gml</script>
+    </scripts>
     <script>scripts\getAreaBGM.gml</script>
     <script>scripts\CreateDialogue.gml</script>
   </scripts>
