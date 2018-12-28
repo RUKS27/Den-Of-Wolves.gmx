@@ -116,6 +116,8 @@ UpMove = keyboard_check(vk_up);
 Sneak = keyboard_check(vk_control);
 Run = keyboard_check(vk_shift);
 
+Activate = keyboard_check_pressed(ord("Z"));
+
 Attack = keyboard_check_pressed(ord("X"))
 Attack_RLS = keyboard_check_released(ord("X"))
 

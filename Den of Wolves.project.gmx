@@ -17,6 +17,7 @@
     <sprite>sprites\spr_tstkey</sprite>
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_areaeditor</sprite>
+    <sprite>sprites\spr_dEvent</sprite>
     <sprites name="Text">
       <sprite>sprites\spr_gameover</sprite>
       <sprite>sprites\spr_title</sprite>
@@ -47,7 +48,8 @@
       <script>scripts\rstick_left.gml</script>
       <script>scripts\lstick_right.gml</script>
       <script>scripts\rstick_right.gml</script>
-    </scripts>
+    <script>scripts\getAreaBGM.gml</script>
+    <script>scripts\CreateDialogue.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>

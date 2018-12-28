@@ -44,6 +44,9 @@ bs_a = 0;
 
 map = ds_grid_create(20, 20);
 curArea = 000000;
+
+// Music
+global.BGM = noone;
 </string>
           </argument>
         </arguments>
