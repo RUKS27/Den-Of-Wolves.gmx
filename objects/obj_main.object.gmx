@@ -64,11 +64,12 @@ curArea = 000000;
             <kind>1</kind>
             <string>// DEBUG ONLY
 Debug_KILLKEY = keyboard_check_pressed(ord("K"));
-
-if(debug_mode){
-    if(Debug_KILLKEY){
-        with(obj_player){
-            p_state = p_states.dead;
+if(instance_exists(obj_player)){
+    if(debug_mode){
+        if(Debug_KILLKEY){
+            with(obj_player){
+                p_state = p_states.dead;
+            }
         }
     }
 }
@@ -134,22 +135,24 @@ if(debug_mode){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Draw Game-Over Screen If Player Is Dead
-if(obj_player.p_state = obj_player.p_states.dead){
-    if(bs_a &lt; 1) bs_a+=0.05;
-    else if(bs_a = 1) &amp;&amp; (go_a &lt; 1) go_a+=0.05;
-    
-    var view_midw = surface_get_width(application_surface)/2;
-    var view_midh = surface_get_height(application_surface)/2;
-    
-    draw_set_alpha(bs_a);
-    draw_set_color(c_black);
-    
-    draw_rectangle(view_xport, view_yport, surface_get_width(application_surface), surface_get_height(application_surface), false);
-    draw_sprite_ext(spr_gameover, 1, view_midw, view_midh - 160, 3, 3, 0, c_white, go_a);
-    
-    draw_set_alpha(1);
-    draw_set_color(c_white);
+            <string>if(instance_exists(obj_player)){
+    // Draw Game-Over Screen If Player Is Dead
+    if(obj_player.p_state = obj_player.p_states.dead){
+        if(bs_a &lt; 1) bs_a+=0.05;
+        else if(bs_a = 1) &amp;&amp; (go_a &lt; 1) go_a+=0.05;
+        
+        var view_midw = surface_get_width(application_surface)/2;
+        var view_midh = surface_get_height(application_surface)/2;
+        
+        draw_set_alpha(bs_a);
+        draw_set_color(c_black);
+        
+        draw_rectangle(view_xport, view_yport, surface_get_width(application_surface), surface_get_height(application_surface), false);
+        draw_sprite_ext(spr_gameover, 1, view_midw, view_midh - 160, 3, 3, 0, c_white, go_a);
+        
+        draw_set_alpha(1);
+        draw_set_color(c_white);
+    }
 }
 </string>
           </argument>
