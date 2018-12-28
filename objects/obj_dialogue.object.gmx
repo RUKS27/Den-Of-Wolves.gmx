@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>// Message Variables
+d_conv_ID = 0;
+d_mess_ID = 0;
+</string>
           </argument>
         </arguments>
       </action>

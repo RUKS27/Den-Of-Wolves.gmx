@@ -17,6 +17,7 @@
     <sprite>sprites\spr_tstkey</sprite>
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_areaeditor</sprite>
+    <sprite>sprites\spr_dEvent</sprite>
     <sprites name="Text">
       <sprite>sprites\spr_gameover</sprite>
       <sprite>sprites\spr_title</sprite>
@@ -38,8 +39,9 @@
     <script>scripts\PlayerNormal.gml</script>
     <script>scripts\StealthKill.gml</script>
     <script>scripts\setBGM.gml</script>
+    <script>scripts\getAreaBGM.gml</script>
+    <script>scripts\CreateDialogue.gml</script>
   </scripts>
-  <shaders name="shaders"/>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
   </fonts>
