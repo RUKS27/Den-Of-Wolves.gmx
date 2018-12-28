@@ -39,6 +39,7 @@
     <script>scripts\StealthKill.gml</script>
     <script>scripts\setBGM.gml</script>
   </scripts>
+  <shaders name="shaders"/>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
   </fonts>
@@ -60,7 +61,6 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
-    <room>rooms\rm_debu</room>
     <room>rooms\rm_debug</room>
     <room>rooms\rm_den_quadrant_01</room>
     <room>rooms\rm_general_house_interiors</room>
