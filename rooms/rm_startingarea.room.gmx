@@ -137,7 +137,7 @@
     <instance objName="obj_camera" x="480" y="608" name="inst_38C84CD3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_player" x="480" y="640" name="inst_E1CFF77B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy" x="480" y="288" name="inst_0A13254F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_dialogueEvent" x="448" y="448" name="inst_07665036" locked="0" code="de_conv = 1;&#xA;" scaleX="3" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_dialogueEvent" x="448" y="448" name="inst_07665036" locked="0" code="message[0] = &quot;This is a test I guess.&quot;;&#xA;message[1] = &quot;Genki Pulse is the best.&quot;;&#xA;message[2] = &quot;Yes.&quot;;&#xA;&#xA;on_collision = true;&#xA;repeatable = false;&#xA;" scaleX="3" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="ts_exterior_den_01" x="448" y="672" w="96" h="32" xo="192" yo="288" id="10002334" name="inst_5F0AACAB" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
