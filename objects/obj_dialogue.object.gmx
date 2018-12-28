@@ -44,6 +44,33 @@ hold = 0;
 message_length = string_length(message[message_current]);
 
 //if(instance_exists(obj_dialogue)) instance_destroy();
+
+if(instance_exists(obj_player)){
+    obj_player.p_state = p_states.cutscene;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>obj_player.p_state = p_states.normal;
 </string>
           </argument>
         </arguments>
