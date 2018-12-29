@@ -35,6 +35,8 @@ rSpd = 4;
 mSpd = 3;
 sSpd = 2;
 
+noise_radius = 256;
+
 enum p_dirs {
     forward = 0,
     right = 1,
@@ -42,7 +44,7 @@ enum p_dirs {
     left = 3
 }
 
-pdir = p_dirs.forward;
+p_dir = p_dirs.forward;
 
 // States
 enum p_states {
@@ -97,6 +99,30 @@ eq_passive = 0;
             <kind>1</kind>
             <string>// Call Stealth Kill Script
 StealthKill(locked_on);
+enemy = noone;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>GenerateNoise(x, y, noise_radius, 8);
 </string>
           </argument>
         </arguments>
@@ -219,7 +245,7 @@ draw_sprite_ext(ItemList(eq_consumable, 2), 1, view_xport+230, view_yport+32, 2,
             <kind>1</kind>
             <string>draw_self();
 
-if(locked_on != noone)
+if(locked_on != noone &amp;&amp; Sneak)
     draw_sprite(spr_arrow, 1, locked_on.x + 16, locked_on.y - 48);
 </string>
           </argument>
