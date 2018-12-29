@@ -35,6 +35,15 @@ rSpd = 4;
 mSpd = 3;
 sSpd = 2;
 
+enum p_dirs {
+    forward = 0,
+    right = 1,
+    down = 2,
+    left = 3
+}
+
+pdir = p_dirs.forward;
+
 // States
 enum p_states {
     normal = 0,
@@ -43,6 +52,9 @@ enum p_states {
 }
 
 p_state = p_states.normal;
+
+// Combat
+locked_on = noone;
 
 // Inventory
 global.keyitems = ds_list_create();
@@ -84,7 +96,7 @@ eq_passive = 0;
           <argument>
             <kind>1</kind>
             <string>// Call Stealth Kill Script
-StealthKill(obj_enemy);
+StealthKill(locked_on);
 </string>
           </argument>
         </arguments>
@@ -108,20 +120,20 @@ StealthKill(obj_enemy);
           <argument>
             <kind>1</kind>
             <string>// Get Keyboard Inputs
-RightMove = keyboard_check(vk_right);
-DownMove = keyboard_check(vk_down);
-LeftMove = keyboard_check(vk_left);
-UpMove = keyboard_check(vk_up);
+RightMove = global.Right_Pressed;
+DownMove = global.Down_Pressed;
+LeftMove = global.Left_Pressed;
+UpMove = global.Up_Pressed;
 
-Sneak = keyboard_check(vk_control);
-Run = keyboard_check(vk_shift);
+Sneak = global.Aim_Press;
+Run = global.Run_Press;
 
-Activate = keyboard_check_pressed(ord("Z"));
+Activate = global.Context_Press;
 
-Attack = keyboard_check_pressed(ord("X"))
-Attack_RLS = keyboard_check_released(ord("X"))
+Attack = global.Attack_Pressed;
+Attack_RLS = global.Attack_Release;
 
-UseConsumable = keyboard_check(ord("C"));
+UseConsumable = global.Item_Press;
 
 // Switch State If Player Is Dead
 if(Health &lt;= 0){
@@ -183,6 +195,32 @@ draw_sprite_ext(ItemList(eq_passive, 2), 1, view_xport+164, view_yport+32, 2, 2,
 draw_sprite_ext(spr_invsquare, 1, view_xport+230, view_yport + 32, 2, 2, 0, c_white, 1);
 
 draw_sprite_ext(ItemList(eq_consumable, 2), 1, view_xport+230, view_yport+32, 2, 2, 0, c_white, 1);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+
+if(locked_on != noone)
+    draw_sprite(spr_arrow, 1, locked_on.x + 16, locked_on.y - 48);
 </string>
           </argument>
         </arguments>

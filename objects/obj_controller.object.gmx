@@ -239,7 +239,7 @@ global.Pause_Pressed = keyboard_check_pressed(kb_Pause)||gamepad_button_check_pr
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -306,7 +306,7 @@ if (global.Pause_Release){print("PAR")}
 if (global.Pause_Press){inputDisplay = inputDisplay+"PA";}
 if (global.Pause_Pressed){print("PAP")}
 
-draw_text(10,10,inputDisplay)
+draw_text(view_xport + 10, view_yport + 10,inputDisplay)
 </string>
           </argument>
         </arguments>
