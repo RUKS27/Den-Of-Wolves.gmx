@@ -19,11 +19,15 @@
     <sprite>sprites\spr_areaeditor</sprite>
     <sprite>sprites\spr_dEvent</sprite>
     <sprite>sprites\spr_exit</sprite>
+    <sprite>sprites\spr_darkness</sprite>
     <sprites name="Text">
       <sprite>sprites\spr_gameover</sprite>
       <sprite>sprites\spr_title</sprite>
     </sprites>
     <sprite>sprites\spr_arrow</sprite>
+    <sprite>sprites\spr_Alert_Node_0</sprite>
+    <sprite>sprites\spr_ball_0</sprite>
+    <sprite>sprites\spr_Patrol_Node_0</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\ts_exterior_den_01</background>
@@ -54,6 +58,8 @@
     </scripts>
     <script>scripts\getAreaBGM.gml</script>
     <script>scripts\CreateDialogue.gml</script>
+    <script>scripts\CheckNoise.gml</script>
+    <script>scripts\GenerateNoise.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
@@ -74,6 +80,12 @@
     <object>objects\obj_spawn</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_controller</object>
+    <object>objects\obj_darkness</object>
+    <objects name="Pathfinding">
+      <object>objects\obj_Finish</object>
+      <object>objects\obj_control</object>
+      <object>objects\obj_Start</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
