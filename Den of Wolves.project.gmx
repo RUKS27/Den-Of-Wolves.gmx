@@ -60,6 +60,10 @@
     <script>scripts\CreateDialogue.gml</script>
     <script>scripts\CheckNoise.gml</script>
     <script>scripts\GenerateNoise.gml</script>
+    <scripts name="listener scripts">
+      <script>scripts\audibleSound.gml</script>
+      <script>scripts\createListener.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
@@ -85,6 +89,10 @@
       <object>objects\obj_Finish</object>
       <object>objects\obj_control</object>
       <object>objects\obj_Start</object>
+    </objects>
+    <objects name="listeners">
+      <object>objects\obj_listener</object>
+      <object>objects\obj_testListener</object>
     </objects>
   </objects>
   <rooms name="rooms">
