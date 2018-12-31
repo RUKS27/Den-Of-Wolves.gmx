@@ -182,7 +182,7 @@ alarm[0] = 128;
             <string>var view_midw = surface_get_width(application_surface)/2;
 var view_midh = surface_get_height(application_surface)/2;
 
-draw_sprite_ext(spr_title, 0, view_midw, view_midh, 2, 2, 0, c_white, 1);
+draw_sprite_ext(spr_title, 0, view_midw, view_midh, 4, 4, 0, c_white, 1);
 
 var wsa = warning_starting_alpha;
 

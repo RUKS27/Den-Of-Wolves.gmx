@@ -47,14 +47,20 @@ print("Created main")
 controller = instance_create(0,0,obj_controller)
 controller.persistent = true;
 
-
-
-
 go_a = 0; 
 bs_a = 0;
 
 map = ds_grid_create(20, 20);
 curArea = 000000;
+
+// Save Slot
+var file = working_directory + "SData.tien";
+
+if(file_exists(file)){
+    global.saveFile = file;
+} else {
+    global.saveFile = pointer_null;;
+}
 
 // Music
 global.BGM = noone;

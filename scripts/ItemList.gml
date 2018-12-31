@@ -25,7 +25,7 @@ type[55] = i_types.consumable;
 sprite[55] = Health_Injection;
 
 // Keys Start From 1
-name[1] =  "";
+name[1] =  "Key";
 type[1] = i_types.key;
 sprite[1] = spr_tstkey;
 

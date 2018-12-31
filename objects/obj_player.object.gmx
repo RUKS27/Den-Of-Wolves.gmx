@@ -35,6 +35,7 @@ rSpd = 4;
 mSpd = 3;
 sSpd = 2;
 
+noise_sound = snd_footstep;
 noise_radius = 256;
 
 enum p_dirs {
@@ -122,7 +123,7 @@ enemy = noone;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>GenerateNoise(x, y, noise_radius, 8);
+            <string>GenerateNoise(x, y, noise_radius, 8, noise_sound);
 </string>
           </argument>
         </arguments>

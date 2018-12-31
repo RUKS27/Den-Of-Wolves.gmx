@@ -30,12 +30,16 @@ alpha = 0;
 
 // Message Variables
 message[0] = "This is a test.";
-message[1] = "yeet";
 //Create More Messages In Creation Code
 
 // Text Variables
 message_current = 0;
-message_end = array_length_1d(message);
+
+var arr_length = array_length_1d(message);
+
+if(arr_length &gt; 1)message_end = array_length_1d(arr_length);
+else message_end = 0;
+
 message_draw = "";
 increase = 0.5;
 characters = 0;
