@@ -27,8 +27,6 @@
             <kind>1</kind>
             <string>to_room = rm_debug;
 to_spawn = pointer_null;
-
-on_collision = true;
 </string>
           </argument>
         </arguments>
@@ -52,7 +50,7 @@ on_collision = true;
           <argument>
             <kind>1</kind>
             <string>if(place_meeting(x, y, obj_player)){
-    if(on_collision) || (!on_collision &amp;&amp; obj_player.Activate) room_goto(to_room);
+    room_goto(to_room);
 }
 
 if(room = to_room){
