@@ -26,6 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>// Enemy Movement Variables
+Health = 100;
+
 xAccel = 0.6;
 yAccel = 0.6;
 
@@ -51,6 +53,7 @@ enum e_states {
 } 
 
 e_state = e_states.idle;
+spotPlayer = false;
 
 xx = pointer_null;
 yy = pointer_null;
@@ -133,15 +136,7 @@ switch(e_state){
     break;
 
     case e_states.alert:
-        if(xx != pointer_null &amp;&amp; yy != pointer_null){ 
-            move_towards_point(xx, yy, 2);
-            
-            if(x = xx &amp;&amp; y = yy){
-                if(alarm[0] = -1) alarm[0] = 300;
-            }    
-        }
-    
-        move_towards_point(xx, yy, 2);
+        
     break;
     
     case e_states.attacking:

@@ -28,6 +28,7 @@
     <sprite>sprites\spr_Alert_Node_0</sprite>
     <sprite>sprites\spr_ball_0</sprite>
     <sprite>sprites\spr_Patrol_Node_0</sprite>
+    <sprite>sprites\spr_menu</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\ts_exterior_den_01</background>
@@ -42,8 +43,6 @@
       <script>scripts\CheckInventoryForItem.gml</script>
       <script>scripts\UseCItem.gml</script>
     </scripts>
-    <script>scripts\PlayerNormal.gml</script>
-    <script>scripts\StealthKill.gml</script>
     <script>scripts\setBGM.gml</script>
     <scripts name="controller scripts">
       <script>scripts\lstick_up.gml</script>
@@ -58,11 +57,32 @@
     </scripts>
     <script>scripts\getAreaBGM.gml</script>
     <script>scripts\CreateDialogue.gml</script>
-    <script>scripts\CheckNoise.gml</script>
-    <script>scripts\GenerateNoise.gml</script>
     <scripts name="listener scripts">
       <script>scripts\audibleSound.gml</script>
       <script>scripts\createListener.gml</script>
+    </scripts>
+    <script>scripts\TypewriterText.gml</script>
+    <scripts name="Menu">
+      <script>scripts\NormalMenu_Input.gml</script>
+      <script>scripts\SettingsMenu_Input.gml</script>
+      <scripts name="GUI">
+        <script>scripts\MenuOptions_Settings.gml</script>
+        <script>scripts\MenuOptions_Normal.gml</script>
+        <script>scripts\MenuOptions_ExistingSave.gml</script>
+      </scripts>
+      <scripts name="Functions">
+        <script>scripts\NewGame.gml</script>
+        <script>scripts\ContinueGame.gml</script>
+        <script>scripts\DeleteSave.gml</script>
+      </scripts>
+    </scripts>
+    <scripts name="Player">
+      <scripts name="Combat">
+        <script>scripts\Attack_GUI.gml</script>
+        <script>scripts\StealthKill.gml</script>
+      </scripts>
+      <script>scripts\PlayerNormal.gml</script>
+      <script>scripts\DrawHUD.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -85,11 +105,6 @@
     <object>objects\obj_camera</object>
     <object>objects\obj_controller</object>
     <object>objects\obj_darkness</object>
-    <objects name="Pathfinding">
-      <object>objects\obj_Finish</object>
-      <object>objects\obj_control</object>
-      <object>objects\obj_Start</object>
-    </objects>
     <objects name="listeners">
       <object>objects\obj_listener</object>
       <object>objects\obj_testListener</object>
@@ -103,6 +118,7 @@
     <room>rooms\rm_important_interiors</room>
     <room>rooms\rm_startingarea</room>
     <room>rooms\rm_gameover</room>
+    <room>rooms\rm_end</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
