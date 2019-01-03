@@ -5,3 +5,5 @@ with(enemy_instance){
     
     show_debug_message("He dead.");
 }
+
+exit;
