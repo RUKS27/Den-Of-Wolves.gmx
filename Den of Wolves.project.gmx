@@ -91,23 +91,25 @@
   </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
-    <object>objects\obj_wall</object>
     <object>objects\obj_main</object>
     <object>objects\obj_door</object>
     <object>objects\obj_item</object>
-    <object>objects\obj_dialogueEvent</object>
-    <object>objects\obj_dialogue</object>
     <object>objects\obj_mainMenu</object>
     <object>objects\obj_enemy</object>
-    <object>objects\obj_area_boundaries</object>
     <object>objects\obj_exit</object>
-    <object>objects\obj_spawn</object>
-    <object>objects\obj_camera</object>
     <object>objects\obj_controller</object>
     <object>objects\obj_darkness</object>
     <objects name="listeners">
       <object>objects\obj_listener</object>
       <object>objects\obj_testListener</object>
+    </objects>
+    <objects name="Complete">
+      <object>objects\obj_camera</object>
+      <object>objects\obj_wall</object>
+      <object>objects\obj_spawn</object>
+      <object>objects\obj_dialogueEvent</object>
+      <object>objects\obj_dialogue</object>
+      <object>objects\obj_area_boundaries</object>
     </objects>
   </objects>
   <rooms name="rooms">

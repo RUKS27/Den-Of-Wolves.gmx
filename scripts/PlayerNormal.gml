@@ -93,13 +93,13 @@ if(keyboard_check_pressed(ord("1"))){
 if(keyboard_check_pressed(ord("2"))){
     show_debug_message(eq_consumable);
     consum_pos++;
-    
-    if(consum_pos < ds_list_size(global.consumables))
-        eq_consumable = ds_list_find_value(global.consumables, consum_pos);
-    else {
-        eq_consumable = ds_list_find_value(global.consumables, 0);
-        consum_pos = 0;    
-    }
+}
+
+if(consum_pos < ds_list_size(global.consumables))
+    eq_consumable = ds_list_find_value(global.consumables, consum_pos);
+else {
+    eq_consumable = ds_list_find_value(global.consumables, 0);
+    consum_pos = 0;    
 }
 
 if(keyboard_check_pressed(ord("3"))){
@@ -112,9 +112,10 @@ if(keyboard_check_pressed(ord("3"))){
 // Use Consumable Items
 if(UseConsumable){
     if(eq_consumable > 0){
-        UseCItem(eq_consumable);
-    
-        ds_list_delete(global.consumables, eq_consumable);
+        if(UseCItem(eq_consumable) = "successful"){
+            ds_list_delete(global.consumables, consum_pos);
+            consum_pos--;
+        }
     }
 }
 
@@ -157,6 +158,8 @@ switch(p_dir){
             break;
 }
 
+if(enemy == noone) delay = 0;
+
 if(Sneak){
     if(enemy != noone){
         if(enemy.e_state != e_states.dead && !enemy.spotPlayer){
@@ -167,15 +170,16 @@ if(Sneak){
             // Lock on to enemy
             locked_on = enemy;
                 
-                if(global.Attack_Press){
+                if(Attack){
                     show_debug_message("Gaining composure..." + string(delay));
                 
                     delay++
                 } else if (Attack_RLS){
                     show_debug_message("Released.");
                 
-                    if(delay < 30) delay = 0;
-                    else if(delay >= 30) { 
+                    if(delay < 120){ 
+                        delay = 0;
+                    } else if(delay >= 120) { 
                         delay = 0;
                         event_user(1);
                     }

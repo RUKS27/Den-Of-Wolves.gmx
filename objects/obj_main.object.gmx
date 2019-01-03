@@ -25,13 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//application_surface_draw_enable(false);
-
-//global.MonitorW = display_get_width();
+            <string>//global.MonitorW = display_get_width();
 //global.MonitorH = display_get_height();
-
-//global.Xoffset=(window_get_width()-800)/2;
-//global.Yoffset=(window_get_height()-600)/2;
 
 global.view_midw = surface_get_width(application_surface)/2;
 global.view_midh = surface_get_height(application_surface)/2;
@@ -58,6 +53,8 @@ curArea = 000000;
 
 if(file_exists("SData.Tien")) global.fileExists = true;
 else global.fileExists = false;
+
+global.Paused = false;
 
 // Music
 global.BGM = noone;
@@ -110,6 +107,27 @@ if(instance_exists(obj_player)){
         }
     }
 }
+
+if(instance_exists(obj_player) &amp;&amp; obj_player.p_state == p_states.normal 
+    || global.Paused = true){
+    canPause = true;
+} else {
+    canPause = false;
+}
+
+if(canPause){
+    if(global.Pause_Pressed){ 
+        global.Paused = !global.Paused;
+    }
+}
+
+if(global.Paused){
+    instance_deactivate_all(true);
+    instance_activate_object(obj_controller);
+} else {
+    instance_activate_all();
+}
+
 
 global.BGMVolume = clamp(global.BGMVolume, 0, 100);
 global.SFXVolume = clamp(global.SFXVolume, 0, 100);
@@ -180,29 +198,6 @@ draw_text(view_xport + 460, view_yport + 480, message_draw);
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="77">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//draw_surface_ext(application_surface,global.Xoffset,global.Yoffset,1,1,0,c_white,1);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -220,7 +215,7 @@ draw_text(view_xport + 460, view_yport + 480, message_draw);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(instance_exists(obj_player)){
+            <string>if(instance_exists(obj_player)){  
     // Draw Game-Over Screen If Player Is Dead
     if(obj_player.p_state = obj_player.p_states.dead){
         if(bs_a &lt; 1) bs_a+=0.05;

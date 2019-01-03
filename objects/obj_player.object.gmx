@@ -55,7 +55,7 @@ enum p_states {
     dead = 3
 }
 
-p_state = p_states.attack;
+p_state = p_states.normal;
 
 
 // Combat
@@ -70,9 +70,9 @@ global.keyitems = ds_list_create();
 global.consumables = ds_list_create();
 global.passiveitems = ds_list_create();
 
-ds_list_add(global.keyitems, 0);
-ds_list_add(global.consumables, 0);
-ds_list_add(global.passiveitems, 0);
+ds_list_add(global.keyitems, ItemList(0, 0));
+ds_list_add(global.consumables, ItemList(0, 0));
+ds_list_add(global.passiveitems, ItemList(0, 0));
 
 // Equipped Items
 eq_key = 0;
@@ -82,6 +82,36 @@ eq_consumable = 0;
 consum_pos = 0;
 
 eq_passive = 0;
+
+// GUI 
+a = 0;
+
+arrow_YSub = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// Enemy cursor y position changes here
+if(arrow_YSub = 0) arrow_YSub = 4;
+else arrow_YSub = 0;
 </string>
           </argument>
         </arguments>
@@ -138,7 +168,7 @@ Run = global.Run_Press;
 
 Activate = global.Context_Press;
 
-Attack = global.Attack_Pressed;
+Attack = global.Attack_Press;
 Attack_RLS = global.Attack_Release;
 
 UseConsumable = global.Item_Press;
@@ -148,6 +178,8 @@ if(Health &lt;= 0){
     show_debug_message("You died");
     p_state = p_states.dead;
 }
+
+delay = clamp(delay, 0, 120);
 
 switch(p_state){
     case 0:
@@ -209,9 +241,8 @@ p_state = p_states.attack;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>DrawHUD();
+            <string>DrawHUD();  
 
-// Check if player is in attack mode
 if(p_state = p_states.attack){ 
     var attack = Attack_GUI(obj_enemy);
     
@@ -231,6 +262,10 @@ if(p_state = p_states.attack){
             } else if(attack = "failure" || attack = "botched"){
                 Health-= 25; // Change this to enemy weapon's damage
             }
+        }
+        
+        if(attack != pointer_null){
+            global.FadeR = false;
         }
     }
 } else {
@@ -260,10 +295,24 @@ if(p_state = p_states.attack){
             <kind>1</kind>
             <string>draw_self();
 
-if(locked_on != noone &amp;&amp; Sneak)
-    if(!locked_on.spotPlayer)draw_sprite(spr_arrow, 1, locked_on.x, locked_on.y - 64);
-    
-
+if(p_state != p_states.attack){
+    if(locked_on != noone &amp;&amp; Sneak){
+        if(!locked_on.spotPlayer){
+            var sub;
+            
+            if(delay &lt; 120){
+                sub = 2;
+            } else {
+                sub = 1;
+            }
+            
+            draw_sprite(spr_arrow, sub, locked_on.x, locked_on.y - (64 + arrow_YSub));
+            
+            if(Attack)
+                if(alarm[2] = -1) alarm[2] = 16 - (delay / 10);
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

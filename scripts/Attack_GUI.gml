@@ -9,7 +9,7 @@ draw_rectangle(mw - 176, mh + 64, mw + 160, mh - 32, false);
 draw_set_color(c_dkgray);
 draw_rectangle(mw - 32, mh + 64, mw, mh - 32, false);
 
-pos = clamp(pos + 10, -160, 160);
+pos = clamp(pos + 12, -160, 160);
 
 draw_set_color(c_red);
 draw_rectangle(mw - pos, mh + 64, mw - (pos + 16), mh - 32, false);

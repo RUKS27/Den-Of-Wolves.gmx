@@ -29,13 +29,12 @@
 alpha = 0;
 
 // Message Variables
-message[0] = "This is a test.";
-message[1] = "yeet";
+message[0] = "";
 //Create More Messages In Creation Code
 
 // Text Variables
 message_current = 0;
-message_end = array_length_1d(message);
+message_end = array_length_1d(message) - 1;
 message_draw = "";
 increase = 0.5;
 characters = 0;
@@ -94,7 +93,9 @@ if(instance_exists(obj_player)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(alpha &lt; 1){
+            <string>message_length = string_length(message[message_current]);
+
+if(alpha &lt; 1){
     alpha += 0.25;
 } else {
     if (characters &lt; message_length) {
