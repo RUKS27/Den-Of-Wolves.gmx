@@ -29,6 +29,9 @@
     <sprite>sprites\spr_ball_0</sprite>
     <sprite>sprites\spr_Patrol_Node_0</sprite>
     <sprite>sprites\spr_menu</sprite>
+    <sprite>sprites\SPLASH</sprite>
+    <sprite>sprites\spr_bg</sprite>
+    <sprite>sprites\spr_hp</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\ts_exterior_den_01</background>
@@ -44,6 +47,7 @@
       <script>scripts\GiveItem.gml</script>
       <script>scripts\CheckInventoryForItem.gml</script>
       <script>scripts\UseCItem.gml</script>
+      <script>scripts\PassiveEffects.gml</script>
     </scripts>
     <script>scripts\setBGM.gml</script>
     <scripts name="controller scripts">
@@ -98,9 +102,6 @@
     <object>objects\obj_item</object>
     <object>objects\obj_mainMenu</object>
     <object>objects\obj_enemy</object>
-    <object>objects\obj_exit</object>
-    <object>objects\obj_controller</object>
-    <object>objects\obj_darkness</object>
     <objects name="listeners">
       <object>objects\obj_listener</object>
       <object>objects\obj_testListener</object>
@@ -110,8 +111,11 @@
       <object>objects\obj_wall</object>
       <object>objects\obj_spawn</object>
       <object>objects\obj_dialogueEvent</object>
-      <object>objects\obj_dialogue</object>
       <object>objects\obj_area_boundaries</object>
+      <object>objects\obj_exit</object>
+      <object>objects\obj_darkness</object>
+      <object>objects\obj_controller</object>
+      <object>objects\obj_dialogue</object>
     </objects>
   </objects>
   <rooms name="rooms">

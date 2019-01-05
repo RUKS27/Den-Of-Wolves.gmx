@@ -23,16 +23,11 @@ else isMoving = false;
 // Ensure that aim does not change if sneak is enabled
 if(!Sneak && isMoving){
     if(Run){
-        Stamina-=2;
         noise_radius = 256;
         if(alarm[1] = -1) alarm[1] = 8;
     } else {
-        Stamina-=1;
-        
         noise_radius = 64;
         if(alarm[1] = -1) alarm[1] = 16;
-        
-        Stamina+=2;
     }
 
     if(UpMove || (UpMove && LeftMove) || (UpMove && RightMove)){
@@ -102,11 +97,10 @@ else {
     consum_pos = 0;    
 }
 
-if(keyboard_check_pressed(ord("3"))){
-    if(eq_passive < ds_list_size(global.passiveitems)){
-        eq_passive = ds_list_find_value(global.passiveitems, eq_passive+1);
-        show_debug_message(eq_passive);
-    } else eq_passive = ds_list_find_value(global.passiveitems, 0);
+MaxHealth = 100;
+MaxStamina = 100;
+if(eq_passive != 0){
+    PassiveEffects(eq_passive);
 }
 
 // Use Consumable Items
@@ -114,9 +108,17 @@ if(UseConsumable){
     if(eq_consumable > 0){
         if(UseCItem(eq_consumable) = "successful"){
             ds_list_delete(global.consumables, consum_pos);
-            consum_pos--;
+            consum_pos++;
         }
     }
+}
+
+// Stealth
+if(place_meeting(x, y, obj_darkness)){
+    hidden = true;
+    show_debug_message("Hidden");
+} else {
+    hidden = false;
 }
 
 // Combat    

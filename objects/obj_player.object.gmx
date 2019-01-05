@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Health = 100;
-Stamina = 100;
+            <string>MaxHealth = 100;
+Health = 100;
 
 //
 xSpd = 0;
@@ -57,6 +57,7 @@ enum p_states {
 
 p_state = p_states.normal;
 
+hidden = false;
 
 // Combat
 delay = 0;
@@ -68,11 +69,9 @@ locked_on = noone;
 // Inventory
 global.keyitems = ds_list_create();
 global.consumables = ds_list_create();
-global.passiveitems = ds_list_create();
 
 ds_list_add(global.keyitems, ItemList(0, 0));
 ds_list_add(global.consumables, ItemList(0, 0));
-ds_list_add(global.passiveitems, ItemList(0, 0));
 
 // Equipped Items
 eq_key = 0;
@@ -172,6 +171,9 @@ Attack = global.Attack_Press;
 Attack_RLS = global.Attack_Release;
 
 UseConsumable = global.Item_Press;
+
+
+Health = clamp(Health, 0, MaxHealth);
 
 // Switch State If Player Is Dead
 if(Health &lt;= 0){
