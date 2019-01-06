@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>obj_wall</parentName>
+  <parentName>obj_depthobject</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -67,9 +67,6 @@ enum e_lookdir {
 
 lookDir = e_lookdir.forward;
 
-sprite = spr_player;
-
-sprite_index = -1;
 mask_index = spr_player;
 </string>
           </argument>
@@ -117,10 +114,10 @@ yy = pointer_null;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(lookDir = e_lookdir.forward) var LOS = collision_ellipse(x-64, y, x+64, y+320, obj_wall, false, true);
-else if(lookDir = e_lookdir.down) var LOS = collision_ellipse(x-64, y, x+64, y-320, obj_wall, false, true);
-else if(lookDir = e_lookdir.left) var LOS = collision_ellipse(x-320, y+64, x, y-64, obj_wall, false, true);
-else if(lookDir = e_lookdir.right) var LOS = collision_ellipse(x, y+64, x+320, y-64, obj_wall, false, true);
+            <string>if(lookDir = e_lookdir.forward) var LOS = collision_ellipse(x-64, y, x+64, y+320, par_wall, false, true);
+else if(lookDir = e_lookdir.down) var LOS = collision_ellipse(x-64, y, x+64, y-320, par_wall, false, true);
+else if(lookDir = e_lookdir.left) var LOS = collision_ellipse(x-320, y+64, x, y-64, par_wall, false, true);
+else if(lookDir = e_lookdir.right) var LOS = collision_ellipse(x, y+64, x+320, y-64, par_wall, false, true);
         
 if(LOS != noone){
         if(LOS = obj_player){
@@ -173,7 +170,7 @@ switch(e_state){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(sprite, 1, x, y);
+            <string>draw_self();
 </string>
           </argument>
         </arguments>

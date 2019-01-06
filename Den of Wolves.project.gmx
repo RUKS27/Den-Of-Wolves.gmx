@@ -32,6 +32,9 @@
     <sprite>sprites\SPLASH</sprite>
     <sprite>sprites\spr_bg</sprite>
     <sprite>sprites\spr_hp</sprite>
+    <sprite>sprites\spr_knife</sprite>
+    <sprite>sprites\spr_savepoint</sprite>
+    <sprite>sprites\spr_door</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\ts_exterior_den_01</background>
@@ -90,25 +93,22 @@
       <script>scripts\PlayerNormal.gml</script>
       <script>scripts\DrawHUD.gml</script>
     </scripts>
+    <script>scripts\SaveFile.gml</script>
+    <script>scripts\LoadFile.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
     <font>fonts\f_dialogue</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_player</object>
-    <object>objects\obj_main</object>
-    <object>objects\obj_door</object>
-    <object>objects\obj_item</object>
-    <object>objects\obj_mainMenu</object>
-    <object>objects\obj_enemy</object>
-    <objects name="listeners">
-      <object>objects\obj_listener</object>
-      <object>objects\obj_testListener</object>
+    <objects name="Meta">
+      <object>objects\obj_main</object>
+      <object>objects\obj_mainMenu</object>
+      <object>objects\obj_depthsorter</object>
     </objects>
     <objects name="Complete">
       <object>objects\obj_camera</object>
-      <object>objects\obj_wall</object>
+      <object>objects\par_wall</object>
       <object>objects\obj_spawn</object>
       <object>objects\obj_dialogueEvent</object>
       <object>objects\obj_area_boundaries</object>
@@ -116,17 +116,35 @@
       <object>objects\obj_darkness</object>
       <object>objects\obj_controller</object>
       <object>objects\obj_dialogue</object>
+      <object>objects\obj_door</object>
+    </objects>
+    <object>objects\obj_depthobject</object>
+    <objects name="listeners">
+      <object>objects\obj_listener</object>
+      <object>objects\obj_testListener</object>
+    </objects>
+    <objects name="Incomplete">
+      <object>objects\obj_player</object>
+      <objects name="Interactable">
+        <object>objects\obj_savepoint</object>
+        <object>objects\obj_item</object>
+      </objects>
+      <objects name="NPC">
+        <object>objects\par_NPC</object>
+        <object>objects\par_enemy</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
     <room>rooms\rm_debug</room>
-    <room>rooms\rm_den_quadrant_01</room>
     <room>rooms\rm_general_house_interiors</room>
     <room>rooms\rm_important_interiors</room>
     <room>rooms\rm_startingarea</room>
     <room>rooms\rm_gameover</room>
     <room>rooms\rm_end</room>
+    <room>rooms\rm_streets_01</room>
+    <room>rooms\rm_st_01_interiors</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -34,12 +34,17 @@ global.view_midh = surface_get_height(application_surface)/2;
 window_set_size(800, 600);
 
 print(instance_number(obj_main))
+
 if(instance_number(obj_main)&gt;1){
-print("Deleted main")
+    print("Deleted main")
     instance_destroy(self);
     exit;
 }
 print("Created main")
+
+//if(!instance_exists(obj_depthsorter)){
+    //instance_create(x, y, obj_depthsorter);
+//}
 
 //create the controller Later we will want a way to load the user's default settings
 controller = instance_create(0,0,obj_controller)
@@ -51,8 +56,12 @@ bs_a = 0;
 map = ds_grid_create(20, 20);
 curArea = 000000;
 
-if(file_exists("SData.Tien")) global.fileExists = true;
-else global.fileExists = false;
+global.data = ds_list_create();
+global.load = false;
+
+// TWEAK THIS- there seem to be problems with the save system.
+if(file_exists("SData.Tien")) global.bufferExists = true;
+else global.bufferExists = false;
 
 global.Paused = false;
 
@@ -61,6 +70,18 @@ global.BGM = noone;
 
 global.BGMVolume = 70;
 global.SFXVolume = 100;
+
+// Game Flags (TO BE PLANNED OUT)
+flag[0] = false; // Entered first area of the city (Sets map in motion)
+flag[1] = false; // First enemy fight (Creates enemies throughout the different rooms)
+flag[2] = false; 
+flag[3] = false;
+flag[4] = false;
+flag[5] = false;
+flag[6] = false;
+flag[7] = false;
+flag[8] = false;
+// MORE TO BE ADDED
 
 // Stats
 global.TotalKills = 0;
@@ -72,8 +93,7 @@ EndQuote[0] = "Congratulations. You have gone through pain unknown to most of yo
                However, you perservered and answered the call to violence. Do not let 
                your guard down; the need for carnage only truly ends at death.";
 EndQuote[1] = "Congratulations. For now, you have escaped death without having to spill 
-               a single drop of blood. However, you will find the need to answer the call 
-               to violence eventually...";
+               a single drop of blood. ";
 </string>
           </argument>
         </arguments>
@@ -105,6 +125,15 @@ if(instance_exists(obj_player)){
                 p_state = p_states.dead;
             }
         }
+    }
+} else {
+    if(!global.bufferExists)
+        if(instance_exists(inst_firstspawn))instance_create(inst_firstspawn.x, inst_firstspawn.y, obj_player);
+}
+
+if(global.load){
+    if(ContinueGame() = "success"){
+        global.load = false;
     }
 }
 

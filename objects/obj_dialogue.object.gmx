@@ -106,14 +106,16 @@ if(message_end &gt; 0){
 
 draw_sprite_ext(spr_dialoguebox, 0, mw, mh + 256, 2, 2, 0, c_white, alpha);
 
+draw_set_color(c_white);
+draw_roundrect(mw - 319, mh + 161, mw + 317, mh + 349, true);
+
 if(message_complete)
     draw_sprite_ext(spr_cursor, 1, mw + 298, mh + 325, 1, 1, 0, c_white, 1);
     
-draw_set_color(c_white);
 draw_set_font(f_dialogue);
 if(message_end &gt; 0){
-    var charWidth = 15;
-    var lineEnd = 35;
+    var charWidth = 20;
+    var lineEnd = 30;
     var line = 0;
     var space = 0;
     var i = 1;    
@@ -147,16 +149,16 @@ if(message_end &gt; 0){
             switch(modifier){
                 case 0:
                     draw_set_color(c_white);
-                    draw_text(mw - 300, mh + 190, string_char_at(message[message_current], i));             
+                    draw_text(mw - 300, mh + 172+(36*line), string_char_at(message[message_current], i));             
                 break;
                                         
                 case 1:
                     draw_set_color(c_red);
-                    draw_text(mw - 300, mh + 190, string_char_at(message[message_current], i));
+                    draw_text(mw - 300, mh + 172+(36*line), string_char_at(message[message_current], i));
                 break;
             }
         } else {
-            draw_text(mw - 300 + (space*charWidth), mh + 190+(13*line), string_char_at(message[message_current], i));
+            draw_text(mw - 300 + (space*charWidth), mh + 172+(36*line), string_char_at(message[message_current], i));
         }
         
         space++;

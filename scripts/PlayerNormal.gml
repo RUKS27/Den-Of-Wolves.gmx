@@ -45,10 +45,10 @@ if(!Sneak && isMoving){
 }
 
 // Collision Detection
-if place_meeting(x+xSpd, y, obj_wall)
+if place_meeting(x+xSpd, y, par_wall)
 {
     repeat(abs(xSpd)){
-        if !place_meeting(x+sign(xSpd),y,obj_wall)
+        if !place_meeting(x+sign(xSpd),y,par_wall)
         {
                x+=sign(xSpd);
         } else {
@@ -59,10 +59,10 @@ if place_meeting(x+xSpd, y, obj_wall)
     xSpd=0;
 }
 
-if place_meeting(x, y+ySpd, obj_wall)
+if place_meeting(x, y+ySpd, par_wall)
 {
     repeat(abs(ySpd)){
-        if !place_meeting(x,y+sign(ySpd),obj_wall)
+        if !place_meeting(x,y+sign(ySpd),par_wall)
         {
             y+=sign(ySpd);
         } else {
@@ -78,11 +78,16 @@ y += ySpd;
 
 // Change Items
 if(keyboard_check_pressed(ord("1"))){
-    show_debug_message("1");
+    show_debug_message(key_pos);
 
-    if(eq_key < ds_list_size(global.keyitems))
-        eq_key = ds_list_find_value(global.keyitems, eq_key+1);
-    else eq_key = ds_list_find_value(global.keyitems, 0);
+    key_pos++;
+}
+
+if(key_pos < ds_list_size(global.keyitems))
+    eq_key = ds_list_find_value(global.keyitems, key_pos);
+else {
+    eq_key = ds_list_find_value(global.keyitems, 0);
+    key_pos = 0;    
 }
 
 if(keyboard_check_pressed(ord("2"))){
@@ -128,34 +133,34 @@ if(place_meeting(x, y, obj_darkness)){
 // Check Directions
 switch(p_dir){
             case p_dirs.forward:
-                var inst_enemy = instance_place(x, y-32, obj_enemy);        
+                var inst_enemy = instance_place(x, y-32, par_enemy);        
             
                 if(inst_enemy != noone){ 
-                    if(inst_enemy.lookDir = e_lookdir.forward) enemy = instance_place(x, y-32, obj_enemy);
+                    if(inst_enemy.lookDir = e_lookdir.forward) enemy = instance_place(x, y-32, par_enemy);
                 } else enemy = noone;  
             break;
             
             case p_dirs.down:
-                var inst_enemy = instance_place(x, y+32, obj_enemy);
+                var inst_enemy = instance_place(x, y+32, par_enemy);
             
                 if(inst_enemy != noone){ 
-                    if(inst_enemy.lookDir = e_lookdir.down) enemy = instance_place(x, y+32, obj_enemy);
+                    if(inst_enemy.lookDir = e_lookdir.down) enemy = instance_place(x, y+32, par_enemy);
                 } else enemy = noone;  
             break;
             
             case p_dirs.right:
-                var inst_enemy = instance_place(x+32, y, obj_enemy);    
+                var inst_enemy = instance_place(x+32, y, par_enemy);    
             
                 if(inst_enemy != noone){
-                    if(inst_enemy.lookDir = e_lookdir.right) enemy = instance_place(x+32, y, obj_enemy);
+                    if(inst_enemy.lookDir = e_lookdir.right) enemy = instance_place(x+32, y, par_enemy);
                 } else enemy = noone;  
             break;
             
             case p_dirs.left:
-                var inst_enemy = instance_place(x-32, y, obj_enemy);
+                var inst_enemy = instance_place(x-32, y, par_enemy);
             
                 if(inst_enemy != noone) {
-                    if(inst_enemy.lookDir = e_lookdir.left) enemy = instance_place(x-32, y, obj_enemy);
+                    if(inst_enemy.lookDir = e_lookdir.left) enemy = instance_place(x-32, y, par_enemy);
                 } else enemy = noone;  
             break;
 }
@@ -171,7 +176,8 @@ if(Sneak){
                 
             // Lock on to enemy
             locked_on = enemy;
-                
+               
+            if(eq_weapon){ 
                 if(Attack){
                     show_debug_message("Gaining composure..." + string(delay));
                 
@@ -188,6 +194,7 @@ if(Sneak){
                 }
             }
         }
+    }
 } else {
     delay = 0;
 }

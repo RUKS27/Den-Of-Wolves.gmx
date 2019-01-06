@@ -54,7 +54,7 @@
     <instance objName="obj_player" x="160" y="192" name="inst_67E2EA69" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_item" x="320" y="256" name="inst_0FB63AB3" locked="0" code="item_receive_ID = 41;&#xA;sprite_index = spr_tstkey;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_item" x="256" y="352" name="inst_B6023EF2" locked="0" code="item_receive_ID = 55;&#xA;sprite_index = Health_Injection;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy" x="288" y="96" name="inst_332D14A7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="par_enemy" x="288" y="96" name="inst_332D14A7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_exit" x="608" y="256" name="inst_E28CF747" locked="0" code="to_room = rm_den_quadrant_01;&#xA;to_spawn = inst_C6852868;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>

@@ -63,8 +63,11 @@ if(place_meeting(x, y, obj_player)){
             case i_types.key:
                 ds_list_add(global.keyitems, item);
                 
-                message[0] = "You found " + name;
+                message[0] = "You found \1" + name;
                 CreateDialogue(message);
+                
+                obj_player.key_pos = ds_list_find_index(global.keyitems, item);
+                
                 instance_destroy();
             break;
             
@@ -93,7 +96,9 @@ if(place_meeting(x, y, obj_player)){
                     instance_destroy();
                 }
                 
-                message[0] = "You found " + name;
+                message[0] = "You found \1" + name;
+                
+                obj_player.consum_pos = ds_list_find_index(global.consumables, item);
                 CreateDialogue(message);
                 break;
             
@@ -113,7 +118,7 @@ if(place_meeting(x, y, obj_player)){
                     instance_destroy();
                 }
                 
-                message[0] = "You found " + name;
+                message[0] = "You found \1" + name;
                 CreateDialogue(message);
                 break;  
         }

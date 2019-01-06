@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>-1</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_depthobject</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -75,7 +75,9 @@ ds_list_add(global.consumables, ItemList(0, 0));
 
 // Equipped Items
 eq_key = 0;
-eq_weapon = 40;
+key_pos = 0;
+
+eq_weapon = 0;
 
 eq_consumable = 0;
 consum_pos = 0;
@@ -165,7 +167,7 @@ UpMove = global.Up_Pressed;
 Sneak = global.Aim_Press;
 Run = global.Run_Press;
 
-Activate = global.Context_Press;
+Activate = global.Context_Pressed;
 
 Attack = global.Attack_Press;
 Attack_RLS = global.Attack_Release;
@@ -246,7 +248,7 @@ p_state = p_states.attack;
             <string>DrawHUD();  
 
 if(p_state = p_states.attack){ 
-    var attack = Attack_GUI(obj_enemy);
+    var attack = Attack_GUI(par_enemy);
     
     if(locked_on != noone){
         if(!locked_on.spotPlayer){
@@ -297,21 +299,36 @@ if(p_state = p_states.attack){
             <kind>1</kind>
             <string>draw_self();
 
-if(p_state != p_states.attack){
-    if(locked_on != noone &amp;&amp; Sneak){
-        if(!locked_on.spotPlayer){
-            var sub;
-            
-            if(delay &lt; 120){
-                sub = 2;
-            } else {
-                sub = 1;
+var sneak = global.Aim_Press;
+
+var lo = locked_on;
+
+if(p_state = p_states.normal){
+    if(sneak){
+        if(lo != noone){
+            if(!lo.spotPlayer){
+                var sub;
+                
+                // Delay controls subimage (if delay is maxed, the sprite will turn red)
+                if(delay &lt; 120){
+                    sub = 2;
+                } else {
+                    sub = 1;
+                }
+                
+                // Draw cursor
+                draw_sprite(spr_arrow, sub, locked_on.x, locked_on.y - (64 + arrow_YSub));
+                
+                // Check if player has a weapon equipped
+                if(Attack){
+                    if(eq_weapon &gt; 0){
+                        if(alarm[2] = -1) alarm[2] = 16 - (delay / 10);
+                    } else {
+                        message[0] = "*I need a weapon...";
+                        CreateDialogue(message);
+                    }
+                }
             }
-            
-            draw_sprite(spr_arrow, sub, locked_on.x, locked_on.y - (64 + arrow_YSub));
-            
-            if(Attack)
-                if(alarm[2] = -1) alarm[2] = 16 - (delay / 10);
         }
     }
 }
