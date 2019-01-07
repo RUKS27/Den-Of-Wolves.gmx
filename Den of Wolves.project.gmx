@@ -42,7 +42,10 @@
     <background>background\ts_exterior_ambience_01</background>
     <background>background\ts_gore_01</background>
   </backgrounds>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\testroompath</path>
+    <path>paths\testroombranch1</path>
+  </paths>
   <scripts name="scripts">
     <script>scripts\GetDialogue.gml</script>
     <scripts name="Inventory">
@@ -93,8 +96,17 @@
       <script>scripts\PlayerNormal.gml</script>
       <script>scripts\DrawHUD.gml</script>
     </scripts>
+
+    <scripts name="pathfinding">
+      <script>scripts\findClosestPath.gml</script>
+      <script>scripts\validateGotoPath.gml</script>
+      <script>scripts\validateGotoPathDraw.gml</script>
+      <script>scripts\script34.gml</script>
+    </scripts>
+
     <script>scripts\SaveFile.gml</script>
     <script>scripts\LoadFile.gml</script>
+
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
@@ -123,6 +135,10 @@
       <object>objects\obj_listener</object>
       <object>objects\obj_testListener</object>
     </objects>
+<<<<<<< HEAD
+    <object>objects\obj_test_path_follow</object>
+    <object>objects\obj_path_manager</object>
+=======
     <objects name="Incomplete">
       <object>objects\obj_player</object>
       <objects name="Interactable">
@@ -134,13 +150,19 @@
         <object>objects\par_enemy</object>
       </objects>
     </objects>
+>>>>>>> pr/10
   </objects>
   <rooms name="rooms">
+    <room>rooms\test_path_finding</room>
     <room>rooms\rm_menu</room>
     <room>rooms\rm_debug</room>
+<<<<<<< HEAD
+    <room>rooms\rm_startingarea</room>
+    <room>rooms\rm_den_quadrant_01</room>
+=======
+>>>>>>> pr/10
     <room>rooms\rm_general_house_interiors</room>
     <room>rooms\rm_important_interiors</room>
-    <room>rooms\rm_startingarea</room>
     <room>rooms\rm_gameover</room>
     <room>rooms\rm_end</room>
     <room>rooms\rm_streets_01</room>

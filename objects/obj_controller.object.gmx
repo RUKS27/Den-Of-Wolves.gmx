@@ -256,55 +256,60 @@ global.Pause_Pressed = keyboard_check_pressed(kb_Pause)||gamepad_button_check_pr
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>inputDisplay = ""
+            <string>if (!debug_mode)
+{
+exit;
+}
 
-if (global.Up_Release){print("DUR")}
+inputDisplay = ""
+
+//if (global.Up_Release){print("DUR")}
 if (global.Up_Press){inputDisplay = inputDisplay+"DU";}
-if (global.Up_Pressed){print("DUP")}
+//if (global.Up_Pressed){print("DUP")}
 
-if (global.Down_Release){print("DDR")}
+//if (global.Down_Release){print("DDR")}
 if (global.Down_Press){inputDisplay = inputDisplay+"DD";}
-if (global.Down_Pressed){print("DDP")}
+//if (global.Down_Pressed){print("DDP")}
 
-if (global.Left_Release){print("DLR")}
+//if (global.Left_Release){print("DLR")}
 if (global.Left_Press){inputDisplay = inputDisplay+"DL";}
-if (global.Left_Pressed){print("DLP")}
+//if (global.Left_Pressed){print("DLP")}
 
-if (global.Right_Release){print("DRR")}
+//if (global.Right_Release){print("DRR")}
 if (global.Right_Press){inputDisplay = inputDisplay+"DR";}
-if (global.Right_Pressed){print("DRP")}
+//if (global.Right_Pressed){print("DRP")}
 
-if (global.Confirm_Release){print("CMR")}
+//if (global.Confirm_Release){print("CMR")}
 if (global.Confirm_Press){inputDisplay = inputDisplay+"CM";}
-if (global.Confirm_Pressed){print("CMP")}
+//if (global.Confirm_Pressed){print("CMP")}
 
-if (global.Cancel_Release){print("CLR")}
+//if (global.Cancel_Release){print("CLR")}
 if (global.Cancel_Press){inputDisplay = inputDisplay+"CL";}
-if (global.Cancel_Pressed){print("CLP")}
+//if (global.Cancel_Pressed){print("CLP")}
 
-if (global.Attack_Release){print("ATR")}
+//if (global.Attack_Release){print("ATR")}
 if (global.Attack_Press){inputDisplay = inputDisplay+"AT";}
-if (global.Attack_Pressed){print("ATP")}
+//if (global.Attack_Pressed){print("ATP")}
 
-if (global.Item_Release){print("IR")}
+//if (global.Item_Release){print("IR")}
 if (global.Item_Press){inputDisplay = inputDisplay+"IR";}
-if (global.Item_Pressed){print("IP")}
+//if (global.Item_Pressed){print("IP")}
 
-if (global.Context_Release){print("CTR")}
+//if (global.Context_Release){print("CTR")}
 if (global.Context_Press){inputDisplay = inputDisplay+"CT";}
-if (global.Context_Pressed){print("CTP")}
+//if (global.Context_Pressed){print("CTP")}
 
-if (global.Run_Release){print("RNR")}
+//if (global.Run_Release){print("RNR")}
 if (global.Run_Press){inputDisplay = inputDisplay+"RN";}
-if (global.Run_Pressed){print("RNP")}
+//if (global.Run_Pressed){print("RNP")}
 
-if (global.Aim_Release){print("AMR")}
+//if (global.Aim_Release){print("AMR")}
 if (global.Aim_Press){inputDisplay = inputDisplay+"AM";}
-if (global.Aim_Pressed){print("AMP")}
+//if (global.Aim_Pressed){print("AMP")}
 
-if (global.Pause_Release){print("PAR")}
+//if (global.Pause_Release){print("PAR")}
 if (global.Pause_Press){inputDisplay = inputDisplay+"PA";}
-if (global.Pause_Pressed){print("PAP")}
+//if (global.Pause_Pressed){print("PAP")}
 
 draw_text(view_xport + 10, view_yport + 10,inputDisplay)
 </string>
