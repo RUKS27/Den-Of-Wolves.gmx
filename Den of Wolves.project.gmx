@@ -34,7 +34,10 @@
     <background>background\ts_exterior_den_01</background>
     <background>background\ts_interior_house_01</background>
   </backgrounds>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\testroompath</path>
+    <path>paths\testroombranch1</path>
+  </paths>
   <scripts name="scripts">
     <script>scripts\GetDialogue.gml</script>
     <scripts name="Inventory">
@@ -84,6 +87,12 @@
       <script>scripts\PlayerNormal.gml</script>
       <script>scripts\DrawHUD.gml</script>
     </scripts>
+    <scripts name="pathfinding">
+      <script>scripts\findClosestPath.gml</script>
+      <script>scripts\validateGotoPath.gml</script>
+      <script>scripts\validateGotoPathDraw.gml</script>
+      <script>scripts\script34.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
@@ -109,14 +118,17 @@
       <object>objects\obj_listener</object>
       <object>objects\obj_testListener</object>
     </objects>
+    <object>objects\obj_test_path_follow</object>
+    <object>objects\obj_path_manager</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\test_path_finding</room>
     <room>rooms\rm_menu</room>
     <room>rooms\rm_debug</room>
+    <room>rooms\rm_startingarea</room>
     <room>rooms\rm_den_quadrant_01</room>
     <room>rooms\rm_general_house_interiors</room>
     <room>rooms\rm_important_interiors</room>
-    <room>rooms\rm_startingarea</room>
     <room>rooms\rm_gameover</room>
     <room>rooms\rm_end</room>
   </rooms>
