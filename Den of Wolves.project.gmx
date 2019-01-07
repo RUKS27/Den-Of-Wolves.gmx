@@ -136,7 +136,6 @@
       <object>objects\obj_listener</object>
       <object>objects\obj_testListener</object>
     </objects>
-<<<<<<< HEAD
     <object>objects\obj_test_path_follow</object>
     <object>objects\obj_path_manager</object>
 =======
