@@ -25,8 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//global.MonitorW = display_get_width();
-//global.MonitorH = display_get_height();
+            <string>application_surface_draw_enable(false);
 
 global.view_midw = surface_get_width(application_surface)/2;
 global.view_midh = surface_get_height(application_surface)/2;
@@ -160,23 +159,6 @@ if(global.Paused){
 
 global.BGMVolume = clamp(global.BGMVolume, 0, 100);
 global.SFXVolume = clamp(global.SFXVolume, 0, 100);
-
-/*if(window_get_fullscreen()){
-    if(global.MonitorW&gt;=1280 &amp;&amp; global.MonitorH&gt;=720) {
-        surface_resize(application_surface,1280,720)
-        global.Xoffset=(global.MonitorW-1280)/2;
-        global.Yoffset=(global.MonitorH-720)/2;
-    }
-    
-    if(global.MonitorW&gt;=1024 &amp;&amp; global.MonitorH&gt;=756) {
-        surface_resize(application_surface,1024,756)
-        global.Xoffset=(global.MonitorW-1024)/2;
-        global.Yoffset=(global.MonitorH-756)/2;
-    }
-} else {
-    global.Xoffset=(window_get_width()-800)/2;
-    global.Yoffset=(window_get_height()-600)/2;
-}*/
 </string>
           </argument>
         </arguments>
@@ -227,6 +209,77 @@ draw_text(view_xport + 460, view_yport + 480, message_draw);
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="77">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+if(!window_get_fullscreen()){
+    var wh = window_get_height();
+    var ww = window_get_width();
+    
+    if(ww = 800 &amp;&amp; wh = 600){
+        surface_resize(application_surface, 800, 600)
+        
+        var xOffset = (ww - 800) / 2;
+        var yOffset = (wh - 600) / 2;
+    } else if(ww = 640 &amp;&amp; wh = 480){
+        surface_resize(application_surface, 680, 480)
+        
+        var xOffset = (ww - 640) / 2;
+        var yOffset = (wh - 480) / 2;
+    }
+} else {
+    var wh = display_get_width();
+    var ww = display_get_height();
+    
+    if(ww &gt;= 1680 &amp;&amp; wh &gt;= 1050){
+        surface_resize(application_surface, 1600, 900)
+        
+        var xOffset = (ww - 1680) / 2;
+        var yOffset = (wh - 1050) / 2;
+    } else if(ww &gt;= 1280 &amp;&amp; wh &gt;= 960){
+        surface_resize(application_surface, 1280, 960)
+        
+        var xOffset = (ww - 1280) / 2;
+        var yOffset = (wh - 960) / 2;
+    } else if(ww &gt;= 1024 &amp;&amp; wh &gt;=768){ 
+        surface_resize(application_surface, 1024, 768)
+        
+        var xOffset = (ww - 1024) / 2;
+        var yOffset = (wh - 768) / 2;
+    } else if(ww &gt;= 800 &amp;&amp; wh &gt;= 600){
+        surface_resize(application_surface, 800, 600)
+        
+        var xOffset = (ww - 800) / 2;
+        var yOffset = (wh - 600) / 2;
+    } else if(ww &gt;= 640 &amp;&amp; wh &gt;= 480){
+        surface_resize(application_surface, 680, 480)
+        
+        var xOffset = (ww - 640) / 2;
+        var yOffset = (wh - 480) / 2;
+    }
+}
+
+draw_surface_ext(application_surface, xOffset, yOffset, 1, 1, 0, c_white, 1);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -263,8 +316,6 @@ draw_text(view_xport + 460, view_yport + 480, message_draw);
         draw_set_color(c_white);
     }
 }
-
-
 
 // Text at the end of game
 if(global.EndTxt){

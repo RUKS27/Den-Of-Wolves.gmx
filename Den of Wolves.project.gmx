@@ -35,6 +35,7 @@
     <sprite>sprites\spr_knife</sprite>
     <sprite>sprites\spr_savepoint</sprite>
     <sprite>sprites\spr_door</sprite>
+    <sprite>sprites\spr_checkbox</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\ts_exterior_den_01</background>

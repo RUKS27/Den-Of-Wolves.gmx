@@ -3,14 +3,24 @@
 var BGMV = global.BGMVolume;
 var SFXV = global.SFXVolume;
 
-if(menu_item != 2){
-    if(global.Down_Press){
-        menu_item++;
-    }
-}
+
 if(menu_item != 0){
     if(global.Up_Press){
-        menu_item--;
+    menu_item--;
+    }
+}
+
+if(window_get_fullscreen()){
+    if(menu_item != 2){
+        if(global.Down_Press){
+            menu_item++;
+        }
+    }
+} else {
+    if(menu_item != 5){
+        if(global.Down_Press){
+            menu_item++;
+        }
     }
 }
 
