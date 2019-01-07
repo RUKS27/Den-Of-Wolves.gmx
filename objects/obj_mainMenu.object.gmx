@@ -127,7 +127,7 @@ if(display_m_options){
             <string>switch(m_screen){
     case 0:
         // If no save is detected
-        var fE = global.fileExists;
+        var fE = global.bufferExists;
         
         if(!fE){
             if(menu_item = 0){
@@ -138,9 +138,10 @@ if(display_m_options){
             }
         } else {
             if(menu_item = 0){
-                ContinueGame();
+                global.load = true;
             } else if (menu_item = 1){
                 DeleteSave();
+                global.bufferExists = file_exists("SData.Tien");
             }
         }
     break;
@@ -201,7 +202,7 @@ alarm[0] = 128;
             <string>var mw = global.view_midw;
 var mh = global.view_midh;
 
-var fE = global.fileExists;
+var fE = global.bufferExists;
 
 var wsa = warning_starting_alpha;
 

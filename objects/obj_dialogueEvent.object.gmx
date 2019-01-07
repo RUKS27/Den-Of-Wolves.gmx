@@ -88,15 +88,13 @@ message[0] = "";
     if(on_collision || obj_player.Activate){
         show_debug_message("Dialogue Activated.");
         CreateDialogue(message);
+        
+        if(!repeatable) instance_destroy(self);
+        else enabled = false;
     }
 }
 
-if(instance_exists(obj_dialogue)){            
-    if(!repeatable) instance_destroy();
-    else enabled = false;
-            
-    alarm[0] = 30;
-}
+if(instance_exists(obj_dialogue)) alarm[0] = 30;
 </string>
           </argument>
         </arguments>

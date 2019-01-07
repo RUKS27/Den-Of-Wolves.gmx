@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>-1</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_depthobject</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Health = 100;
-Stamina = 100;
+            <string>MaxHealth = 100;
+Health = 100;
 
 //
 xSpd = 0;
@@ -55,8 +55,9 @@ enum p_states {
     dead = 3
 }
 
-p_state = p_states.attack;
+p_state = p_states.normal;
 
+hidden = false;
 
 // Combat
 delay = 0;
@@ -68,20 +69,50 @@ locked_on = noone;
 // Inventory
 global.keyitems = ds_list_create();
 global.consumables = ds_list_create();
-global.passiveitems = ds_list_create();
 
-ds_list_add(global.keyitems, 0);
-ds_list_add(global.consumables, 0);
-ds_list_add(global.passiveitems, 0);
+ds_list_add(global.keyitems, ItemList(0, 0));
+ds_list_add(global.consumables, ItemList(0, 0));
 
 // Equipped Items
 eq_key = 0;
-eq_weapon = 40;
+key_pos = 0;
+
+eq_weapon = 0;
 
 eq_consumable = 0;
 consum_pos = 0;
 
 eq_passive = 0;
+
+// GUI 
+a = 0;
+
+arrow_YSub = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// Enemy cursor y position changes here
+if(arrow_YSub = 0) arrow_YSub = 4;
+else arrow_YSub = 0;
 </string>
           </argument>
         </arguments>
@@ -136,18 +167,23 @@ UpMove = global.Up_Pressed;
 Sneak = global.Aim_Press;
 Run = global.Run_Press;
 
-Activate = global.Context_Press;
+Activate = global.Context_Pressed;
 
-Attack = global.Attack_Pressed;
+Attack = global.Attack_Press;
 Attack_RLS = global.Attack_Release;
 
 UseConsumable = global.Item_Press;
+
+
+Health = clamp(Health, 0, MaxHealth);
 
 // Switch State If Player Is Dead
 if(Health &lt;= 0){
     show_debug_message("You died");
     p_state = p_states.dead;
 }
+
+delay = clamp(delay, 0, 120);
 
 switch(p_state){
     case 0:
@@ -209,11 +245,10 @@ p_state = p_states.attack;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>DrawHUD();
+            <string>DrawHUD();  
 
-// Check if player is in attack mode
 if(p_state = p_states.attack){ 
-    var attack = Attack_GUI(obj_enemy);
+    var attack = Attack_GUI(par_enemy);
     
     if(locked_on != noone){
         if(!locked_on.spotPlayer){
@@ -231,6 +266,10 @@ if(p_state = p_states.attack){
             } else if(attack = "failure" || attack = "botched"){
                 Health-= 25; // Change this to enemy weapon's damage
             }
+        }
+        
+        if(attack != pointer_null){
+            global.FadeR = false;
         }
     }
 } else {
@@ -260,10 +299,39 @@ if(p_state = p_states.attack){
             <kind>1</kind>
             <string>draw_self();
 
-if(locked_on != noone &amp;&amp; Sneak)
-    if(!locked_on.spotPlayer)draw_sprite(spr_arrow, 1, locked_on.x, locked_on.y - 64);
-    
+var sneak = global.Aim_Press;
 
+var lo = locked_on;
+
+if(p_state = p_states.normal){
+    if(sneak){
+        if(lo != noone){
+            if(!lo.spotPlayer){
+                var sub;
+                
+                // Delay controls subimage (if delay is maxed, the sprite will turn red)
+                if(delay &lt; 120){
+                    sub = 2;
+                } else {
+                    sub = 1;
+                }
+                
+                // Draw cursor
+                draw_sprite(spr_arrow, sub, locked_on.x, locked_on.y - (64 + arrow_YSub));
+                
+                // Check if player has a weapon equipped
+                if(Attack){
+                    if(eq_weapon &gt; 0){
+                        if(alarm[2] = -1) alarm[2] = 16 - (delay / 10);
+                    } else {
+                        message[0] = "*I need a weapon...";
+                        CreateDialogue(message);
+                    }
+                }
+            }
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

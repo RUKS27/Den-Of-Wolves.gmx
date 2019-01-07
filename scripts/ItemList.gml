@@ -10,22 +10,32 @@ enum i_types {
 }
 
 // Item Names
+
+// Passive Items start from 75
+name[75] =  "Health Boost";
+type[75] = i_types.passive;
+sprite[75] = spr_mshard;
+
+// Consumables start from 55
+name[55] =  "Health Injection";
+type[55] = i_types.consumable;
+sprite[55] = Health_Injection;
+
 // Weapons Start From 40
 name[40] =  "Sharp Metal Shard";
 type[40] = i_types.weapon;
 sprite[40] = spr_mshard;
 
-name[41] =  "knife";
+name[41] =  "Knife";
 type[41] = i_types.weapon;
-sprite[41] = spr_tstkey;
-
-// Consumables start from 55
-name[55] =  "Health";
-type[55] = i_types.consumable;
-sprite[55] = Health_Injection;
+sprite[41] = spr_knife;
 
 // Keys Start From 1
-name[1] =  "";
+name[2] =  "Rusted Key";
+type[2] = i_types.key;
+sprite[2] = spr_tstkey;
+
+name[1] =  "Surveillance Key";
 type[1] = i_types.key;
 sprite[1] = spr_tstkey;
 
