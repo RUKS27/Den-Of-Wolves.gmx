@@ -30,7 +30,8 @@
 global.view_midw = surface_get_width(application_surface)/2;
 global.view_midh = surface_get_height(application_surface)/2;
 
-window_set_size(800, 600);
+global.xOffset = 0;
+global.yOffset = 0;
 
 print(instance_number(obj_main))
 
@@ -54,6 +55,11 @@ bs_a = 0;
 
 map = ds_grid_create(20, 20);
 curArea = 000000;
+
+global.fadeOut = false;
+global.fade_alpha = 0;
+
+global.roomDarkness = 0;
 
 global.data = ds_list_create();
 global.load = false;
@@ -93,6 +99,31 @@ EndQuote[0] = "Congratulations. You have gone through pain unknown to most of yo
                your guard down; the need for carnage only truly ends at death.";
 EndQuote[1] = "Congratulations. For now, you have escaped death without having to spill 
                a single drop of blood. ";
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>with(obj_player){
+    p_state = p_states.normal;
+}
 </string>
           </argument>
         </arguments>
@@ -209,6 +240,30 @@ draw_text(view_xport + 460, view_yport + 480, message_draw);
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>window_set_size(800, 600);
+display_set_gui_size(view_wport, view_hport);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="77">
       <action>
         <libid>1</libid>
@@ -226,55 +281,78 @@ draw_text(view_xport + 460, view_yport + 480, message_draw);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-if(!window_get_fullscreen()){
+            <string>draw_surface_ext(application_surface, global.xOffset, global.yOffset, 1, 1, 0, c_white, 1);
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="76">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(!window_get_fullscreen()){
     var wh = window_get_height();
     var ww = window_get_width();
     
-    if(ww = 800 &amp;&amp; wh = 600){
-        surface_resize(application_surface, 800, 600)
+    if(ww &gt;= 800 &amp;&amp; wh &gt;= 600){
+        surface_resize(application_surface, 800, 600);
         
-        var xOffset = (ww - 800) / 2;
-        var yOffset = (wh - 600) / 2;
-    } else if(ww = 640 &amp;&amp; wh = 480){
-        surface_resize(application_surface, 680, 480)
+        global.xOffset = (ww - 800) / 2;
+        global.yOffset = (wh - 600) / 2;
+    } else if(ww &gt;= 640 &amp;&amp; wh &gt;= 480){
+        surface_resize(application_surface, 640, 480);
         
-        var xOffset = (ww - 640) / 2;
-        var yOffset = (wh - 480) / 2;
+        global.xOffset = (ww - 640) / 2;
+        global.yOffset = (wh - 480) / 2;
     }
 } else {
     var wh = display_get_width();
     var ww = display_get_height();
     
     if(ww &gt;= 1680 &amp;&amp; wh &gt;= 1050){
-        surface_resize(application_surface, 1600, 900)
+        surface_resize(application_surface, 1600, 900);
         
-        var xOffset = (ww - 1680) / 2;
-        var yOffset = (wh - 1050) / 2;
+        global.xOffset = (ww - 1680) / 2;
+        global.yOffset = (wh - 1050) / 2;
     } else if(ww &gt;= 1280 &amp;&amp; wh &gt;= 960){
         surface_resize(application_surface, 1280, 960)
         
-        var xOffset = (ww - 1280) / 2;
-        var yOffset = (wh - 960) / 2;
+        global.xOffset = (ww - 1280) / 2;
+        global.yOffset = (wh - 960) / 2;
     } else if(ww &gt;= 1024 &amp;&amp; wh &gt;=768){ 
         surface_resize(application_surface, 1024, 768)
         
-        var xOffset = (ww - 1024) / 2;
-        var yOffset = (wh - 768) / 2;
+        global.xOffset = (ww - 1024) / 2;
+        global.yOffset = (wh - 768) / 2;
     } else if(ww &gt;= 800 &amp;&amp; wh &gt;= 600){
         surface_resize(application_surface, 800, 600)
         
-        var xOffset = (ww - 800) / 2;
-        var yOffset = (wh - 600) / 2;
+        global.xOffset = (ww - 800) / 2;
+        global.yOffset = (wh - 600) / 2;
     } else if(ww &gt;= 640 &amp;&amp; wh &gt;= 480){
-        surface_resize(application_surface, 680, 480)
+        surface_resize(application_surface, 640, 480)
         
-        var xOffset = (ww - 640) / 2;
-        var yOffset = (wh - 480) / 2;
+        global.xOffset = (ww - 640) / 2;
+        global.yOffset = (wh - 480) / 2;
     }
 }
 
-draw_surface_ext(application_surface, xOffset, yOffset, 1, 1, 0, c_white, 1);
+show_debug_message(application_surface);
 </string>
           </argument>
         </arguments>
@@ -297,7 +375,10 @@ draw_surface_ext(application_surface, xOffset, yOffset, 1, 1, 0, c_white, 1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(instance_exists(obj_player)){  
+            <string>display_set_gui_size(view_wport, view_hport);
+display_set_gui_maximise(1, 1, global.xOffset, global.yOffset);
+
+if(instance_exists(obj_player)){  
     // Draw Game-Over Screen If Player Is Dead
     if(obj_player.p_state = obj_player.p_states.dead){
         if(bs_a &lt; 1) bs_a+=0.05;
@@ -315,6 +396,36 @@ draw_surface_ext(application_surface, xOffset, yOffset, 1, 1, 0, c_white, 1);
         draw_set_alpha(1);
         draw_set_color(c_white);
     }
+}
+
+if(global.fadeOut){
+    with(obj_player){
+        p_state = p_states.cutscene;
+    }
+        
+    draw_set_color(c_black);
+    if(global.fade_alpha &lt; 1){
+        global.fade_alpha+=0.2;
+    }
+    
+    draw_set_alpha(global.fade_alpha);
+    
+    draw_rectangle(view_xport, view_yport, view_wport * window_get_width(), view_hport * window_get_height(), false);
+    draw_set_alpha(1);
+    draw_set_color(c_white);
+    
+    alarm[0] = 8;
+} else {
+    draw_set_color(c_black);
+    
+    if(global.fade_alpha &gt; 0){
+        global.fade_alpha-=0.2;
+        draw_set_alpha(global.fade_alpha);   
+        draw_rectangle(view_xport, view_yport, view_wport * window_get_width(), view_hport * window_get_height(), false);
+    }
+    
+    draw_set_alpha(1);
+    draw_set_color(c_white);
 }
 
 // Text at the end of game

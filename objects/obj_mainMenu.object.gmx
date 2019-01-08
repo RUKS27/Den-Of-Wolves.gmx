@@ -156,10 +156,14 @@ if(display_m_options){
             if(menu_item = 2){
                 if(window_get_fullscreen() = true) window_set_fullscreen(false);
                 else window_set_fullscreen(true);
+                
+                display_set_gui_size(view_wport, view_hport);
             } else if(menu_item = 3){
                 window_set_size(800, 600);
+                display_set_gui_size(view_wport, view_hport);
             } else if(menu_item = 4){
                 window_set_size(640, 480);
+                display_set_gui_size(view_wport, view_hport);
             } else if(menu_item = 5){
                 menu_item = 0;
                 m_screen = 0;

@@ -51,8 +51,8 @@ v_border = 30;
           <argument>
             <kind>1</kind>
             <string>if(instance_exists(following)){
-    x = clamp(x, following.x-h_border, following.x+h_border);
-    y = clamp(y, following.y-v_border, following.y+v_border);
+    x = clamp(x, round(following.x-h_border), round(following.x+h_border));
+    y = clamp(y, round(following.y-v_border), round(following.y+v_border));
 }
 </string>
           </argument>
