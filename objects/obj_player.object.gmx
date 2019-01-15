@@ -6,7 +6,7 @@
   <depth>0</depth>
   <persistent>-1</persistent>
   <parentName>obj_depthobject</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_playerforward</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -33,19 +33,21 @@ xSpd = 0;
 ySpd = 0;
 
 rSpd = 4;
-mSpd = 3;
+mSpd = 3.5;
 sSpd = 2;
 
 noise_radius = 256;
 
 enum p_dirs {
-    forward = 0,
-    right = 1,
-    down = 2,
-    left = 3
+    forward,
+    right,
+    down,
+    left
 }
 
 p_dir = p_dirs.forward;
+
+sprite = spr_playerforward;
 
 // States
 enum p_states {
@@ -65,6 +67,9 @@ pos = -160;
 
 locked_on = noone;
 
+a_sub = 0;
+a_delay = 0;
+
 
 // Inventory
 global.keyitems = ds_list_create();
@@ -83,6 +88,8 @@ eq_consumable = 0;
 consum_pos = 0;
 
 eq_passive = 0;
+
+tm = 0;
 
 // GUI 
 a = 0;
@@ -184,6 +191,24 @@ if(Health &lt;= 0){
 }
 
 delay = clamp(delay, 0, 120);
+
+switch(p_dir){
+    case p_dirs.forward:
+        sprite = spr_playerforward;
+    break;
+    
+    case p_dirs.left:
+        sprite = spr_playerleft;
+    break;
+    
+    case p_dirs.right:
+        sprite = spr_playerright;
+    break;
+    
+    case p_dirs.down:
+        sprite = spr_playerback;
+    break;
+}
 
 switch(p_state){
     case 0:
@@ -297,8 +322,11 @@ if(p_state = p_states.attack){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
-
+            <string>if(xSpd != 0 || ySpd != 0) {
+    if(Sneak) draw_sprite(sprite, AnimateSprite(1, 2, 15), x, y);
+    else if(Run) draw_sprite(sprite, AnimateSprite(1, 2, 4), x, y);
+    else draw_sprite(sprite, AnimateSprite(1, 2, 8), x, y);
+} else draw_sprite(sprite, 0, x, y);
 var sneak = global.Aim_Press;
 
 var lo = locked_on;

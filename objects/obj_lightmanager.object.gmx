@@ -31,6 +31,8 @@ surface_set_target(surf);
 draw_clear_alpha(c_black, 0);
 
 surface_reset_target();
+
+
 </string>
           </argument>
         </arguments>
@@ -90,13 +92,26 @@ if(surface_exists(surf)){
     
     draw_set_alpha(global.roomDarkness);
     draw_rectangle(0, 0, room_width, room_height, false);
-    draw_set_alpha(0.75);
+    draw_set_alpha(1);
     
     with(par_light){
         draw_set_color(c_white);
         
         draw_set_blend_mode(bm_subtract);
         draw_sprite(spr_lcookie0, 0, x, y);
+        draw_set_blend_mode(bm_normal);
+        draw_set_alpha(1);
+    }
+    
+    with(obj_flame){
+        if(!alarm_running) {
+            alarm[0] = 2;
+            alarm_running = true;
+        }
+        
+        draw_set_alpha(f);
+        draw_set_blend_mode(bm_add);
+        draw_sprite_ext(spr_lcookie0, 0, x, y, 1, 1, 0, c_orange, f);
         draw_set_blend_mode(bm_normal);
         draw_set_alpha(1);
     }

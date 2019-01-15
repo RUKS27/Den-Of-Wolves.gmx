@@ -30,9 +30,9 @@ if(!Sneak && isMoving){
         if(alarm[1] = -1) alarm[1] = 16;
     }
 
-    if(UpMove || (UpMove && LeftMove) || (UpMove && RightMove)){
+    if(UpMove){
         p_dir = p_dirs.forward;
-    } else if (DownMove || (DownMove && LeftMove) || (DownMove && RightMove)) {
+    } else if (DownMove) {
         p_dir = p_dirs.down;
     } else if (RightMove) {
         p_dir = p_dirs.right;

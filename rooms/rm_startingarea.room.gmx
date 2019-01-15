@@ -138,7 +138,6 @@
     <instance objName="par_wall" x="288" y="416" name="inst_4B1959A8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_testListener" x="384" y="288" name="inst_72AF5DF9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="par_enemy" x="640" y="288" name="inst_9396FF82" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_door" x="448" y="480" name="inst_0ECBC6C4" locked="0" code="key_id = 1;&#xA;" scaleX="3" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="par_wall" x="480" y="224" name="inst_055996A1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_dialogueEvent" x="480" y="241" name="inst_51818E5C" locked="0" code="repeatable = true;&#xA;&#xA;message[0] = &quot;A statue.&quot;;&#xA;" scaleX="1" scaleY="1.03225803375244" colour="4294967295" rotation="0"/>
     <instance objName="obj_item" x="640" y="352" name="inst_FA4F14C1" locked="0" code="item_receive_ID = 75;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -147,10 +146,10 @@
     <instance objName="obj_item" x="480" y="576" name="inst_073DDECE" locked="0" code="item_receive_ID = 1;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_item" x="480" y="384" name="inst_A0C66D00" locked="0" code="item_receive_ID = 41;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_savepoint" x="320" y="384" name="inst_3F69145F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_spawn" x="480" y="672" name="inst_firstspawn" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_exit" x="464" y="128" name="inst_96B92864" locked="0" code="to_room = rm_streets_01;&#xA;to_spawn = inst_spawn_st_0_sa;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_exit" x="464" y="128" name="inst_96B92864" locked="0" code="to_room = rm_streets_00;&#xA;to_spawn = inst_firstspawn;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_dialogueEvent" x="608" y="320" name="inst_86E55B49" locked="0" code="repeatable = false;&#xA;on_collision = true;&#xA;message[0] = &quot;*To execute an inmate, hold Sneak (CTRL) and approach them from behind.  When the cursor appears, hold Attack(X) until &quot;;&#xA;message[1] = &quot;it turns to red, then release.&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_main" x="1088" y="-32" name="inst_C23748BA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_player" x="512" y="672" name="inst_31FDAD58" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_depthsorter" x="672" y="512" name="inst_6613E8D9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="ts_gore_01" x="352" y="224" w="32" h="32" xo="0" yo="32" id="10002850" name="inst_03F49192" depth="2" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

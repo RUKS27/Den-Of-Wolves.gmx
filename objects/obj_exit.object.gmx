@@ -29,6 +29,9 @@
 to_spawn = pointer_null;
 
 destroy = false;
+
+sprite_index = -1;
+mask_index = spr_wall;
 </string>
           </argument>
         </arguments>

@@ -19,7 +19,7 @@ sprite[75] = spr_mshard;
 // Consumables start from 55
 name[55] =  "Health Injection";
 type[55] = i_types.consumable;
-sprite[55] = Health_Injection;
+sprite[55] = spr_healthicon;
 
 // Weapons Start From 40
 name[40] =  "Sharp Metal Shard";

@@ -20,6 +20,7 @@
     <sprite>sprites\spr_dEvent</sprite>
     <sprite>sprites\spr_exit</sprite>
     <sprite>sprites\spr_darkness</sprite>
+    <sprite>sprites\spr_darknesscorner</sprite>
     <sprites name="Text">
       <sprite>sprites\spr_gameover</sprite>
       <sprite>sprites\spr_title</sprite>
@@ -38,9 +39,17 @@
     <sprite>sprites\spr_checkbox</sprite>
     <sprite>sprites\spr_lcookie0</sprite>
     <sprite>sprites\spr_lcookie1</sprite>
+    <sprite>sprites\spr_healthicon</sprite>
+    <sprite>sprites\spr_barrel</sprite>
+    <sprite>sprites\spr_door_00</sprite>
+    <sprite>sprites\spr_indicator</sprite>
+    <sprite>sprites\spr_playerback</sprite>
+    <sprite>sprites\spr_playerforward</sprite>
+    <sprite>sprites\spr_playerleft</sprite>
+    <sprite>sprites\spr_playerright</sprite>
   </sprites>
   <backgrounds name="background">
-    <background>background\ts_exterior_den_01</background>
+    <background>background\ts_exterior_01</background>
     <background>background\ts_interior_house_01</background>
     <background>background\ts_exterior_ambience_01</background>
     <background>background\ts_gore_01</background>
@@ -107,6 +116,8 @@
     </scripts>
     <script>scripts\SaveFile.gml</script>
     <script>scripts\LoadFile.gml</script>
+    <script>scripts\ScaleGame.gml</script>
+    <script>scripts\AnimateSprite.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
@@ -127,12 +138,14 @@
       <object>objects\obj_area_boundaries</object>
       <object>objects\obj_exit</object>
       <object>objects\obj_darkness</object>
+      <object>objects\obj_dcorner</object>
       <object>objects\obj_controller</object>
       <object>objects\obj_dialogue</object>
       <object>objects\obj_door</object>
       <objects name="Lights">
         <object>objects\par_light</object>
         <object>objects\obj_walllight</object>
+        <object>objects\obj_flame</object>
       </objects>
     </objects>
     <object>objects\obj_depthobject</object>
@@ -153,7 +166,11 @@
       </objects>
       <object>objects\obj_player</object>
     </objects>
+    <object>objects\obj_barrel</object>
   </objects>
+  <timelines name="timelines">
+    <timeline>timelines\tl_firstenemy</timeline>
+  </timelines>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
     <room>rooms\rm_debug</room>
@@ -162,13 +179,19 @@
     <room>rooms\rm_gameover</room>
     <room>rooms\rm_end</room>
     <rooms name="Streets">
+      <room>rooms\rm_streets_00</room>
       <room>rooms\rm_streets_01</room>
+      <room>rooms\rm_firstenemy</room>
     </rooms>
     <rooms name="Houses">
       <rooms name="Street_01">
         <room>rooms\rm_st_01_house_01</room>
         <room>rooms\rm_st_01_house_01_br</room>
       </rooms>
+      <rooms name="Street_00">
+        <room>rooms\rm_st_00_h_0</room>
+      </rooms>
+      <room>rooms\rm_enemy_warehouse</room>
     </rooms>
   </rooms>
   <help>

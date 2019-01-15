@@ -53,7 +53,7 @@ enum e_states {
 } 
 
 e_state = e_states.idle;
-spotPlayer = false;
+spotPlayer = true;
 
 xx = pointer_null;
 yy = pointer_null;
