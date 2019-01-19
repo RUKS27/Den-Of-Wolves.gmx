@@ -135,10 +135,10 @@
       <object>objects\obj_listener</object>
       <object>objects\obj_testListener</object>
     </objects>
-<<<<<<< HEAD
+
     <object>objects\obj_test_path_follow</object>
     <object>objects\obj_path_manager</object>
-=======
+
     <objects name="Incomplete">
       <object>objects\obj_player</object>
       <objects name="Interactable">
@@ -150,17 +150,14 @@
         <object>objects\par_enemy</object>
       </objects>
     </objects>
->>>>>>> pr/10
+
   </objects>
   <rooms name="rooms">
     <room>rooms\test_path_finding</room>
     <room>rooms\rm_menu</room>
     <room>rooms\rm_debug</room>
-<<<<<<< HEAD
     <room>rooms\rm_startingarea</room>
     <room>rooms\rm_den_quadrant_01</room>
-=======
->>>>>>> pr/10
     <room>rooms\rm_general_house_interiors</room>
     <room>rooms\rm_important_interiors</room>
     <room>rooms\rm_gameover</room>
