@@ -20,4 +20,4 @@ otherSide1y = argument3+lengthdir_y(argument4,dir-90)
 draw_line(side0x,side0y,otherSide0x,otherSide0y);
 draw_line(side1x,side1y,otherSide1x,otherSide1y);
 
-
+draw_set_color(c_white);

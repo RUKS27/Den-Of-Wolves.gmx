@@ -45,6 +45,15 @@
   <paths name="paths">
     <path>paths\testroompath</path>
     <path>paths\testroombranch1</path>
+    <path>paths\testRoomPath1</path>
+    <path>paths\testRoomPath2</path>
+    <path>paths\testRoomPath3</path>
+    <path>paths\testRoomPath4</path>
+    <path>paths\testRoomPath5</path>
+    <path>paths\testRoomPath6</path>
+    <path>paths\testRoomPath7</path>
+    <path>paths\testRoomPath8</path>
+    <path>paths\testRoomPath9</path>
   </paths>
   <scripts name="scripts">
     <script>scripts\GetDialogue.gml</script>
@@ -96,17 +105,20 @@
       <script>scripts\PlayerNormal.gml</script>
       <script>scripts\DrawHUD.gml</script>
     </scripts>
-
     <scripts name="pathfinding">
       <script>scripts\findClosestPath.gml</script>
       <script>scripts\validateGotoPath.gml</script>
       <script>scripts\validateGotoPathDraw.gml</script>
       <script>scripts\script34.gml</script>
+      <script>scripts\pathDistance.gml</script>
+      <scripts name="pathCalculations">
+        <script>scripts\getMeetPathChoices.gml</script>
+        <script>scripts\calculatePath.gml</script>
+        <script>scripts\script42.gml</script>
+      </scripts>
     </scripts>
-
     <script>scripts\SaveFile.gml</script>
     <script>scripts\LoadFile.gml</script>
-
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
@@ -135,10 +147,8 @@
       <object>objects\obj_listener</object>
       <object>objects\obj_testListener</object>
     </objects>
-
     <object>objects\obj_test_path_follow</object>
     <object>objects\obj_path_manager</object>
-
     <objects name="Incomplete">
       <object>objects\obj_player</object>
       <objects name="Interactable">
@@ -150,7 +160,6 @@
         <object>objects\par_enemy</object>
       </objects>
     </objects>
-
   </objects>
   <rooms name="rooms">
     <room>rooms\test_path_finding</room>

@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//path_start(testroompath,5,path_action_continue,true);
+            <string>
+
+//path_start(testroompath,5,path_action_continue,true);
 
 followingPath = false;
 
@@ -36,6 +38,8 @@ alarm[0] = room_speed*5;
 pathDestination = noone;
 destination[0] = noone;
 destination[1] = noone;
+instructionPath[0] = 0;
+instructionPathSteps = 0;
 </string>
           </argument>
         </arguments>
@@ -83,13 +87,33 @@ print("recalculating");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>alarm[0] = room_speed*10;
+
+
+pathManager = instance_find(obj_path_manager,0);
+paths = pathManager.paths;
+path_points = pathManager.path_points
+//copy meet paths so we can eliminate used paths
+meet_paths_get = pathManager.meet_paths
+meet_paths[0,0] = 0;
+
+for (var a = 0;a&lt; array_height_2d(meet_paths_get);a++)
+{
+    for (var b = 0;b&lt;array_length_2d(meet_paths_get,a);b++)
+    {
+        meet_paths[a,b] = meet_paths_get[a,b]
+    }
+    
+}
+
+
+meet_points = pathManager.meet_points;
 //go to nearest valid path
 
 //GMS will override the array if you don't move it 
 //to another array
 array = findClosestPath(x,y);
-for (i = 0; i&lt;4;i++;){nearestPath[i] = array[i];}
+for (i = 0; i&lt;5;i++;){nearestPath[i] = array[i];}
 nearestPath[0] = array[0];
 move_towards_point( nearestPath[0], nearestPath[1], 5 );
 
@@ -99,8 +123,234 @@ destination[0] = player.x;
 destination[1] = player.y;
 //array copying thing
 array = findClosestPath(player.x,player.y);
-for (i = 0; i&lt;4;i++;){pathDestination[i] = array[i];}
-print("Start Moving to destination")
+for (i = 0; i&lt;5;i++;){pathDestination[i] = array[i];}
+print("Start Moving to path")
+
+
+startPathID = nearestPath[4]
+startPathName = path_get_name(nearestPath[3])
+instructionPath[0] = pathDestination[4]
+endPathName = path_get_name(pathDestination[3])
+
+//clear instructions
+instructionPath = noone;
+instructionPath[0] = endPathName;
+instructionPathSteps = 0;
+
+
+
+//first check to see if target is on the same path
+if (startPathName == endPathName)
+{
+    print(instructionPath);
+    print("Same start and end path!");
+    exit;
+}
+else
+{
+    
+//use path calculation scripts here
+    
+        possiblePaths = noone;
+        possiblePaths[0] =0; 
+    
+    
+        print("Begin while Loop")
+        testArray = noone;
+        testArray[0] = pathDestination[4];
+        invalidPath = false;
+        foundPath = false;
+        arrayPos = 0;
+        timesLooped = 0
+        while(!invalidPath&amp;&amp;timesLooped&lt;200)
+        {
+            timesLooped++;
+            getMeetPathChoices(testArray[arrayPos])
+            
+            for (var a = 0; a&lt;array_length_1d(pathChoices);a++)
+            {
+                if (pathChoices[a] == startPathID)
+                {
+                    print("found a match");
+        
+                    foundPath = true;
+                }
+            }
+            if (foundPath)//if it found a match then we can add the new path to the list
+            {
+                arrayPos++
+                testArray[arrayPos]= startPathID;
+                //print (testArray)
+                possiblePaths[array_length_1d(possiblePaths)]= testArray
+                
+                //eliminate the path -2 from the destination
+                if (arrayPos&gt;0)
+                {
+                    var elimIndex = testArray[arrayPos-1]
+                    var elim = false;
+                    for (var d = 0;d&lt;array_length_2d(meet_paths,elimIndex)&amp;&amp;!elim;d++)
+                    {
+                        if(meet_paths[elimIndex,d] == testArray[arrayPos])
+                        {
+                            elim = true;
+                            meet_paths[elimIndex,d] = -1;
+                            print("Eliminated");
+                        }
+                    }
+                }
+                else
+                {
+                    break;
+                }
+                //reset test array
+                testArray = noone;
+                testArray[0] = pathDestination[4];
+                foundPath = false;
+                arrayPos = 0;
+                //break;
+            }
+            else
+            {
+                
+                //check if there is a path choice not already in the testArray
+                print("test uniques")
+                print(string(testArray[arrayPos]) +": "+ string(pathChoices));
+                print(string(testArray[arrayPos]) +": "+ string(testArray));
+                unique = false;
+                choosePath = -1;
+                for ( a = 0; a&lt;array_length_1d(pathChoices)&amp;&amp;!unique;a++)
+                {
+                    if (pathChoices[a]!=-1)
+                    {
+                    
+                        unique = true;
+                        for ( b = 0; b&lt;array_length_1d(testArray);b++)
+                        {
+                            //-1 indicates a path that has been tested
+                            if (pathChoices[a]==testArray[b])
+                            {
+                            unique = false;   
+                        
+                            }
+                        }
+                        if (unique)
+                        {
+                            print("unique number found " + string(pathChoices[a]))
+                            choosePath =a;
+                        }
+                    }
+                }
+                if (unique)
+                {   
+                    //found an untested path add it to the test array 
+                            //then re run the loop
+                            print("Current Array"+string(testArray))
+                            
+                            arrayPos++
+                            testArray[arrayPos] = pathChoices[choosePath];
+                            print("adding: " + string(pathChoices[choosePath]))
+                            print("Redo Loop")
+                }
+                else
+                {
+                    print("Could not find unique")
+                    
+                    //eliminate path that cause problem
+                    if (arrayPos&gt;0)
+                    {
+                    var elimIndex = testArray[arrayPos-1]
+                    var elim = false;
+                    for (var d = 0;d&lt;array_length_2d(meet_paths,elimIndex)&amp;&amp;!elim;d++)
+                        {
+                            if(meet_paths[elimIndex,d] == testArray[arrayPos])
+                            {
+                                elim = true;
+                                meet_paths[elimIndex,d] = -1;
+                                print("Eliminated");
+                            }
+                        }
+                        //reset test array
+                        testArray = noone;
+                        testArray[0] = pathDestination[4];
+                        foundPath = false;
+                        arrayPos = 0;
+                    }
+                    else
+                    {
+                        print("All possibles paths exhausted")
+                        break;
+                    }
+                    
+                }
+                if(array_length_1d(testArray)&gt;100)
+                {
+                    print("INFINITE LOOP FAILSAFE TRIGGERED")
+                    break;   
+                }
+            }
+        }
+    
+    print(testArray);
+    
+    
+}
+print("Final Results")
+print(meet_paths);
+print(possiblePaths);
+print(timesLooped);
+
+
+
+//cancels route if no match is found;
+if (invalidPath)
+{
+    pathDestination = noone;
+    nearestPath = noone
+    destination[0] = noone;
+    print("path Cancelled");
+}
+
+/*
+
+print("Path3 info")
+
+
+//find the possible paths that can be taken from the starting path
+transferPaths = "";
+print("Current Path = "+ startPathName)
+
+
+
+pathLength = path_get_length(nearestPath[3]);
+    for (j = 0;j&lt;array_length_2d(meet_paths,startPathID);j++)
+    {
+        var pathID = paths[meet_paths[startPathID,j]];
+        transferPaths = transferPaths + path_get_name(pathID) +" "
+        + string(pathDistance(nearestPath[3],
+        nearestPath[2],
+        path_points[meet_points[startPathID,j],2])
+        )+" ";
+        
+        //print("Array Position: "+string(startPathID)+", "+string(j)+" v: "
+        //+string(meet_points[startPathID,j]))
+    }
+
+print("Possible Transfer Paths: " +transferPaths)
+
+//find the possible paths that can be taken from the ending path
+transferPaths = "";
+print("Target Path = "+ endPathName)
+
+for (j = 0;j&lt;array_length_2d(meet_paths,endPathID);j++)
+    {
+        transferPaths = transferPaths + path_get_name(paths[meet_paths[endPathID,j]]) +" "
+    }
+
+print("Possible Transfer Paths: " +transferPaths)
+
+
+
+*/
 //alarm[0] = room_speed*5;
 </string>
           </argument>
@@ -124,8 +374,25 @@ print("Start Moving to destination")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-
+            <string>//check if a straight line can be drawn towards target
+if(pathDestination!=noone)
+{
+    if (validateGotoPath(x,y,destination[0],destination[1],16))
+    {
+        //get off the path
+        var holdX = x;
+        var holdY = y;
+        path_end();
+        x = holdX;
+        y = holdY;
+        //move towards destination
+        move_towards_point(destination[0],destination[1],5)
+        //clear variables
+        nearestPath = noone;
+        pathDestination = noone
+        print("Early move to final");
+    }
+}
 //Object is not on a path but needs to get to one.
 if (nearestPath!=noone)
 {
@@ -149,13 +416,18 @@ if (nearestPath!=noone)
         }
         else
         {
-        
+            if (pathDestination[2]&lt;nearestPath[2])
+            {
+                pathDirection = -1;
+            }
         }
         path_start(nearestPath[3],5*pathDirection,path_action_continue,true);
         path_position = nearestPath[2];
         followingPath = true;
-        print("Following path");
         nearestPath = noone;
+        
+        print("move along path");
+        print(pathDirection);
         
     }
     exit;
@@ -171,8 +443,17 @@ if (pathDestination!=noone)
         followingPath = false;
         path_end();
         pathDestination = noone;
-        move_towards_point(destination[0],destination[1],5)
-        print("reached path dest");
+        if(validateGotoPath(x,y,destination[0],destination[1],16))
+        {
+            move_towards_point(destination[0],destination[1],5)
+        }
+        else
+        {
+            print("Could not reach target!");
+            speed = 0;
+        }
+        
+        print("move to final");
     }
     exit;
 }
@@ -182,7 +463,7 @@ if(destination[0] != noone)
     if (point_distance(x,y,destination[0], destination[1])&lt;5)
     {
         speed = 0;
-        alarm[0] = room_speed*10;
+        
         print("Reached final dest");
         destination[0] = noone;
         destination[1] = noone;
@@ -213,7 +494,7 @@ if(destination[0] != noone)
             <kind>1</kind>
             <string>draw_self();
 draw_text(x,y-48,"Path: " + string(path_position))
-
+draw_text(x,y-68,"Pos: " + string(x)+", "+string(y));
 if (nearestPath != noone)
 {
     draw_text(x,y-72,"Distance to path: " + 
@@ -240,6 +521,9 @@ if (destination[0]!= noone)
     draw_rectangle_colour(destination[0], destination[1], 
     destination[0]+8, destination[1]+8, 
     c_fuchsia, c_fuchsia, c_fuchsia, c_fuchsia, false);
+    
+    
+    validateGotoPathDraw(x,y,destination[0],destination[1],16)
 
 }
 </string>
