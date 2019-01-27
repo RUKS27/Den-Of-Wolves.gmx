@@ -10,10 +10,10 @@
   <HTile>-1</HTile>
   <VTile>-1</VTile>
   <TextureGroups>
-    <TextureGroup0>1</TextureGroup0>
+    <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>320</width>
-  <height>320</height>
+  <width>160</width>
+  <height>256</height>
   <data>images\ts_interior_house_01.png</data>
 </background>

@@ -11,9 +11,6 @@ draw_set_color(c_white);
 draw_rectangle(view_xport+98, view_yport + 96, view_xport + 162, view_yport + 160, true);
 draw_sprite_ext(ItemList(eq_consumable, 2), 1, view_xport+128, view_yport+128, 1, 1, 0, c_white, 1);
 
-// Weapon
-draw_sprite_ext(ItemList(eq_weapon, 2), 1, view_xport+830, view_yport + 16, 2.5, 2.5, 0, c_white, 1);
-
 // Passive
 //draw_sprite_ext(ItemList(eq_passive, 2), 1, view_xport+32, view_yport+168, 2, 2, 0, c_white, 1);
 
@@ -44,4 +41,4 @@ if(obj_player.hidden && instance_exists(par_enemy) && par_enemy.spotPlayer = fal
     sub = 0;
 }
 
-draw_sprite_ext(spr_indicator, sub, global.view_midw + 400, global.view_midh + 280, 1, 1, 0, c_white, 1);
+draw_sprite_ext(spr_indicator, sub, view_xport + 920, view_yport + 680, 1, 1, 0, c_white, 1);

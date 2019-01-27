@@ -43,20 +43,28 @@
     <sprite>sprites\spr_barrel</sprite>
     <sprite>sprites\spr_door_00</sprite>
     <sprite>sprites\spr_indicator</sprite>
-    <sprite>sprites\spr_playerback</sprite>
-    <sprite>sprites\spr_playerforward</sprite>
-    <sprite>sprites\spr_playerleft</sprite>
-    <sprite>sprites\spr_playerright</sprite>
+    <sprites name="Enemy">
+      <sprite>sprites\spr_enemy_00forward</sprite>
+    </sprites>
+    <sprites name="Player">
+      <sprite>sprites\spr_playerforward</sprite>
+      <sprite>sprites\spr_playerback</sprite>
+      <sprite>sprites\spr_playerright</sprite>
+      <sprite>sprites\spr_playerleft</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\ts_exterior_01</background>
     <background>background\ts_interior_house_01</background>
     <background>background\ts_exterior_ambience_01</background>
     <background>background\ts_gore_01</background>
+    <background>background\bg_mountain</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\testroompath</path>
     <path>paths\testroombranch1</path>
+    <path>paths\rm000path0</path>
+    <path>paths\rm000branch0</path>
   </paths>
   <scripts name="scripts">
     <script>scripts\GetDialogue.gml</script>
@@ -135,7 +143,6 @@
       <object>objects\par_wall</object>
       <object>objects\obj_spawn</object>
       <object>objects\obj_dialogueEvent</object>
-      <object>objects\obj_area_boundaries</object>
       <object>objects\obj_exit</object>
       <object>objects\obj_darkness</object>
       <object>objects\obj_dcorner</object>
@@ -167,32 +174,21 @@
       <object>objects\obj_player</object>
     </objects>
     <object>objects\obj_barrel</object>
+    <object>objects\obj_parallax_p</object>
   </objects>
-  <timelines name="timelines">
-    <timeline>timelines\tl_firstenemy</timeline>
-  </timelines>
   <rooms name="rooms">
+    <room>rooms\rm_testtutorials</room>
     <room>rooms\rm_menu</room>
+    <rooms name="Levels">
+      <room>rooms\rm_000</room>
+      <room>rooms\rm_midnight_highway_01</room>
+      <room>rooms\rm_midnight_highway_00START</room>
+    </rooms>
     <room>rooms\rm_debug</room>
     <room>rooms\rm_startingarea</room>
     <room>rooms\test_path_finding</room>
     <room>rooms\rm_gameover</room>
     <room>rooms\rm_end</room>
-    <rooms name="Streets">
-      <room>rooms\rm_streets_00</room>
-      <room>rooms\rm_streets_01</room>
-      <room>rooms\rm_firstenemy</room>
-    </rooms>
-    <rooms name="Houses">
-      <rooms name="Street_01">
-        <room>rooms\rm_st_01_house_01</room>
-        <room>rooms\rm_st_01_house_01_br</room>
-      </rooms>
-      <rooms name="Street_00">
-        <room>rooms\rm_st_00_h_0</room>
-      </rooms>
-      <room>rooms\rm_enemy_warehouse</room>
-    </rooms>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

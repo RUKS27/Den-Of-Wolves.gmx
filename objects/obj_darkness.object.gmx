@@ -30,6 +30,7 @@
 } else {
     //sprite_index = -1;
 }
+
 </string>
           </argument>
         </arguments>

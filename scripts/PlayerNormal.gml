@@ -21,55 +21,59 @@ if(xSpd != 0 && ySpd != 0){
 if(xSpd != 0 || ySpd != 0) isMoving = true;
 else isMoving = false;
 // Ensure that aim does not change if sneak is enabled
-if(!Sneak && isMoving){
+if(isMoving){
     if(Run){
         noise_radius = 256;
         if(alarm[1] = -1) alarm[1] = 8;
+    } else if(Sneak){
+        noise_radius = 33;
+        if(alarm[1] = -1 && isMoving) alarm[1] = 30;
     } else {
         noise_radius = 64;
         if(alarm[1] = -1) alarm[1] = 16;
     }
 
-    if(UpMove){
-        p_dir = p_dirs.forward;
-    } else if (DownMove) {
-        p_dir = p_dirs.down;
-    } else if (RightMove) {
-        p_dir = p_dirs.right;
-    } else if (LeftMove){
-        p_dir = p_dirs.left;
+    if(!Sneak || Sneak && Run){
+        if(UpMove){
+            p_dir = p_dirs.forward;
+        } else if (DownMove) {
+            p_dir = p_dirs.down;
+        } else if (RightMove) {
+            p_dir = p_dirs.right;
+        } else if (LeftMove){
+            p_dir = p_dirs.left;
+        }
     }
-} else {
-    noise_radius = 33;
-    if(alarm[1] = -1) alarm[1] = 30;
 }
 
-// Collision Detection
-if place_meeting(x+xSpd, y, par_wall)
-{
-    repeat(abs(xSpd)){
-        if !place_meeting(x+sign(xSpd),y,par_wall)
-        {
-               x+=sign(xSpd);
-        } else {
-            break;
+if(!noClip){
+    // Collision Detection
+    if place_meeting(x+xSpd, y, par_wall)
+    {
+        repeat(abs(xSpd)){
+            if !place_meeting(x+sign(xSpd),y,par_wall)
+            {
+                   x+=sign(xSpd);
+            } else {
+                break;
+            }
         }
+        
+        xSpd=0;
     }
     
-    xSpd=0;
-}
-
-if place_meeting(x, y+ySpd, par_wall)
-{
-    repeat(abs(ySpd)){
-        if !place_meeting(x,y+sign(ySpd),par_wall)
-        {
-            y+=sign(ySpd);
-        } else {
-            break;
+    if place_meeting(x, y+ySpd, par_wall)
+    {
+        repeat(abs(ySpd)){
+            if !place_meeting(x,y+sign(ySpd),par_wall)
+            {
+                y+=sign(ySpd);
+            } else {
+                break;
+            }
         }
+        ySpd=0;
     }
-    ySpd=0;
 }
 
 // Move Player Along The Axes
@@ -127,40 +131,39 @@ if(place_meeting(x, y, obj_darkness)){
 }
 
 // Combat    
-
 // Stealth Kill
 
 // Check Directions
 switch(p_dir){
             case p_dirs.forward:
-                var inst_enemy = instance_place(x, y-32, par_enemy);        
+                var inst_enemy = instance_place(x, y-48, par_enemy);        
             
                 if(inst_enemy != noone){ 
-                    if(inst_enemy.lookDir = e_lookdir.forward) enemy = instance_place(x, y-32, par_enemy);
+                    if(inst_enemy.lookDir = e_lookdir.forward) enemy = instance_place(x, y-48, par_enemy);
                 } else enemy = noone;  
             break;
             
             case p_dirs.down:
-                var inst_enemy = instance_place(x, y+32, par_enemy);
+                var inst_enemy = instance_place(x, y+48, par_enemy);
             
                 if(inst_enemy != noone){ 
-                    if(inst_enemy.lookDir = e_lookdir.down) enemy = instance_place(x, y+32, par_enemy);
+                    if(inst_enemy.lookDir = e_lookdir.down) enemy = instance_place(x, y+48, par_enemy);
                 } else enemy = noone;  
             break;
             
             case p_dirs.right:
-                var inst_enemy = instance_place(x+32, y, par_enemy);    
+                var inst_enemy = instance_place(x+48, y, par_enemy);    
             
                 if(inst_enemy != noone){
-                    if(inst_enemy.lookDir = e_lookdir.right) enemy = instance_place(x+32, y, par_enemy);
+                    if(inst_enemy.lookDir = e_lookdir.right) enemy = instance_place(x+48, y, par_enemy);
                 } else enemy = noone;  
             break;
             
             case p_dirs.left:
-                var inst_enemy = instance_place(x-32, y, par_enemy);
+                var inst_enemy = instance_place(x-48, y, par_enemy);
             
                 if(inst_enemy != noone) {
-                    if(inst_enemy.lookDir = e_lookdir.left) enemy = instance_place(x-32, y, par_enemy);
+                    if(inst_enemy.lookDir = e_lookdir.left) enemy = instance_place(x-6484, y, par_enemy);
                 } else enemy = noone;  
             break;
 }
@@ -202,4 +205,4 @@ if(Sneak){
 locked_on = enemy;
 
 // Set enemy to noone to prevent crash
-enemy = noone;
+enemy = noone; 

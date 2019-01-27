@@ -33,6 +33,8 @@ open = false;
 
 canActivate = true;
 image_speed = 0;
+
+sprite = spr_door_00;
 </string>
           </argument>
         </arguments>
@@ -130,7 +132,7 @@ if(open = true){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(spr_door_00, image_index, x, y);
+            <string>if(sprite != -1)draw_sprite(sprite, image_index, x, y);
 </string>
           </argument>
         </arguments>

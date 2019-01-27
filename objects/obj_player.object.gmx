@@ -61,15 +61,10 @@ p_state = p_states.normal;
 
 hidden = false;
 
-// Combat
-delay = 0;
-pos = -160;
-
 locked_on = noone;
 
 a_sub = 0;
 a_delay = 0;
-
 
 // Inventory
 global.keyitems = ds_list_create();
@@ -78,16 +73,19 @@ global.consumables = ds_list_create();
 ds_list_add(global.keyitems, ItemList(0, 0));
 ds_list_add(global.consumables, ItemList(0, 0));
 
+delay = 0;
+
+arrow_YSub = 0;
+
 // Equipped Items
 eq_key = 0;
 key_pos = 0;
-
-eq_weapon = 0;
 
 eq_consumable = 0;
 consum_pos = 0;
 
 eq_passive = 0;
+eq_weapon = 0;
 
 tm = 0;
 
@@ -95,6 +93,8 @@ tm = 0;
 a = 0;
 
 arrow_YSub = 0;
+
+noClip = false;
 </string>
           </argument>
         </arguments>
@@ -117,9 +117,11 @@ arrow_YSub = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Enemy cursor y position changes here
-if(arrow_YSub = 0) arrow_YSub = 4;
-else arrow_YSub = 0;
+            <string>if(arrow_YSub = 0){
+    arrow_YSub = 4;
+} else if(arrow_YSub = 4){
+    arrow_YSub = 0;
+}
 </string>
           </argument>
         </arguments>
@@ -166,31 +168,37 @@ else arrow_YSub = 0;
           <argument>
             <kind>1</kind>
             <string>// Get Keyboard Inputs
-RightMove = global.Right_Pressed;
-DownMove = global.Down_Pressed;
-LeftMove = global.Left_Pressed;
-UpMove = global.Up_Pressed;
+RightMove = global.Right_Press;
+DownMove = global.Down_Press;
+LeftMove = global.Left_Press;
+UpMove = global.Up_Press;
+
+Attack = global.Attack_Press;
+Attack_RLS = global.Attack_Release;
 
 Sneak = global.Aim_Press;
 Run = global.Run_Press;
 
 Activate = global.Context_Pressed;
 
-Attack = global.Attack_Press;
-Attack_RLS = global.Attack_Release;
-
 UseConsumable = global.Item_Press;
 
 
+if(debug_mode){
+    if(keyboard_check(ord('O'))){
+        noClip = !noClip;
+    }
+}
+
 Health = clamp(Health, 0, MaxHealth);
+
+delay = clamp(delay, 0, 120);
 
 // Switch State If Player Is Dead
 if(Health &lt;= 0){
     show_debug_message("You died");
     p_state = p_states.dead;
 }
-
-delay = clamp(delay, 0, 120);
 
 switch(p_dir){
     case p_dirs.forward:
@@ -216,11 +224,15 @@ switch(p_state){
     break;
     
     case 1:
-        
+        xSpd = 0;
+        ySpd = 0;
     break;
     
     case 2:
-    
+        xSpd = 0;
+        ySpd = 0;
+        
+        StealthKill(locked_on);
     break;
 }
 </string>
@@ -272,34 +284,6 @@ p_state = p_states.attack;
             <kind>1</kind>
             <string>DrawHUD();  
 
-if(p_state = p_states.attack){ 
-    var attack = Attack_GUI(par_enemy);
-    
-    if(locked_on != noone){
-        if(!locked_on.spotPlayer){
-            if(attack = "success"){
-                StealthKill(locked_on);
-                locked_on = noone;
-            } else if(attack = "failure"){
-                locked_on.spotPlayer = true;
-            }
-        } else {    
-            if(attack = "success"){
-                with(locked_on){
-                    Health-=10; // Change this to player's weapon
-                }
-            } else if(attack = "failure" || attack = "botched"){
-                Health-= 25; // Change this to enemy weapon's damage
-            }
-        }
-        
-        if(attack != pointer_null){
-            global.FadeR = false;
-        }
-    }
-} else {
-    if(pos != -160) pos = -160;
-}
 </string>
           </argument>
         </arguments>
@@ -316,7 +300,7 @@ if(p_state = p_states.attack){
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>other</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -328,6 +312,7 @@ if(p_state = p_states.attack){
     else draw_sprite(sprite, AnimateSprite(1, 2, 8), x, y);
 } else draw_sprite(sprite, 0, x, y);
 var sneak = global.Aim_Press;
+
 
 var lo = locked_on;
 
@@ -345,7 +330,7 @@ if(p_state = p_states.normal){
                 }
                 
                 // Draw cursor
-                draw_sprite(spr_arrow, sub, locked_on.x, locked_on.y - (64 + arrow_YSub));
+                draw_sprite(spr_arrow, sub, locked_on.x, locked_on.y - (80 + arrow_YSub));
                 
                 // Check if player has a weapon equipped
                 if(Attack){
@@ -359,7 +344,7 @@ if(p_state = p_states.normal){
             }
         }
     }
-}
+} 
 </string>
           </argument>
         </arguments>
