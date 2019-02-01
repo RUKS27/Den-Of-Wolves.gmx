@@ -22,7 +22,7 @@ type[55] = i_types.consumable;
 sprite[55] = spr_healthicon;
 
 // Weapons Start From 40
-name[40] =  " Knife";
+name[40] =  "Broken Metal Rod";
 type[40] = i_types.weapon;
 sprite[40] = spr_knife;
 

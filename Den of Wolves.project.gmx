@@ -55,10 +55,10 @@
   </sprites>
   <backgrounds name="background">
     <background>background\ts_exterior_01</background>
-    <background>background\ts_interior_house_01</background>
     <background>background\ts_exterior_ambience_01</background>
     <background>background\ts_gore_01</background>
     <background>background\bg_mountain</background>
+    <background>background\bg_sky</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\testroompath</path>
@@ -177,12 +177,15 @@
     <object>objects\obj_parallax_p</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_testtutorials</room>
     <room>rooms\rm_menu</room>
     <rooms name="Levels">
-      <room>rooms\rm_000</room>
-      <room>rooms\rm_midnight_highway_01</room>
-      <room>rooms\rm_midnight_highway_00START</room>
+      <rooms name="OUTDATED">
+        <room>rooms\rm_midnight_highway_01</room>
+        <room>rooms\rm_midnight_highway_00START</room>
+        <room>rooms\rm_000</room>
+      </rooms>
+      <room>rooms\rm_startalley</room>
+      <room>rooms\rm_alley_01</room>
     </rooms>
     <room>rooms\rm_debug</room>
     <room>rooms\rm_startingarea</room>

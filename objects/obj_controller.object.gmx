@@ -103,6 +103,7 @@ xi_Context = gp_face1;
 xi_Run = gp_shoulderrb;
 xi_Aim = gp_shoulderlb;
 xi_Pause = gp_start;
+
 //Keyboard Controls
 
 kb_Up = vk_up;

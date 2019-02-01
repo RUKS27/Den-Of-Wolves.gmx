@@ -33,7 +33,7 @@ xSpd = 0;
 ySpd = 0;
 
 rSpd = 4;
-mSpd = 3.5;
+mSpd = 3;
 sSpd = 2;
 
 noise_radius = 256;
@@ -282,7 +282,27 @@ p_state = p_states.attack;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>DrawHUD();  
+            <string>//DrawHUD();  
+
+if(obj_player.hidden &amp;&amp; instance_exists(par_enemy) &amp;&amp; par_enemy.spotPlayer = false || obj_player.hidden &amp;&amp; !instance_exists(par_enemy)){
+    sub = 1;
+} else if (instance_exists(par_enemy) &amp;&amp; par_enemy.spotPlayer){
+    tm++;
+    
+    if(tm &gt;= 6) sub = 2;
+    else {
+        sub = 3;
+    }
+    
+    if(tm = 12){
+        tm = 0;
+    }
+    
+} else {
+    sub = 0;
+}
+
+draw_sprite_ext(spr_indicator, sub, view_xport + 920, view_yport + 680, 1, 1, 0, c_white, 1);
 
 </string>
           </argument>
@@ -319,7 +339,7 @@ var lo = locked_on;
 if(p_state = p_states.normal){
     if(sneak){
         if(lo != noone){
-            if(!lo.spotPlayer){
+            if(!lo.spotPlayer &amp;&amp; lo.e_state != e_states.dead){
                 var sub;
                 
                 // Delay controls subimage (if delay is maxed, the sprite will turn red)
@@ -330,15 +350,14 @@ if(p_state = p_states.normal){
                 }
                 
                 // Draw cursor
-                draw_sprite(spr_arrow, sub, locked_on.x, locked_on.y - (80 + arrow_YSub));
-                
-                // Check if player has a weapon equipped
-                if(Attack){
-                    if(eq_weapon &gt; 0){
-                        if(alarm[2] = -1) alarm[2] = 16 - (delay / 10);
+                if(eq_weapon &gt; 0){
+                    draw_sprite(spr_arrow, sub, locked_on.x, locked_on.y - (80 + arrow_YSub));
+                    
+                    // Check if player has a weapon equipped
+                    if(Attack){
+                        if(alarm[2] = -1) alarm[2] = 16 - round(delay / 12);
                     } else {
-                        message[0] = "*I need a weapon...";
-                        CreateDialogue(message);
+                        alarm[2] = -1;
                     }
                 }
             }

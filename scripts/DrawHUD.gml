@@ -23,22 +23,4 @@ draw_rectangle(view_xport + 32, view_yport + 32, (view_xport + 32) + ((2.3 * Max
 
 var sub = 0;
 
-if(obj_player.hidden && instance_exists(par_enemy) && par_enemy.spotPlayer = false || obj_player.hidden && !instance_exists(par_enemy)){
-    sub = 1;
-} else if (instance_exists(par_enemy) && par_enemy.spotPlayer){
-    tm++;
-    
-    if(tm >= 6) sub = 2;
-    else {
-        sub = 3;
-    }
-    
-    if(tm = 12){
-        tm = 0;
-    }
-    
-} else {
-    sub = 0;
-}
 
-draw_sprite_ext(spr_indicator, sub, view_xport + 920, view_yport + 680, 1, 1, 0, c_white, 1);
