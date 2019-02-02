@@ -27,6 +27,11 @@
             <kind>1</kind>
             <string>to_room = rm_debug;
 to_spawn = pointer_null;
+
+destroy = false;
+
+sprite_index = -1;
+mask_index = spr_wall;
 </string>
           </argument>
         </arguments>
@@ -50,14 +55,19 @@ to_spawn = pointer_null;
           <argument>
             <kind>1</kind>
             <string>if(place_meeting(x, y, obj_player)){
-    room_goto(to_room);
+    if(to_room != room) { 
+        global.fadeOut = true;
+        if(global.fade_alpha = 1) room_goto(to_room);
+    }
 }
 
 if(room = to_room){
+    global.fadeOut = false;
+    
     obj_player.x = to_spawn.x;
     obj_player.y = to_spawn.y;
     
-    instance_destroy();
+    instance_destroy(self);
 }
 </string>
           </argument>

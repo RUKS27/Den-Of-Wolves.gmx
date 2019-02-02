@@ -26,12 +26,15 @@
           <argument>
             <kind>1</kind>
             <string>sprite_index = -1;
-mask_index = spr_wall;
+mask_index = spr_door_00;
 
 key_id = 0;
 open = false;
 
 canActivate = true;
+image_speed = 0;
+
+sprite = spr_door_00;
 </string>
           </argument>
         </arguments>
@@ -101,10 +104,35 @@ if(!instance_exists(obj_dialogue)){
 }
 
 if(open = true){
+    image_index = 1;
     mask_index = -1;    
 } else {
+    image_index = 2;
     mask_index = spr_wall;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(sprite != -1)draw_sprite(sprite, image_index, x, y);
 </string>
           </argument>
         </arguments>

@@ -6,7 +6,7 @@
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>obj_depthobject</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_enemy_00forward</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -26,6 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>// Enemy Movement Variables
+sprite_index = -1;
+
 Health = 100;
 
 xAccel = 0.6;
@@ -65,33 +67,24 @@ enum e_lookdir {
     left = 3
 }
 
+a_sub = 0;
+a_delay = 0;
+
 lookDir = e_lookdir.forward;
 
-mask_index = spr_player;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>xx = pointer_null;
-yy = pointer_null;
+sprite = spr_enemy_00forward;
+
+//path_start(testroompath,5,path_action_continue,true);
+
+followingPath = false;
+
+nearestPath = noone;
+alarm[0] = room_speed*5;
+
+//path destination uses path point
+pathDestination = noone;
+destination[0] = noone;
+destination[1] = noone;
 </string>
           </argument>
         </arguments>
@@ -114,22 +107,10 @@ yy = pointer_null;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(lookDir = e_lookdir.forward) var LOS = collision_ellipse(x-64, y, x+64, y+320, par_wall, false, true);
-else if(lookDir = e_lookdir.down) var LOS = collision_ellipse(x-64, y, x+64, y-320, par_wall, false, true);
-else if(lookDir = e_lookdir.left) var LOS = collision_ellipse(x-320, y+64, x, y-64, par_wall, false, true);
-else if(lookDir = e_lookdir.right) var LOS = collision_ellipse(x, y+64, x+320, y-64, par_wall, false, true);
-        
-if(LOS != noone){
-        if(LOS = obj_player){
-            e_state = e_states.alert;
-            xx = obj_player;
-            yy = obj_player;
-        }
-}
-
+            <string>
 switch(e_state){
     case e_states.idle:
-        
+
     break;
 
     case e_states.alert:
@@ -170,7 +151,11 @@ switch(e_state){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>if(xSpd != 0 || ySpd != 0){
+    draw_sprite(sprite, AnimateSprite(1, 2, 8), x, y);
+} else {
+    draw_sprite(sprite, 0, x, y);
+}
 </string>
           </argument>
         </arguments>
