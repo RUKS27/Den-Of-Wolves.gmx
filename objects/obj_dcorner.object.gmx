@@ -25,12 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(debug_mode){
-    sprite_index = spr_darkness;
-} else {
-    //sprite_index = -1;
-}
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
