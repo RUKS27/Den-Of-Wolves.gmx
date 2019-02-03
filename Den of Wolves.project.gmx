@@ -136,6 +136,8 @@
         <script>scripts\calculatePath.gml</script>
         <script>scripts\script42.gml</script>
       </scripts>
+      <script>scripts\attachToPath.gml</script>
+      <script>scripts\instructionPathsLengthCalc.gml</script>
     </scripts>
     <script>scripts\SaveFile.gml</script>
     <script>scripts\LoadFile.gml</script>
