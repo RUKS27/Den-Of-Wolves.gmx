@@ -194,6 +194,7 @@
     <object>objects\obj_parallax_p</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\test_path_finding_new</room>
     <room>rooms\rm_menu</room>
     <rooms name="Levels">
       <rooms name="OUTDATED">
@@ -210,8 +211,6 @@
     <room>rooms\rm_general_house_interiors</room>
     <room>rooms\rm_important_interiors</room>
     <room>rooms\test_path_finding</room>
-    <room>rooms\rm_gameover</room>
-    <room>rooms\rm_end</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
