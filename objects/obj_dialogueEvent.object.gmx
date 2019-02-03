@@ -84,7 +84,7 @@ message[0] = "";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(place_meeting(x, y, obj_player) &amp;&amp; enabled){
+            <string>if(place_meeting(x, y, obj_player) &amp;&amp; enabled){    
     if(on_collision || obj_player.Activate){
         show_debug_message("Dialogue Activated.");
         CreateDialogue(message);
