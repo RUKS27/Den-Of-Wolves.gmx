@@ -126,7 +126,6 @@
     <script>scripts\LoadFile.gml</script>
     <script>scripts\ScaleGame.gml</script>
     <script>scripts\AnimateSprite.gml</script>
-    <script>scripts\Events.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
@@ -176,11 +175,7 @@
     </objects>
     <object>objects\obj_barrel</object>
     <object>objects\obj_parallax_p</object>
-    <object>objects\obj_trigger</object>
   </objects>
-  <timelines name="timelines">
-    <timeline>timelines\tl_cell</timeline>
-  </timelines>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
     <rooms name="Levels">
@@ -189,9 +184,8 @@
         <room>rooms\rm_midnight_highway_00START</room>
         <room>rooms\rm_000</room>
       </rooms>
-      <room>rooms\rm_cell</room>
-      <room>rooms\rm_prison_A0</room>
-      <room>rooms\rm_prison_frestroom</room>
+      <room>rooms\rm_startalley</room>
+      <room>rooms\rm_alley_01</room>
     </rooms>
     <room>rooms\rm_debug</room>
     <room>rooms\rm_startingarea</room>
