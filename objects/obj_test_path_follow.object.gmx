@@ -30,8 +30,6 @@
 //path_start(testroompath,5,path_action_continue,true);
 
 followingPath = false;
-//keeps track of what step the object is in when following the path
-followingPathStep = 0;
 
 nearestPath = noone;
 alarm[0] = room_speed*5;
@@ -40,12 +38,8 @@ alarm[0] = room_speed*5;
 pathDestination = noone;
 destination[0] = noone;
 destination[1] = noone;
-
-instructionPath[0,0] = -1;
+instructionPath[0] = 0;
 instructionPathSteps = 0;
-wasOnThisPath = -1;
-size = 16;
-midPath =noone;
 </string>
           </argument>
         </arguments>
@@ -93,45 +87,16 @@ print("recalculating");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[0] = room_speed*15;
-//reset vars
-
-pathDestination = noone;
-nearestPath = noone;
-destination[0] = noone;
-destination[1] = noone;
-followingPath = false;
-instructionPath = noone;
-instructionPathSteps = 0;
-wasOnThisPath = -1;
-followingPathStep = 0;
-
-//exit path if in one
-if (path_index!=-1)
-{//get off the path
-        var holdX = x;
-        var holdY = y;
-        path_end();
-        x = holdX;
-        y = holdY;
-        //move towards destination
-        //clear variables
-        nearestPath = noone;
-        pathDestination = noone
-        
-}
-
+            <string>alarm[0] = room_speed*10;
 
 
 pathManager = instance_find(obj_path_manager,0);
 paths = pathManager.paths;
 path_points = pathManager.path_points
 //copy meet paths so we can eliminate used paths
-
-
-
 meet_paths_get = pathManager.meet_paths
 meet_paths[0,0] = 0;
+
 for (var a = 0;a&lt; array_height_2d(meet_paths_get);a++)
 {
     for (var b = 0;b&lt;array_length_2d(meet_paths_get,a);b++)
@@ -142,43 +107,13 @@ for (var a = 0;a&lt; array_height_2d(meet_paths_get);a++)
 }
 
 
-
-meet_points_get = pathManager.meet_points
-meet_points[0,0] = 0;
-for (var a = 0;a&lt; array_height_2d(meet_points_get);a++)
-{
-    for (var b = 0;b&lt;array_length_2d(meet_points_get,a);b++)
-    {
-        meet_points[a,b] = meet_points_get[a,b]
-    }
-    
-}
-
-
-
-
-meet_points_other_get = pathManager.meet_points_other
-meet_points_other[0,0] = 0;
-for (var a = 0;a&lt; array_height_2d(meet_points_other_get);a++)
-{
-    for (var b = 0;b&lt;array_length_2d(meet_points_other_get,a);b++)
-    {
-        meet_points_other[a,b] = meet_points_other_get[a,b]
-    }
-    
-}
-
-
-
-
-
 meet_points = pathManager.meet_points;
 //go to nearest valid path
 
 //GMS will override the array if you don't move it 
 //to another array
 array = findClosestPath(x,y);
-for (i = 0; i&lt;6;i++;){nearestPath[i] = array[i];}
+for (i = 0; i&lt;5;i++;){nearestPath[i] = array[i];}
 nearestPath[0] = array[0];
 move_towards_point( nearestPath[0], nearestPath[1], 5 );
 
@@ -188,7 +123,7 @@ destination[0] = player.x;
 destination[1] = player.y;
 //array copying thing
 array = findClosestPath(player.x,player.y);
-for (i = 0; i&lt;6;i++;){pathDestination[i] = array[i];}
+for (i = 0; i&lt;5;i++;){pathDestination[i] = array[i];}
 print("Start Moving to path")
 
 
@@ -199,11 +134,7 @@ endPathName = path_get_name(pathDestination[3])
 
 //clear instructions
 instructionPath = noone;
-instructionPath[0,0] = pathDestination[5];
-instructionPath[0,1] = -1; 
-pathLength = 1000000
-
-//0 = stop at point 1 = next startpoint
+instructionPath[0] = endPathName;
 instructionPathSteps = 0;
 
 
@@ -224,110 +155,33 @@ else
         possiblePaths[0] =0; 
     
     
-        //print("Begin while Loop")
-        //test array holds the paths while test array points holds the points
+        print("Begin while Loop")
         testArray = noone;
         testArray[0] = pathDestination[4];
-        testArrayPoints = noone;
-        testArrayPoints[0,0] = pathDestination[5];
-        testArrayPoints[0,1] = -1; 
-        pathLengthTest = 0;
-        
-        
         invalidPath = false;
         foundPath = false;
         arrayPos = 0;
         timesLooped = 0
-        while(!invalidPath&amp;&amp;timesLooped&lt;1000)
+        while(!invalidPath&amp;&amp;timesLooped&lt;200)
         {
             timesLooped++;
             getMeetPathChoices(testArray[arrayPos])
-            //testArray[arrayPos] is the height and i is the length
             
             for (var a = 0; a&lt;array_length_1d(pathChoices);a++)
             {
                 if (pathChoices[a] == startPathID)
                 {
-                    //print("found a match");
+                    print("found a match");
         
                     foundPath = true;
-                    choosePath = a;
                 }
             }
             if (foundPath)//if it found a match then we can add the new path to the list
             {
-                previousPath = testArray[arrayPos];
-                
                 arrayPos++
-                //add point and path ids to arrays
                 testArray[arrayPos]= startPathID;
-                
-                    testArrayPoints[arrayPos,0] = meet_points[previousPath,choosePath]
-                    testArrayPoints[arrayPos,1] = meet_points_other[previousPath,choosePath]
-                    
-                
-                
+                //print (testArray)
                 possiblePaths[array_length_1d(possiblePaths)]= testArray
-                
-                //add the length
-                addLength = instructionPathsLengthCalc();
-                            print(addLength);
-                //add the distance to the target
-                arrayPoint = testArrayPoints[0,0];
-                addFinalDist = point_distance(path_points[arrayPoint,0],
-                path_points[arrayPoint,1],
-                destination[0],
-                destination[1]);
-                
-                            pathLengthTest +=addLength;
-                            pathLengthTest+= addFinalDist;
-                            print("Final Distance Result: " + string(pathLengthTest))
-                
-                //if the new path is shorter than the old path length then replace the instructions
-                
-                if(pathLength&gt;pathLengthTest)
-                {
-                    pathLength = pathLengthTest
-                    print("New Shortest Path");
-                    //copy array so it can be used by the instructions
-                    for (var b = 0;b&lt; array_height_2d(testArrayPoints);b++)
-                    {
-                        for (var c = 0;c&lt;array_length_2d(testArrayPoints,b);c++)
-                        {
-                        instructionPath[b,c] = testArrayPoints[b,c]
-                        }
-    
-                    }
-                }
-                else
-                {
-                    print("New path is longer than current path");
-                }
-                //
-                /*
-                print("Completed Array")
-                    for(var b = 0; b&lt;array_length_1d(instructionPath);b++)
-                    {
-                            var left = "-1";
-                            var right = "-1";
-                            if (instructionPath[b,0]!=-1)
-                            {
-                            left = string(path_points[instructionPath[b,0],4])
-                            left = left + " "+string(path_points[instructionPath[b,0],0])+","+string(path_points[instructionPath[b,0],1])
-                            }
-                            if (instructionPath[b,1]!=-1)
-                            {
-                            right = string(path_points[instructionPath[b,1],4])
-                            right = right + " "+string(path_points[instructionPath[b,1],0])+","+string(path_points[instructionPath[b,1],1])
-                            }
-    
-    
-                            print("Left: "+left+" Right: "+right)
-                    }
-                
-                */
-                
-                
                 
                 //eliminate the path -2 from the destination
                 if (arrayPos&gt;0)
@@ -340,7 +194,7 @@ else
                         {
                             elim = true;
                             meet_paths[elimIndex,d] = -1;
-                            //print("Eliminated");
+                            print("Eliminated");
                         }
                     }
                 }
@@ -349,14 +203,8 @@ else
                     break;
                 }
                 //reset test array
-                //print("Complete");
-                //print("Reset Test");
                 testArray = noone;
                 testArray[0] = pathDestination[4];
-                testArrayPoints = noone;
-                testArrayPoints[0,0] = pathDestination[5];
-                testArrayPoints[0,1] = -1; 
-                pathLengthTest = 0;
                 foundPath = false;
                 arrayPos = 0;
                 //break;
@@ -365,9 +213,9 @@ else
             {
                 
                 //check if there is a path choice not already in the testArray
-                //print("test uniques")
-                //print(string(testArray[arrayPos]) +": "+ string(pathChoices));
-                //print(string(testArray[arrayPos]) +": "+ string(testArray));
+                print("test uniques")
+                print(string(testArray[arrayPos]) +": "+ string(pathChoices));
+                print(string(testArray[arrayPos]) +": "+ string(testArray));
                 unique = false;
                 choosePath = -1;
                 for ( a = 0; a&lt;array_length_1d(pathChoices)&amp;&amp;!unique;a++)
@@ -387,7 +235,7 @@ else
                         }
                         if (unique)
                         {
-                            //print("unique number found " + string(pathChoices[a]))
+                            print("unique number found " + string(pathChoices[a]))
                             choosePath =a;
                         }
                     }
@@ -396,48 +244,16 @@ else
                 {   
                     //found an untested path add it to the test array 
                             //then re run the loop
-                            //print("Current Array"+string(testArray))
+                            print("Current Array"+string(testArray))
                             
-                            previousPath = testArray[arrayPos]; 
-                            
-                            //used for finding loaction in meet points that is needed to 
-                            //create the point list
-                            //print("Left: "+
-                            //string(path_points[currentPathPoint,4])+
-                            //" Right: "+
-                            //string(path_points[nextPathPoint,4]))
                             arrayPos++
                             testArray[arrayPos] = pathChoices[choosePath];
-                            
-                                testArrayPoints[arrayPos,0] = meet_points[previousPath,choosePath]
-                                testArrayPoints[arrayPos,1] = meet_points_other[previousPath,choosePath]
-                            
-                            //print("add");
-                            //print(path_points[testArrayPoints[arrayPos,0],4]);
-                            //print("adding: " + string(pathChoices[choosePath]))
-                            //print("Redo Loop")
-                            
-                            addLength = instructionPathsLengthCalc();
-                            print(addLength);
-                            pathLengthTest +=addLength
-                            /*
-                            print("Current Path Coordindinates"
-                            + string(path_points[testArrayPoints[arrayPos,0],0])+", "
-                            + string(path_points[testArrayPoints[arrayPos,0],1])+" Path Pos: "
-                            + string(path_points[testArrayPoints[arrayPos,0],2]));
-                            
-                            print("Previous Path Coordindinates"
-                            + string(path_points[testArrayPoints[arrayPos-1,0],0])+", "
-                            + string(path_points[testArrayPoints[arrayPos-1,0],1])+" Path Pos: "
-                            + string(path_points[testArrayPoints[arrayPos-1,0],2]));
-                            */ 
-                            
-                            
-                            
+                            print("adding: " + string(pathChoices[choosePath]))
+                            print("Redo Loop")
                 }
                 else
                 {
-                    //print("Could not find unique")
+                    print("Could not find unique")
                     
                     //eliminate path that cause problem
                     if (arrayPos&gt;0)
@@ -450,17 +266,12 @@ else
                             {
                                 elim = true;
                                 meet_paths[elimIndex,d] = -1;
-                                //print("Eliminated");
+                                print("Eliminated");
                             }
                         }
                         //reset test array
-                        //print("Reset Test");
                         testArray = noone;
                         testArray[0] = pathDestination[4];
-                        testArrayPoints = noone;
-                        testArrayPoints[0,0] = pathDestination[5];
-                        testArrayPoints[0,1] = -1; 
-                        pathLengthTest = 0;
                         foundPath = false;
                         arrayPos = 0;
                     }
@@ -471,7 +282,7 @@ else
                     }
                     
                 }
-                if(array_length_1d(testArray)&gt;1000)
+                if(array_length_1d(testArray)&gt;100)
                 {
                     print("INFINITE LOOP FAILSAFE TRIGGERED")
                     break;   
@@ -483,53 +294,12 @@ else
     
     
 }
-
+print("Final Results")
+print(meet_paths);
 print(possiblePaths);
-print("Test Array Points");
-print(testArrayPoints);
-print("test array paths")
-
-for (var a = 0;a&lt; array_height_2d(instructionPath);a++)
-{
-    for (var b = 0;b&lt;array_length_2d(instructionPath,a);b++)
-    {
-        if (instructionPath[a,b]&gt;-1)
-        {
-        
-            
-            //print(path_points[instructionPath[a,b],4])
-            
-            
-        
-        }
-    }
-    
-}
+print(timesLooped);
 
 
-for (var a = 0;a&lt; array_height_2d(instructionPath);a++)
-{
-
-    var left = "-1";
-    var right = "-1";
-    if (instructionPath[a,0]!=-1)
-    {
-        left = string(path_points[instructionPath[a,0],4])
-        left = left + " "+string(path_points[instructionPath[a,0],0])+","+string(path_points[instructionPath[a,0],1])
-    }
-    if (instructionPath[a,1]!=-1)
-    {
-        right = string(path_points[instructionPath[a,1],4])
-        right = right + " "+string(path_points[instructionPath[a,1],0])+","+string(path_points[instructionPath[a,1],1])
-    }
-    
-    
-    print("Left: "+left+" Right: "+right)
-}
-
-
-followingPathStep = array_height_2d(instructionPath);
-midPoint = noone
 
 //cancels route if no match is found;
 if (invalidPath)
@@ -539,23 +309,6 @@ if (invalidPath)
     destination[0] = noone;
     print("path Cancelled");
 }
-
-//set nearest path and next path point to the following paths. 
-
-followingPathStep -=1;
-//for (var a =0; a&lt; 5;a++){midPath[a] = path_points[instructionPath[followingPathStep,0],a]}
-
-//for (var a =0; a&lt; 5;a++){pathDestination[a] = path_points[instructionPath[followingPathStep,0],a]}
-if (nearestPath[4] == path_points[instructionPath[followingPathStep,0],4])
-            {
-                for (var a =0; a&lt; 5;a++){pathDestination[a] = path_points[instructionPath[followingPathStep,0],a]}
-            }
-            else
-            {
-                for (var a =0; a&lt; 5;a++){pathDestination[a] = path_points[instructionPath[followingPathStep,1],a]}            
-            }
-
-
 
 /*
 
@@ -622,9 +375,9 @@ print("Possible Transfer Paths: " +transferPaths)
           <argument>
             <kind>1</kind>
             <string>//check if a straight line can be drawn towards target
-if(pathDestination!=noone||true)
+if(pathDestination!=noone)
 {
-    if (validateGotoPath(x,y,destination[0],destination[1],size))
+    if (validateGotoPath(x,y,destination[0],destination[1],16))
     {
         //get off the path
         var holdX = x;
@@ -643,16 +396,39 @@ if(pathDestination!=noone||true)
 //Object is not on a path but needs to get to one.
 if (nearestPath!=noone)
 {
-    
-    if(point_distance(x,y,nearestPath[0], nearestPath[1])&lt;7&amp;&amp;!followingPath)
+    if(point_distance(x,y,nearestPath[0], nearestPath[1])&lt;5&amp;&amp;!followingPath)
     {
-        attachToPath();
-        print("ATTACHING");
-    }
-    else
-    {
-    //if something changes its position reset speed
-        move_towards_point( nearestPath[0], nearestPath[1], 5 );
+        //calculate which path direction is closer
+        //nearestPath[2]
+        //pathDestination[2]
+        pathDirection = 1;
+        if(path_get_closed(nearestPath[3]))
+        {
+            difference = abs(nearestPath[2]- pathDestination[2]);
+            if(nearestPath[2]&gt;pathDestination[2])
+            {
+                if (difference&lt;.5){pathDirection = -1}
+            }
+            else
+            {
+                if (difference&gt;.5){pathDirection = -1}
+            }
+        }
+        else
+        {
+            if (pathDestination[2]&lt;nearestPath[2])
+            {
+                pathDirection = -1;
+            }
+        }
+        path_start(nearestPath[3],5*pathDirection,path_action_continue,true);
+        path_position = nearestPath[2];
+        followingPath = true;
+        nearestPath = noone;
+        
+        print("move along path");
+        print(pathDirection);
+        
     }
     exit;
 }
@@ -660,97 +436,24 @@ if (nearestPath!=noone)
 //object is on a path and needs to go to a path point near its destination
 if (pathDestination!=noone)
 {
-
-    //if it reaches the end of the path and stops redo the nearest path set up 
-    if (path_index == -1&amp;&amp;point_distance(x,y,pathDestination[0], pathDestination[1])&gt;5)
-    {
-        print("path stop")
-        
-        
-    }
     if (point_distance(x,y,pathDestination[0], pathDestination[1])&lt;5&amp;&amp;followingPath)
     {
-        
         x = pathDestination[0];
         y = pathDestination[1];
         followingPath = false;
         path_end();
         pathDestination = noone;
-        print("Validate: "+ string(validateGotoPath(x,y,destination[0],destination[1],size)));
-        //if on the last step of the instruction path and can reach point.
-        if(validateGotoPath(x,y,destination[0],destination[1],size)
-        &amp;&amp;followingPathStep == 0)
+        if(validateGotoPath(x,y,destination[0],destination[1],16))
         {
             move_towards_point(destination[0],destination[1],5)
-            print("move to final");
         }
-        else if (followingPathStep ==0||wasOnThisPath == -1)
+        else
         {
             print("Could not reach target!");
             speed = 0;
         }
-        else
-        {
-            
-            //nearest path should be different to wasOnPath 
-            //because it is transfering the object to the next track
-            
-            
-            print("Was on this path: "+ string(wasOnThisPath))
-            print("Path Choices: " 
-            +string(path_points[instructionPath[followingPathStep,0],4])
-            +" "+string(path_points[instructionPath[followingPathStep,1],4]))
-            if (wasOnThisPath == path_points[instructionPath[followingPathStep,0],4])
-            {
-                for (var a =0; a&lt; 5;a++){nearestPath[a] = path_points[instructionPath[followingPathStep,1],a]}
-            
-            }
-            else
-            {
-                for (var a =0; a&lt; 5;a++){nearestPath[a] = path_points[instructionPath[followingPathStep,0],a]}
-            
-            }
-            followingPathStep-=1
-            //pathDestination[2] needs to have the other value in order to function properly so it 
-            if (wasOnThisPath == path_points[instructionPath[followingPathStep,0],4])
-            
-            {
-                for (var a =0; a&lt; 5;a++){pathDestination[a] = path_points[instructionPath[followingPathStep,1],a]}
-                pathDestination[2] = path_points[instructionPath[followingPathStep,0],2]
-            }
-            else 
-            {
-                for (var a =0; a&lt; 5;a++){pathDestination[a] = path_points[instructionPath[followingPathStep,0],a]}
-                if (instructionPath[followingPathStep,1]!=-1)
-                {
-                    pathDestination[2] = path_points[instructionPath[followingPathStep,1],2]
-                }
-                
-            }
-            attachToPath();
-            
-            
-            //print("Going to: "+string(nearestPath[4]))
-            /*
-            for (var a =0; a&lt; 5;a++{midPath[a] = path_points[instructionPath[followingPathStep,0],a]
-
-            nearestPath[0] = 
-            nearestPath[1] = 
-            nearestPath[2] = 
-            nearestPath[3] = 
-            nearestPath[4] = 
-            nearestPath[5] = 
-            
-            pathDestination[0] = 
-            pathDestination[1] = 
-            pathDestination[2] = 
-            pathDestination[3] = 
-            pathDestination[4] =
-            pathDestination[5] =
-            */
-        }
         
-        
+        print("move to final");
     }
     exit;
 }
@@ -790,26 +493,17 @@ if(destination[0] != noone)
           <argument>
             <kind>1</kind>
             <string>draw_self();
-//draw_text(x,y-48,"Path: " + string(path_position))
-//draw_text(x,y-68,"Pos: " + string(x)+", "+string(y));
+draw_text(x,y-48,"Path: " + string(path_position))
+draw_text(x,y-68,"Pos: " + string(x)+", "+string(y));
 if (nearestPath != noone)
 {
     draw_text(x,y-72,"Distance to path: " + 
     string(point_distance(x,y,nearestPath[0], nearestPath[1])))
-    
-    
-    if (point_distance(x,y,nearestPath[0], nearestPath[1])&gt;7)
-    {
     draw_rectangle_colour(nearestPath[0], nearestPath[1], 
-    nearestPath[0]+8, nearestPath[1]-8, 
+    nearestPath[0]+8, nearestPath[1]+8, 
     c_blue, c_blue, c_blue, c_blue, false);
-    }
-    else
-    {
-        draw_rectangle_colour(nearestPath[0], nearestPath[1], 
-    nearestPath[0]+8, nearestPath[1]-8, 
-    c_gray, c_gray, c_gray, c_gray, c_gray);
-    }
+
+
 }
 
 if (pathDestination!= noone)
@@ -831,51 +525,6 @@ if (destination[0]!= noone)
     
     validateGotoPathDraw(x,y,destination[0],destination[1],16)
 
-}
-
-for (var a = 0;a&lt; array_height_2d(instructionPath);a++)
-{
-
-    for (var b = 0;b&lt;array_length_2d(instructionPath,a);b++)
-    {
-        if (instructionPath[a,b]&gt;-1)
-        {
-        
-            //drawinstruction path
-            xDraw = path_points[instructionPath[a,b],0]
-            yDraw = path_points[instructionPath[a,b],1]
-            draw_rectangle_colour(xDraw, yDraw, 
-            xDraw+8, yDraw+8, 
-            c_purple, c_purple, c_purple, c_purple, false);
-            if(a+1&lt; array_height_2d(instructionPath))
-            {
-                xDraw = path_points[instructionPath[a,0],0]
-                yDraw = path_points[instructionPath[a,0],1]
-                xDraw2 = path_points[instructionPath[a+1,1],0]
-                yDraw2 = path_points[instructionPath[a+1,1],1]
-                
-                draw_line_color(xDraw,yDraw,xDraw2,yDraw2,
-                c_purple, c_purple)
-            
-            
-            }
-        }
-    }
-    
-}
-
-if (nearestPath!=noone)
-{
-    draw_rectangle_colour(nearestPath[0], nearestPath[1], 
-    nearestPath[0]-8, nearestPath[1]-8, 
-    c_red, c_red, c_red, c_red, false);
-}
-
-if (pathDestination!=noone)
-{
-    draw_rectangle_colour(pathDestination[0], pathDestination[1], 
-    pathDestination[0]-8, pathDestination[1]+8, 
-    c_green, c_green, c_green, c_green, c_green);
 }
 </string>
           </argument>

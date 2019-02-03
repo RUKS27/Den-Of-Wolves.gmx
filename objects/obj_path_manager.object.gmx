@@ -207,13 +207,7 @@ for (i = 0; i&lt;array_height_2d(path_points);i++)
     
     
 }
-print("meet paths")  
-print(meet_paths);
-print("meet points") 
-print(meet_points);
-print("meet other") 
-print(meet_points_other);
-/*
+exit;
 //print final count
 for (i= 0; i&lt;array_height_2d(meet_paths)i++)
 {
@@ -231,18 +225,13 @@ for (i= 0; i&lt;array_height_2d(meet_paths)i++)
 
 //print all point data
 for (i= 0; i&lt;array_height_2d(path_points)i++)
-{    
+    
         print(string(i)+" "+"X: "+string(path_points[i,0])
         +(" Y: "+string(path_points[i,1]))
         +(" Pos: "+string(path_points[i,2]))
         +(" PID: "+string(path_points[i,3]))
         +(" PAID: "+string(path_points[i,4])));
- } 
- */
- 
-
-        
-        
+    
 </string>
           </argument>
         </arguments>
