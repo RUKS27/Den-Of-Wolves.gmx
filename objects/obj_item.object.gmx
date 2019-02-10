@@ -70,6 +70,23 @@ if(place_meeting(x, y, obj_player)){
                 
                 instance_destroy();
             break;
+            
+            case i_types.weapon:
+                var newWeapon = item_receive_ID;
+                if(obj_player.eq_weapon != 0){
+                    
+                    with(obj_player){
+                        var oldWeapon = eq_weapon;
+                        eq_weapon = newWeapon;
+                    }
+                        
+                    sprite_index = ItemList(oldWeapon, 2);
+                    item_receive_ID = oldWeapon;
+                } else {
+                    obj_player.eq_weapon = newWeapon;
+                    instance_destroy();
+                }
+                break;
                 
             case i_types.consumable:
                 consumableSpace = ds_list_size(global.consumables);
@@ -84,10 +101,6 @@ if(place_meeting(x, y, obj_player)){
                 obj_player.consum_pos = ds_list_find_index(global.consumables, item);
                 CreateDialogue(message);
                 break;
-                
-            case i_types.weapon:
-                obj_player.eq_weapon = item_receive_ID;
-            break;
             
             case i_types.passive:
                 var newPassive = item_receive_ID;

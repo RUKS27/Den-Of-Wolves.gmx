@@ -1,11 +1,11 @@
 // Menu Selections
 if(menu_item != 1){
-    if(global.Down_Pressed){
+    if(global.Down_Press){
         menu_item++;
     }
 }
 if(menu_item != 0){
-    if(global.Up_Pressed){
+    if(global.Up_Press){
         menu_item--;
     }
 }

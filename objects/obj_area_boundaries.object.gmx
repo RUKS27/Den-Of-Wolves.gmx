@@ -31,6 +31,7 @@ area_mapsprite = spr_empty;
 
 area_BGM = -1;
 
+
 if(place_meeting(x, y, obj_area_boundaries)){
     var toDestroy = noone;
     
