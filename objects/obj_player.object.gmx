@@ -171,10 +171,10 @@ noClip = false;
           <argument>
             <kind>1</kind>
             <string>// Get Keyboard Inputs
-RightMove = global.Right_Press;
-DownMove = global.Down_Press;
-LeftMove = global.Left_Press;
-UpMove = global.Up_Press;
+RightMove = global.Right_Pressed;
+DownMove = global.Down_Pressed;
+LeftMove = global.Left_Pressed;
+UpMove = global.Up_Pressed;
 
 Attack = global.Attack_Press;
 Attack_RLS = global.Attack_Release;
