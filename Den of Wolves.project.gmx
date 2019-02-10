@@ -37,7 +37,7 @@
     <sprite>sprites\spr_door</sprite>
   </sprites>
   <backgrounds name="background">
-    <background>background\ts_exterior_den_01</background>
+    <background>background\ts_exterior_01</background>
     <background>background\ts_interior_house_01</background>
     <background>background\ts_exterior_ambience_01</background>
     <background>background\ts_gore_01</background>
