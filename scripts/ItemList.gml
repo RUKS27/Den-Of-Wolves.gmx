@@ -4,8 +4,8 @@ var ret_var = argument1;
 
 enum i_types {
     consumable = 1,
-    weapon = 2,
-    passive = 3,
+    passive = 2,
+    weapon = 3,
     key = 0
 }
 
@@ -19,23 +19,19 @@ sprite[75] = spr_mshard;
 // Consumables start from 55
 name[55] =  "Health Injection";
 type[55] = i_types.consumable;
-sprite[55] = Health_Injection;
+sprite[55] = spr_healthicon;
 
 // Weapons Start From 40
-name[40] =  "Sharp Metal Shard";
+name[40] =  "Broken Metal Rod";
 type[40] = i_types.weapon;
-sprite[40] = spr_mshard;
-
-name[41] =  "Knife";
-type[41] = i_types.weapon;
-sprite[41] = spr_knife;
+sprite[40] = spr_knife;
 
 // Keys Start From 1
-name[2] =  "Rusted Key";
+name[2] =  " Key";
 type[2] = i_types.key;
 sprite[2] = spr_tstkey;
 
-name[1] =  "Surveillance Key";
+name[1] =  "Rusted Key";
 type[1] = i_types.key;
 sprite[1] = spr_tstkey;
 

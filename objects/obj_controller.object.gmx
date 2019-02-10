@@ -35,7 +35,6 @@
 //_Press = check if the button is being held down
 //_Pressed = check if the button was pressed on that frame
 
-
 //Access Controls
 
 global.Up_Release = false;
@@ -58,13 +57,13 @@ global.Confirm_Release = false;
 global.Confirm_Press = false;
 global.Confirm_Pressed = false;
 
-global.Cancel_Release = false;
-global.Cancel_Press = false;
-global.Cancel_Pressed = false;
-
 global.Attack_Release = false;
 global.Attack_Press = false;
 global.Attack_Pressed = false;
+
+global.Cancel_Release = false;
+global.Cancel_Press = false;
+global.Cancel_Pressed = false;
 
 global.Item_Release = false;
 global.Item_Press = false;
@@ -97,13 +96,14 @@ xi_Down = gp_padd
 xi_Left = gp_padl
 xi_Right = gp_padr
 xi_Confirm = gp_face1;
+xi_Attack = gp_face2;
 xi_Cancel = gp_face3;
-xi_Attack = gp_face3;
 xi_Item = gp_face4;
 xi_Context = gp_face1;
-xi_Run = gp_shoulderl;
-xi_Aim = gp_shoulderr;
+xi_Run = gp_shoulderrb;
+xi_Aim = gp_shoulderlb;
 xi_Pause = gp_start;
+
 //Keyboard Controls
 
 kb_Up = vk_up;
@@ -111,8 +111,8 @@ kb_Down =  vk_down;
 kb_Left = vk_left;
 kb_Right = vk_right;
 kb_Confirm = ord('Z');
-kb_Cancel = ord('X');
 kb_Attack = ord('X');
+kb_Cancel = ord('X');
 kb_Item = ord('C');
 kb_Context = ord('Z');
 kb_Run = vk_shift;
@@ -168,37 +168,37 @@ switch(stickMode)
     break;
     case 1:
         global.Up_Release = keyboard_check_released(kb_Up)||(!lstick_up()&amp;&amp;global.Up_Press);
-        global.Up_Pressed = keyboard_check(kb_Up)||(lstick_up()&amp;&amp;!global.Up_Press);
-        global.Up_Press = keyboard_check_pressed(kb_Up)||(lstick_up());
+        global.Up_Pressed = keyboard_check_pressed(kb_Up)||(lstick_up()&amp;&amp;!global.Up_Press);
+        global.Up_Press = keyboard_check(kb_Up)||(lstick_up());
 
         global.Down_Release = keyboard_check_released(kb_Down)||(!lstick_down()&amp;&amp;global.Down_Press);
-        global.Down_Pressed = keyboard_check(kb_Down)||(lstick_down()&amp;&amp;!global.Down_Press);
-        global.Down_Press = keyboard_check_pressed(kb_Down)||(lstick_down());
+        global.Down_Pressed = keyboard_check_pressed(kb_Down)||(lstick_down()&amp;&amp;!global.Down_Press);
+        global.Down_Press = keyboard_check(kb_Down)||(lstick_down());
 
         global.Left_Release = keyboard_check_released(kb_Left)||(!lstick_left()&amp;&amp;global.Left_Press);
-        global.Left_Pressed = keyboard_check(kb_Left)||(lstick_left()&amp;&amp;!global.Left_Press);
-        global.Left_Press = keyboard_check_pressed(kb_Left)||(lstick_left());
+        global.Left_Pressed = keyboard_check_pressed(kb_Left)||(lstick_left()&amp;&amp;!global.Left_Press);
+        global.Left_Press = keyboard_check(kb_Left)||(lstick_left());
 
         global.Right_Release = keyboard_check_released(kb_Right)||(!lstick_right()&amp;&amp;global.Right_Press);
-        global.Right_Pressed = keyboard_check(kb_Right)||(lstick_right()&amp;&amp;!global.Right_Press);
-        global.Right_Press = keyboard_check_pressed(kb_Right)||(lstick_right());
+        global.Right_Pressed = keyboard_check_pressed(kb_Right)||(lstick_right()&amp;&amp;!global.Right_Press);
+        global.Right_Press = keyboard_check(kb_Right)||(lstick_right());
     break;
     case 2:
         global.Up_Release = keyboard_check_released(kb_Up)||(!rstick_up()&amp;&amp;global.Up_Press);
-        global.Up_Pressed = keyboard_check(kb_Up)||(rstick_up()&amp;&amp;!global.Up_Press);
-        global.Up_Press = keyboard_check_pressed(kb_Up)||(rstick_up());
+        global.Up_Pressed = keyboard_check_pressed(kb_Up)||(rstick_up()&amp;&amp;!global.Up_Press);
+        global.Up_Press = keyboard_check(kb_Up)||(rstick_up());
 
         global.Down_Release = keyboard_check_released(kb_Down)||(!rstick_down()&amp;&amp;global.Down_Press);
-        global.Down_Pressed = keyboard_check(kb_Down)||(rstick_down()&amp;&amp;!global.Down_Press);
-        global.Down_Press = keyboard_check_pressed(kb_Down)||(rstick_down());
+        global.Down_Pressed = keyboard_check_pressed(kb_Down)||(rstick_down()&amp;&amp;!global.Down_Press);
+        global.Down_Press = keyboard_check(kb_Down)||(rstick_down());
 
         global.Left_Release = keyboard_check_released(kb_Left)||(!rstick_left()&amp;&amp;global.Left_Press);
-        global.Left_Pressed = keyboard_check(kb_Left)||(rstick_left()&amp;&amp;!global.Left_Press);
-        global.Left_Press = keyboard_check_pressed(kb_Left)||(rstick_left());
+        global.Left_Pressed = keyboard_check_pressed(kb_Left)||(rstick_left()&amp;&amp;!global.Left_Press);
+        global.Left_Press = keyboard_check(kb_Left)||(rstick_left());
 
         global.Right_Release = keyboard_check_released(kb_Right)||(!rstick_right()&amp;&amp;global.Right_Press);
-        global.Right_Pressed = keyboard_check(kb_Right)||(rstick_right()&amp;&amp;!global.Right_Press);
-        global.Right_Press = keyboard_check_pressed(kb_Right)||(rstick_right());
+        global.Right_Pressed = keyboard_check_pressed(kb_Right)||(rstick_right()&amp;&amp;!global.Right_Press);
+        global.Right_Press = keyboard_check(kb_Right)||(rstick_right());
     break;
 }
 
@@ -207,13 +207,13 @@ global.Confirm_Release = keyboard_check_released(kb_Confirm)||gamepad_button_che
 global.Confirm_Press = keyboard_check(kb_Confirm)||gamepad_button_check(0,xi_Confirm);
 global.Confirm_Pressed = keyboard_check_pressed(kb_Confirm)||gamepad_button_check_pressed(0,xi_Confirm);
 
-global.Cancel_Release = keyboard_check_released(kb_Cancel)||gamepad_button_check_released(0,xi_Cancel);
-global.Cancel_Press = keyboard_check(kb_Cancel)||gamepad_button_check(0,xi_Cancel);
-global.Cancel_Pressed = keyboard_check_pressed(kb_Cancel)||gamepad_button_check_pressed(0,xi_Cancel);
-
 global.Attack_Release = keyboard_check_released(kb_Attack)||gamepad_button_check_released(0,xi_Attack);
 global.Attack_Press = keyboard_check(kb_Attack)||gamepad_button_check(0,xi_Attack);
 global.Attack_Pressed = keyboard_check_pressed(kb_Attack)||gamepad_button_check_pressed(0,xi_Attack);
+
+global.Cancel_Release = keyboard_check_released(kb_Cancel)||gamepad_button_check_released(0,xi_Cancel);
+global.Cancel_Press = keyboard_check(kb_Cancel)||gamepad_button_check(0,xi_Cancel);
+global.Cancel_Pressed = keyboard_check_pressed(kb_Cancel)||gamepad_button_check_pressed(0,xi_Cancel);
 
 global.Item_Release = keyboard_check_released(kb_Item)||gamepad_button_check_released(0,xi_Item);
 global.Item_Press = keyboard_check(kb_Item)||gamepad_button_check(0,xi_Item);
@@ -239,6 +239,42 @@ global.Pause_Pressed = keyboard_check_pressed(kb_Pause)||gamepad_button_check_pr
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="75">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>show_debug_message("Event = " + async_load[? "event_type"]);        // Debug cocde so you can see which event has been
+show_debug_message("Pad = " + string(async_load[? "pad_index"]));   // triggered and the pad associated with it.
+
+switch(async_load[? "event_type"])             // Parse the async_load map to see which event has been triggered
+{
+case "gamepad discovered":                     // A game pad has been discovered
+    var pad = async_load[? "pad_index"];       // Get the pad index value from the async_load map
+    gamepad_set_axis_deadzone(pad, 0.5);       // Set the "deadzone" for the axis
+    gamepad_set_button_threshold(pad, 0.1);    // Set the "threshold" for the triggers
+    break;
+case "gamepad lost":                           // Gamepad has been removed or otherwise disabled
+    var pad = async_load[? "pad_index"];       // Get the pad index
+    break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -256,7 +292,9 @@ global.Pause_Pressed = keyboard_check_pressed(kb_Pause)||gamepad_button_check_pr
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!debug_mode)
+            <string>draw_set_font(f_dialogue);
+
+if (!debug_mode)
 {
 exit;
 }
@@ -312,6 +350,27 @@ if (global.Pause_Press){inputDisplay = inputDisplay+"PA";}
 //if (global.Pause_Pressed){print("PAP")}
 
 draw_text(view_xport + 10, view_yport + 10,inputDisplay)
+
+for (var i = 0; i &lt; 4; i++;)
+{
+var xx = 32;
+var yy = 32 + (160 * i);
+if gamepad_is_connected(i)
+    {
+    draw_text(xx, yy, "Gamepad Slot - " + string(i));
+    draw_text(xx, yy + 20, "Gamepad Type - " + string(gamepad_get_description(i)));
+    draw_text(xx, yy + 40, "Left H Axis - " + string(gamepad_axis_value(i, gp_axislh)));
+    draw_text(xx, yy + 60, "Left V Axis - " + string(gamepad_axis_value(i, gp_axislv)));
+    draw_text(xx, yy + 80, "Right H Axis - " + string(gamepad_axis_value(i, gp_axisrh)));
+    draw_text(xx, yy + 100, "Right V Axis - " + string(gamepad_axis_value(i, gp_axisrv)));   
+    draw_text(xx, yy + 120, "Fire Rate - " + string(gamepad_button_value(i, gp_shoulderrb)));
+    }
+else
+    {
+    draw_text(xx, yy, "Gamepad Slot - " + string(i));
+    draw_text(xx, yy + 20, "Gamepad not connected" + string(gamepad_get_description(i)));
+    }
+}
 </string>
           </argument>
         </arguments>
