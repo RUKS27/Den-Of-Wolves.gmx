@@ -1,4 +1,4 @@
-///findClosestPath(x,y)
+///findClosestPath(x,y,size)
 pathManager = instance_find(obj_path_manager,0)
 if (pathManager == noone) {return noone}
 with(pathManager)
@@ -24,6 +24,9 @@ with(pathManager)
             pp = i;
             //find point closest to player
             testDist = point_distance(argument0,argument1,xPos,yPos)
+            var valid = validateGotoPath(argument0,argument1,path_points[i,0],path_points[i,1],argument2)
+            //print("Check Valid Path")
+            //print(valid)
             if (dist>testDist)
             {
                 closestX = xPos;

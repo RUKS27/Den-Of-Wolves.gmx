@@ -28,7 +28,7 @@
             <string>
 
 //path_start(testroompath,5,path_action_continue,true);
-
+player = instance_find(obj_player,0);
 followingPath = false;
 //keeps track of what step the object is in when following the path
 followingPathStep = 0;
@@ -46,6 +46,7 @@ instructionPathSteps = 0;
 wasOnThisPath = -1;
 size = 16;
 midPath =noone;
+spd = 5;
 </string>
           </argument>
         </arguments>
@@ -93,7 +94,7 @@ print("recalculating");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[0] = room_speed*15;
+            <string>//alarm[0] = room_speed*15;
 //reset vars
 
 pathDestination = noone;
@@ -177,17 +178,21 @@ meet_points = pathManager.meet_points;
 
 //GMS will override the array if you don't move it 
 //to another array
-array = findClosestPath(x,y);
+var array;
+array = findClosestPath(x,y,size);
 for (i = 0; i&lt;6;i++;){nearestPath[i] = array[i];}
 nearestPath[0] = array[0];
 move_towards_point( nearestPath[0], nearestPath[1], 5 );
 
 //select a destination point (Pick player)
-player = instance_find(obj_player,0);
+//player = instance_find(obj_player,0);
 destination[0] = player.x;
 destination[1] = player.y;
 //array copying thing
-array = findClosestPath(player.x,player.y);
+//must be done with player so notme can be procced
+
+array = findClosestPath(player.x,player.y,size);
+
 for (i = 0; i&lt;6;i++;){pathDestination[i] = array[i];}
 print("Start Moving to path")
 
@@ -238,7 +243,9 @@ else
         foundPath = false;
         arrayPos = 0;
         timesLooped = 0
-        while(!invalidPath&amp;&amp;timesLooped&lt;1000)
+        
+        findShortestPath(testArray[0],testArray,testArrayPoints,0,0)
+        while(!invalidPath&amp;&amp;timesLooped&lt;1000&amp;&amp;false)
         {
             timesLooped++;
             getMeetPathChoices(testArray[arrayPos])
@@ -257,7 +264,8 @@ else
             if (foundPath)//if it found a match then we can add the new path to the list
             {
                 previousPath = testArray[arrayPos];
-                
+                print("Prev Path original")
+                print(previousPath)
                 arrayPos++
                 //add point and path ids to arrays
                 testArray[arrayPos]= startPathID;
@@ -303,7 +311,7 @@ else
                 {
                     print("New path is longer than current path");
                 }
-                //
+                
                 /*
                 print("Completed Array")
                     for(var b = 0; b&lt;array_length_1d(instructionPath);b++)
@@ -506,7 +514,8 @@ for (var a = 0;a&lt; array_height_2d(instructionPath);a++)
     
 }
 
-
+print("instructionPath")
+print(instructionPath)
 for (var a = 0;a&lt; array_height_2d(instructionPath);a++)
 {
 
@@ -529,7 +538,7 @@ for (var a = 0;a&lt; array_height_2d(instructionPath);a++)
 
 
 followingPathStep = array_height_2d(instructionPath);
-midPoint = noone
+midPoint = noone;
 
 //cancels route if no match is found;
 if (invalidPath)
@@ -543,9 +552,7 @@ if (invalidPath)
 //set nearest path and next path point to the following paths. 
 
 followingPathStep -=1;
-//for (var a =0; a&lt; 5;a++){midPath[a] = path_points[instructionPath[followingPathStep,0],a]}
 
-//for (var a =0; a&lt; 5;a++){pathDestination[a] = path_points[instructionPath[followingPathStep,0],a]}
 if (nearestPath[4] == path_points[instructionPath[followingPathStep,0],4])
             {
                 for (var a =0; a&lt; 5;a++){pathDestination[a] = path_points[instructionPath[followingPathStep,0],a]}
@@ -555,8 +562,26 @@ if (nearestPath[4] == path_points[instructionPath[followingPathStep,0],4])
                 for (var a =0; a&lt; 5;a++){pathDestination[a] = path_points[instructionPath[followingPathStep,1],a]}            
             }
 
+//check if the the second point in the instruction list is close
+nearestPathDist = point_distance(x,y,nearestPath[0],nearestPath[1]);
+nearestPointDist = point_distance(x,y,path_points[instructionPath[followingPathStep-1,0],0],path_points[instructionPath[followingPathStep-1,0],1])
 
 
+
+
+/*
+print("Go to close?");
+
+if (validateGotoPath(x,y
+,path_points[instructionPath[followingPathStep,0],0]
+,path_points[instructionPath[followingPathStep,0],1],size))
+{
+//
+for (var a =0; a&lt; 5;a++){nearestPath[a] = path_points[instructionPath[followingPathStep,1],a]}
+print("Go to closer Path")
+followingPathStep -=1;
+}
+*/
 /*
 
 print("Path3 info")
@@ -633,7 +658,7 @@ if(pathDestination!=noone||true)
         x = holdX;
         y = holdY;
         //move towards destination
-        move_towards_point(destination[0],destination[1],5)
+        move_towards_point(destination[0],destination[1],spd)
         //clear variables
         nearestPath = noone;
         pathDestination = noone
@@ -652,7 +677,7 @@ if (nearestPath!=noone)
     else
     {
     //if something changes its position reset speed
-        move_towards_point( nearestPath[0], nearestPath[1], 5 );
+        move_towards_point( nearestPath[0], nearestPath[1], spd );
     }
     exit;
 }
@@ -681,7 +706,7 @@ if (pathDestination!=noone)
         if(validateGotoPath(x,y,destination[0],destination[1],size)
         &amp;&amp;followingPathStep == 0)
         {
-            move_towards_point(destination[0],destination[1],5)
+            move_towards_point(destination[0],destination[1],spd)
             print("move to final");
         }
         else if (followingPathStep ==0||wasOnThisPath == -1)
@@ -757,7 +782,7 @@ if (pathDestination!=noone)
 //object is at the nearest path point and has a straight line to the target 
 if(destination[0] != noone)
 {
-    if (point_distance(x,y,destination[0], destination[1])&lt;5)
+    if (point_distance(x,y,destination[0], destination[1])&lt;spd)
     {
         speed = 0;
         
@@ -792,6 +817,21 @@ if(destination[0] != noone)
             <string>draw_self();
 //draw_text(x,y-48,"Path: " + string(path_position))
 //draw_text(x,y-68,"Pos: " + string(x)+", "+string(y));
+
+
+
+var nearestTest;
+nearestHold = findClosestPath(x,y,size);
+for (i = 0; i&lt;6;i++;){nearestTest[i] = nearestHold[i];}
+
+draw_rectangle_colour(nearestTest[0], nearestTest[1], 
+    nearestTest[0]-8, nearestTest[1]-8, 
+    c_teal, c_gray, c_teal, c_teal, false);
+
+
+
+
+
 if (nearestPath != noone)
 {
     draw_text(x,y-72,"Distance to path: " + 
@@ -840,13 +880,21 @@ for (var a = 0;a&lt; array_height_2d(instructionPath);a++)
     {
         if (instructionPath[a,b]&gt;-1)
         {
-        
+            color = c_purple;
+            if a == array_height_2d(instructionPath) 
+            {
+                color = c_red;
+            }
+            if a == array_height_2d(instructionPath)-1 
+            {
+                color = c_green;
+            }
             //drawinstruction path
             xDraw = path_points[instructionPath[a,b],0]
             yDraw = path_points[instructionPath[a,b],1]
             draw_rectangle_colour(xDraw, yDraw, 
             xDraw+8, yDraw+8, 
-            c_purple, c_purple, c_purple, c_purple, false);
+            color, color, color, color, false);
             if(a+1&lt; array_height_2d(instructionPath))
             {
                 xDraw = path_points[instructionPath[a,0],0]
@@ -877,6 +925,55 @@ if (pathDestination!=noone)
     pathDestination[0]-8, pathDestination[1]+8, 
     c_green, c_green, c_green, c_green, c_green);
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="80">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+
+x = player.x;
+y = player.y;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alarm[0] = 1;
 </string>
           </argument>
         </arguments>

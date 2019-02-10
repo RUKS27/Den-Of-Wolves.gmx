@@ -1,11 +1,13 @@
 ///pathDistance(path,point1,point2);
-print("script");
+
 var length = path_get_length(argument0);
+/*
+print("script");
 print(path_get_name(argument0));
 print(argument1);
 print(argument2);
 print(length)
-
+*/
 if (path_get_closed(argument0))
 {
     var pathDist = abs(argument1-argument2);
