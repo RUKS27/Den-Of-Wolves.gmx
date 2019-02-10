@@ -7,7 +7,13 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_player</sprite>
+    <sprite>sprites\spr_playerforward</sprite>
+    <sprite>sprites\spr_playerback</sprite>
+    <sprite>sprites\spr_playerleft</sprite>
+    <sprite>sprites\spr_playerright</sprite>
     <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_indicator</sprite>
+    <sprite>sprites\spr_barrel</sprite>
     <sprite>sprites\spr_warningTitle</sprite>
     <sprite>sprites\Health_Injection</sprite>
     <sprite>sprites\spr_dialoguebox</sprite>
@@ -41,11 +47,9 @@
     <background>background\ts_interior_house_01</background>
     <background>background\ts_exterior_ambience_01</background>
     <background>background\ts_gore_01</background>
-
     <background>background\bg_mountain</background>
     <background>background\bg_sky</background>
     <background>background\ts_interior_01</background>
-
   </backgrounds>
   <paths name="paths">
     <path>paths\testroompath</path>
@@ -135,7 +139,6 @@
     </scripts>
     <script>scripts\SaveFile.gml</script>
     <script>scripts\LoadFile.gml</script>
-
     <script>scripts\ScaleGame.gml</script>
     <script>scripts\AnimateSprite.gml</script>
     <script>scripts\Events.gml</script>
@@ -181,11 +184,9 @@
         <object>objects\par_enemy</object>
       </objects>
     </objects>
-
     <object>objects\obj_barrel</object>
     <object>objects\obj_parallax_p</object>
     <object>objects\obj_trigger</object>
-
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_cell</timeline>
