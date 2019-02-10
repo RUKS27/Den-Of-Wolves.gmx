@@ -23,6 +23,7 @@ else isMoving = false;
 // Ensure that aim does not change if sneak is enabled
 if(isMoving){
     if(Run){
+        Stamina-=0.75;
         noise_radius = 256;
         if(alarm[1] = -1) alarm[1] = 8;
     } else if(Sneak){
@@ -44,6 +45,10 @@ if(isMoving){
             p_dir = p_dirs.left;
         }
     }
+}
+
+if(!Run){
+    Stamina+= 0.75;
 }
 
 if(!noClip){
@@ -107,7 +112,6 @@ else {
 }
 
 MaxHealth = 100;
-MaxStamina = 100;
 if(eq_passive != 0){
     PassiveEffects(eq_passive);
 }

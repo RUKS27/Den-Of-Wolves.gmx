@@ -146,7 +146,7 @@
     <instance objName="obj_darkness" x="832" y="192" name="inst_3DE86B90" locked="0" code="" scaleX="2" scaleY="2" colour="4294967295" rotation="0"/>
     <instance objName="obj_lightmanager" x="704" y="512" name="inst_4E7095C9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_item" x="480" y="320" name="inst_7F12E5F2" locked="0" code="item_receive_ID = 40;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_exit" x="465" y="128" name="inst_FC31ADD7" locked="0" code="to_room = rm_cell;&#xA;to_spawn = inst_firstspawn;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_exit" x="465" y="128" name="inst_FC31ADD7" locked="0" code="to_room = rm_mortuary_room01;&#xA;to_spawn = inst_firstspawn;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="par_enemy" x="480" y="384" name="inst_FFF367B1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="par_enemy" x="576" y="256" name="inst_A7D5BD3D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="par_enemy" x="384" y="224" name="inst_D4296893" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
