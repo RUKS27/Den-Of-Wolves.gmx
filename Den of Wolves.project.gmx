@@ -44,11 +44,8 @@
 
     <background>background\bg_mountain</background>
     <background>background\bg_sky</background>
-<<<<<<< HEAD
     <background>background\ts_interior_01</background>
 
-=======
->>>>>>> parent of 8baea7e... some experimental stuff
   </backgrounds>
   <paths name="paths">
     <path>paths\testroompath</path>
@@ -202,9 +199,7 @@
         <room>rooms\rm_midnight_highway_00START</room>
         <room>rooms\rm_000</room>
       </rooms>
-      <room>rooms\rm_cell</room>
-      <room>rooms\rm_prison_A0</room>
-      <room>rooms\rm_prison_frestroom</room>
+      <room>rooms\rm_mortuary_room01</room>
     </rooms>
     <room>rooms\rm_debug</room>
     <room>rooms\rm_startingarea</room>

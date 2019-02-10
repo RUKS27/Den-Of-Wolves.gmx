@@ -28,12 +28,15 @@
             <string>MaxHealth = 100;
 Health = 100;
 
+MaxStamina = 250;
+Stamina = 250;
+
 //
 xSpd = 0;
 ySpd = 0;
 
-rSpd = 4;
-mSpd = 3;
+rSpd = 5;
+mSpd = 4;
 sSpd = 2;
 
 noise_radius = 256;
@@ -193,6 +196,12 @@ if(debug_mode){
 Health = clamp(Health, 0, MaxHealth);
 
 delay = clamp(delay, 0, 120);
+
+Stamina = clamp(Stamina, 100, MaxStamina);
+
+rSpd = 3 + (Stamina / 100);
+
+show_debug_message(Stamina);
 
 // Switch State If Player Is Dead
 if(Health &lt;= 0){
