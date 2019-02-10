@@ -3,8 +3,6 @@ var hlS = argument0;
 var mw = global.view_midw;
 var mh = global.view_midh;
 
-var f_check = window_get_fullscreen() + 2;
-
 // Two sliders, BGM and SFX
 draw_set_color(c_black);
 draw_rectangle(mw - 128, mh - 32, mw + 128, mh, false);
@@ -23,98 +21,19 @@ if(menu_item = 0){
     
     draw_set_color(c_dkgray);
     draw_text(mw - 192, mh + 32, "SFX");
-    
-    if(!window_get_fullscreen()){
-        draw_text(mw - 64, mh + 96, "Fullscreen");
-        
-        draw_text(mw - 64, mh + 160, "800x600");
-        draw_text(mw - 64, mh + 224, "640x480");
-        
-        draw_text(mw - 64, mh + 288, "Return");
-    } else {
-        draw_text(mw - 64, mh + 96, "Fullscreen");
-        draw_text(mw - 64, mh + 160, "Return");
-    }
+    draw_text(mw - 64, mh + 96, "Return");
 } else if (menu_item = 1){
     draw_set_color(c_white);
     draw_text(mw - 192, mh + 32, "SFX");
-    
+
     draw_set_color(c_dkgray);
     draw_text(mw - 192, mh - 32, "BGM");
-    
-    if(!window_get_fullscreen()){
-        draw_text(mw - 64, mh + 96, "Fullscreen");
-        
-        draw_text(mw - 64, mh + 160, "800x600");
-        draw_text(mw - 64, mh + 224, "640x480");
-        
-        draw_text(mw - 64, mh + 288, "Return");
-    } else {
-        draw_text(mw - 64, mh + 96, "Fullscreen");
-        draw_text(mw - 64, mh + 160, "Return");
-    }
+    draw_text(mw - 64, mh + 96, "Return");
 } else if (menu_item = 2){
     draw_set_color(c_dkgray);
     draw_text(mw - 192, mh - 32, "BGM");
     draw_text(mw - 192, mh + 32, "SFX");
     
     draw_set_color(c_white);
-
-    if(!window_get_fullscreen()){
-        draw_text(mw - 64, mh + 96, "Fullscreen");
-        
-        draw_set_color(c_dkgray);
-        draw_text(mw - 64, mh + 160, "800x600");
-        draw_text(mw - 64, mh + 224, "640x480");
-        
-        draw_text(mw - 64, mh + 288, "Return");
-    } else {
-        draw_text(mw - 64, mh + 96, "Fullscreen");
-        draw_set_color(c_dkgray);
-        draw_text(mw - 64, mh + 160, "Return");
-    }
-} else if(menu_item = 3){
-    draw_set_color(c_dkgray);
-    draw_text(mw - 192, mh + 32, "SFX");
-    draw_text(mw - 192, mh - 32, "BGM");
-
-    if(!window_get_fullscreen()){
-        draw_text(mw - 64, mh + 96, "Fullscreen");
-        
-        draw_set_color(c_white);
-        draw_text(mw - 64, mh + 160, "800x600");
-        draw_set_color(c_dkgray);
-        draw_text(mw - 64, mh + 224, "640x480");
-        
-        draw_text(mw - 64, mh + 288, "Return");
-    } else {
-        draw_text(mw - 64, mh + 96, "Fullscreen");
-        draw_set_color(c_white);
-        draw_text(mw - 64, mh + 160, "Return");
-    }
-} else {
-    draw_set_color(c_dkgray);
-    draw_text(mw - 192, mh + 32, "SFX");
-    draw_text(mw - 192, mh - 32, "BGM");    
-
-    if(!window_get_fullscreen()){
-        if(menu_item = 4){
-                draw_text(mw - 64, mh + 96, "Fullscreen");
-                draw_text(mw - 64, mh + 160, "800x600");
-                
-                draw_set_color(c_white);
-                draw_text(mw - 64, mh + 224, "640x480");
-                draw_set_color(c_dkgray);
-                draw_text(mw - 64, mh + 288, "Return");
-        } else if(menu_item = 5){
-                draw_text(mw - 64, mh + 96, "Fullscreen");
-                draw_text(mw - 64, mh + 160, "800x600");
-                draw_text(mw - 64, mh + 224, "640x480");
-                
-                draw_set_color(c_white);
-                draw_text(mw - 64, mh + 288, "Return");
-        }
-    }
+    draw_text(mw - 64, mh + 96, "Return");
 }
-
-draw_sprite(spr_checkbox, f_check, mw + 160, mh + 96);

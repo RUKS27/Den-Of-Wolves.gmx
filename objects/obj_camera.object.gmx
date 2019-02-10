@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>following = obj_player;
-h_border = 30;
-v_border = 10;
+h_border = 60;
+v_border = 30;
 </string>
           </argument>
         </arguments>
@@ -51,8 +51,8 @@ v_border = 10;
           <argument>
             <kind>1</kind>
             <string>if(instance_exists(following)){
-    x = round(clamp(x, following.x-h_border, (following.x+h_border)));
-    y = round(clamp(y, following.y-v_border, (following.y+v_border)));
+    x = clamp(x, following.x-h_border, following.x+h_border);
+    y = clamp(y, following.y-v_border, following.y+v_border);
 }
 </string>
           </argument>
