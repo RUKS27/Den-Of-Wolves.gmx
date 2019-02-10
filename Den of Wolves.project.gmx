@@ -44,7 +44,11 @@
 
     <background>background\bg_mountain</background>
     <background>background\bg_sky</background>
+<<<<<<< HEAD
     <background>background\ts_interior_01</background>
+
+=======
+>>>>>>> parent of 8baea7e... some experimental stuff
   </backgrounds>
   <paths name="paths">
     <path>paths\testroompath</path>
