@@ -41,6 +41,11 @@
     <background>background\ts_interior_house_01</background>
     <background>background\ts_exterior_ambience_01</background>
     <background>background\ts_gore_01</background>
+
+    <background>background\bg_mountain</background>
+    <background>background\bg_sky</background>
+    <background>background\ts_interior_01</background>
+
   </backgrounds>
   <paths name="paths">
     <path>paths\testroompath</path>
@@ -130,6 +135,10 @@
     </scripts>
     <script>scripts\SaveFile.gml</script>
     <script>scripts\LoadFile.gml</script>
+
+    <script>scripts\ScaleGame.gml</script>
+    <script>scripts\AnimateSprite.gml</script>
+    <script>scripts\Events.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
@@ -172,10 +181,26 @@
         <object>objects\par_enemy</object>
       </objects>
     </objects>
+
+    <object>objects\obj_barrel</object>
+    <object>objects\obj_parallax_p</object>
+    <object>objects\obj_trigger</object>
+
   </objects>
+  <timelines name="timelines">
+    <timeline>timelines\tl_cell</timeline>
+  </timelines>
   <rooms name="rooms">
     <room>rooms\test_path_finding</room>
     <room>rooms\rm_menu</room>
+    <rooms name="Levels">
+      <rooms name="OUTDATED">
+        <room>rooms\rm_midnight_highway_01</room>
+        <room>rooms\rm_midnight_highway_00START</room>
+        <room>rooms\rm_000</room>
+      </rooms>
+      <room>rooms\rm_mortuary_room01</room>
+    </rooms>
     <room>rooms\rm_debug</room>
     <room>rooms\rm_startingarea</room>
     <room>rooms\rm_den_quadrant_01</room>
