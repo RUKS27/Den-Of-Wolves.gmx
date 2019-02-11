@@ -50,6 +50,7 @@
     <background>background\bg_mountain</background>
     <background>background\bg_sky</background>
     <background>background\ts_interior_01</background>
+    <background>background\ts_otherworld</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\testroompath</path>
@@ -192,13 +193,13 @@
     <timeline>timelines\tl_cell</timeline>
   </timelines>
   <rooms name="rooms">
-    <room>rooms\test_path_finding</room>
     <room>rooms\rm_menu</room>
+    <room>rooms\test_path_finding</room>
     <rooms name="Levels">
       <rooms name="OUTDATED">
         <room>rooms\rm_000</room>
       </rooms>
-      <room>rooms\rm_mortuary_room01</room>
+      <room>rooms\rm_otherworld_portal</room>
     </rooms>
     <room>rooms\rm_debug</room>
     <room>rooms\rm_startingarea</room>
