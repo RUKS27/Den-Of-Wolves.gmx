@@ -41,6 +41,7 @@
     <sprite>sprites\spr_knife</sprite>
     <sprite>sprites\spr_savepoint</sprite>
     <sprite>sprites\spr_door</sprite>
+    <sprite>sprites\spr_pillar</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\ts_exterior_01</background>
@@ -189,6 +190,7 @@
     <object>objects\obj_barrel</object>
     <object>objects\obj_parallax_p</object>
     <object>objects\obj_trigger</object>
+    <object>objects\obj_pillar</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_cell</timeline>
