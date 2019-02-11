@@ -153,6 +153,7 @@
       <object>objects\obj_main</object>
       <object>objects\obj_mainMenu</object>
       <object>objects\obj_depthsorter</object>
+      <object>objects\obj_lightmanager</object>
     </objects>
     <objects name="Complete">
       <object>objects\obj_camera</object>
