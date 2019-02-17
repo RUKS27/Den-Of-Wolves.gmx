@@ -22,15 +22,21 @@ type[55] = i_types.consumable;
 sprite[55] = Health_Injection;
 
 // Weapons Start From 40
-name[40] =  "Sharp Metal Shard";
+name[40] =  "Sharp Stake";
 type[40] = i_types.weapon;
 sprite[40] = spr_mshard;
+value[40] = 1;
 
 name[41] =  "Knife";
 type[41] = i_types.weapon;
 sprite[41] = spr_knife;
+value[41] = 4;
 
 // Keys Start From 1
+name[3] =  "Wooden Board";
+type[3] = i_types.key;
+sprite[3] = spr_tstkey;
+
 name[2] =  "Rusted Key";
 type[2] = i_types.key;
 sprite[2] = spr_tstkey;
@@ -48,7 +54,7 @@ sprite[0] = spr_empty;
 // Return Name = 0
 // Return Type = 1
 // Return Sprite = 2
-// Return ID = 3
+// Return Value = 3
 */
 
 if(ret_var = 0){
@@ -58,5 +64,5 @@ if(ret_var = 0){
 } else if(ret_var = 2){
     return sprite[item_ID];
 } else {
-    return item_ID;
+    return value[item_ID];
 }

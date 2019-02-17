@@ -4,10 +4,20 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_saferoom</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_player</sprite>
+    <sprite>sprites\spr_playerforward</sprite>
+    <sprite>sprites\spr_playerback</sprite>
+    <sprite>sprites\spr_playerleft</sprite>
+    <sprite>sprites\spr_playerright</sprite>
     <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_wallcent</sprite>
+    <sprite>sprites\spr_item</sprite>
+    <sprite>sprites\spr_indicator</sprite>
+    <sprite>sprites\spr_barrel</sprite>
     <sprite>sprites\spr_warningTitle</sprite>
     <sprite>sprites\Health_Injection</sprite>
     <sprite>sprites\spr_dialoguebox</sprite>
@@ -20,6 +30,9 @@
     <sprite>sprites\spr_dEvent</sprite>
     <sprite>sprites\spr_exit</sprite>
     <sprite>sprites\spr_darkness</sprite>
+    <sprite>sprites\spr_darknesscorner</sprite>
+    <sprite>sprites\spr_pillarshadow</sprite>
+    <sprite>sprites\spr_pillarshadow_one</sprite>
     <sprites name="Text">
       <sprite>sprites\spr_gameover</sprite>
       <sprite>sprites\spr_title</sprite>
@@ -35,17 +48,23 @@
     <sprite>sprites\spr_knife</sprite>
     <sprite>sprites\spr_savepoint</sprite>
     <sprite>sprites\spr_door</sprite>
+    <sprite>sprites\spr_pillar</sprite>
+    <sprite>sprites\spr_lcookie0</sprite>
+    <sprite>sprites\spr_lcookie1</sprite>
+    <sprite>sprites\spr_board</sprite>
+    <sprite>sprites\spr_torch</sprite>
+    <sprite>sprites\spr_alter</sprite>
   </sprites>
   <backgrounds name="background">
-    <background>background\ts_exterior_den_01</background>
+    <background>background\ts_exterior_01</background>
     <background>background\ts_interior_house_01</background>
     <background>background\ts_exterior_ambience_01</background>
     <background>background\ts_gore_01</background>
-
     <background>background\bg_mountain</background>
     <background>background\bg_sky</background>
     <background>background\ts_interior_01</background>
-
+    <background>background\ts_otherworld</background>
+    <background>background\ts_village</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\testroompath</path>
@@ -113,6 +132,7 @@
       </scripts>
       <script>scripts\PlayerNormal.gml</script>
       <script>scripts\DrawHUD.gml</script>
+      <script>scripts\PlayerHiding.gml</script>
     </scripts>
     <scripts name="pathfinding">
       <script>scripts\findClosestPath.gml</script>
@@ -135,34 +155,44 @@
     </scripts>
     <script>scripts\SaveFile.gml</script>
     <script>scripts\LoadFile.gml</script>
-
     <script>scripts\ScaleGame.gml</script>
     <script>scripts\AnimateSprite.gml</script>
     <script>scripts\Events.gml</script>
+    <script>scripts\CheckPlayerDirection.gml</script>
+    <script>scripts\ChangeBGM.gml</script>
   </scripts>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shader0.shader</shader>
+  </shaders>
   <fonts name="fonts">
     <font>fonts\f_menu</font>
     <font>fonts\f_dialogue</font>
   </fonts>
   <objects name="objects">
+    <object>objects\obj_depthobject</object>
     <objects name="Meta">
       <object>objects\obj_main</object>
       <object>objects\obj_mainMenu</object>
       <object>objects\obj_depthsorter</object>
+      <object>objects\obj_lightmanager</object>
+      <object>objects\obj_parallax_p</object>
     </objects>
     <objects name="Complete">
       <object>objects\obj_camera</object>
       <object>objects\par_wall</object>
+      <object>objects\obj_hideablewall</object>
       <object>objects\obj_spawn</object>
       <object>objects\obj_dialogueEvent</object>
       <object>objects\obj_area_boundaries</object>
       <object>objects\obj_exit</object>
       <object>objects\obj_darkness</object>
+      <object>objects\obj_darknesscorner</object>
+      <object>objects\obj_pillarshadow</object>
       <object>objects\obj_controller</object>
       <object>objects\obj_dialogue</object>
       <object>objects\obj_door</object>
+      <object>objects\obj_door2</object>
     </objects>
-    <object>objects\obj_depthobject</object>
     <objects name="listeners">
       <object>objects\obj_listener</object>
       <object>objects\obj_testListener</object>
@@ -181,35 +211,49 @@
         <object>objects\par_enemy</object>
       </objects>
     </objects>
-
-    <object>objects\obj_barrel</object>
-    <object>objects\obj_parallax_p</object>
-    <object>objects\obj_trigger</object>
-
+    <objects name="Props">
+      <object>objects\obj_pillar</object>
+      <object>objects\obj_barrel</object>
+      <object>objects\obj_alter</object>
+      <object>objects\obj_torch</object>
+      <objects name="Interactable">
+        <object>objects\obj_board</object>
+      </objects>
+    </objects>
+    <objects name="Lighting">
+      <object>objects\obj_flame</object>
+      <object>objects\par_light</object>
+    </objects>
+    <objects name="Event">
+      <object>objects\obj_trigger</object>
+    </objects>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_cell</timeline>
   </timelines>
   <rooms name="rooms">
-    <room>rooms\test_path_finding</room>
     <room>rooms\rm_menu</room>
+    <room>rooms\test_path_finding</room>
     <rooms name="Levels">
       <rooms name="OUTDATED">
-        <room>rooms\rm_midnight_highway_01</room>
-        <room>rooms\rm_midnight_highway_00START</room>
         <room>rooms\rm_000</room>
       </rooms>
-      <room>rooms\rm_mortuary_room01</room>
+      <room>rooms\rm_hallway</room>
+      <rooms name="Village">
+        <room>rooms\rm_</room>
+      </rooms>
+      <rooms name="Otherworld">
+        <room>rooms\rm_otherworld_sideroom</room>
+        <room>rooms\rm_otherworld_entrance</room>
+        <room>rooms\rm_otherworld_cell</room>
+        <room>rooms\rm_otherworld_portal</room>
+        <room>rooms\rm_otherworld_</room>
+      </rooms>
     </rooms>
     <room>rooms\rm_debug</room>
     <room>rooms\rm_startingarea</room>
-    <room>rooms\rm_den_quadrant_01</room>
-    <room>rooms\rm_general_house_interiors</room>
-    <room>rooms\rm_important_interiors</room>
     <room>rooms\rm_gameover</room>
     <room>rooms\rm_end</room>
-    <room>rooms\rm_streets_01</room>
-    <room>rooms\rm_st_01_interiors</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -13,7 +13,7 @@
     <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>128</width>
-  <height>128</height>
+  <width>640</width>
+  <height>480</height>
   <data>images\ts_interior_01.png</data>
 </background>

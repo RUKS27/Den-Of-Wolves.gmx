@@ -57,7 +57,8 @@ enum p_states {
     normal = 0,
     cutscene = 1,
     attack = 2,
-    dead = 3
+    hiding = 3,
+    dead = 4
 }
 
 p_state = p_states.normal;
@@ -73,8 +74,8 @@ a_delay = 0;
 global.keyitems = ds_list_create();
 global.consumables = ds_list_create();
 
-ds_list_add(global.keyitems, ItemList(0, 0));
-ds_list_add(global.consumables, ItemList(0, 0));
+ds_list_add(global.keyitems, 0);
+ds_list_add(global.consumables, 0);
 
 delay = 0;
 
@@ -89,6 +90,7 @@ consum_pos = 0;
 
 eq_passive = 0;
 eq_weapon = 0;
+weapon_uses = 0;
 
 tm = 0;
 
@@ -171,10 +173,10 @@ noClip = false;
           <argument>
             <kind>1</kind>
             <string>// Get Keyboard Inputs
-RightMove = global.Right_Press;
-DownMove = global.Down_Press;
-LeftMove = global.Left_Press;
-UpMove = global.Up_Press;
+RightMove = global.Right_Pressed;
+DownMove = global.Down_Pressed;
+LeftMove = global.Left_Pressed;
+UpMove = global.Up_Pressed;
 
 Attack = global.Attack_Press;
 Attack_RLS = global.Attack_Release;
@@ -186,10 +188,20 @@ Activate = global.Context_Pressed;
 
 UseConsumable = global.Item_Press;
 
+if(weapon_uses = 0){
+    eq_weapon = 0;
+}
 
 if(debug_mode){
     if(keyboard_check(ord('O'))){
         noClip = !noClip;
+    }
+}
+
+if(place_meeting(x, y, obj_hideablewall) &amp;&amp; CheckPlayerDirection(other)){
+    if(UpMove){
+        p_dir = p_dirs.down;
+        p_state = p_states.hiding;
     }
 }
 
@@ -208,6 +220,10 @@ if(Health &lt;= 0){
     show_debug_message("You died");
     p_state = p_states.dead;
 }
+
+/*if(weapon_uses = 0){
+    eq_weapon = 0;
+}*/
 
 switch(p_dir){
     case p_dirs.forward:
@@ -242,6 +258,10 @@ switch(p_state){
         ySpd = 0;
         
         StealthKill(locked_on);
+    break;
+    
+    case 3:
+        PlayerHiding();
     break;
 }
 </string>

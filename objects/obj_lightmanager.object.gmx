@@ -110,8 +110,8 @@ if(surface_exists(surf)){
         }
         
         draw_set_alpha(f);
-        draw_set_blend_mode(bm_add);
-        draw_sprite_ext(spr_lcookie0, 0, x, y, 1, 1, 0, c_orange, f);
+        draw_set_blend_mode(bm_dest_colour);
+        draw_sprite_ext(spr_lcookie1, 0, x, y, 1, 1, 0, c_orange, f);
         draw_set_blend_mode(bm_normal);
         draw_set_alpha(1);
     }
