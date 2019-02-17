@@ -88,6 +88,8 @@ flag[7] = false;
 flag[8] = false;
 // MORE TO BE ADDED
 
+global.roomDarkness = 0;
+
 // Stats
 global.TotalKills = 0;
 global.TotalDeaths = 0;
@@ -114,6 +116,14 @@ global.TotalDeaths = 0;
           <argument>
             <kind>1</kind>
             <string>// DEBUG ONLY
+
+if(global.BGM != noone){
+    if(!audio_is_playing(global.BGM)){
+        audio_sound_gain(global.BGM, global.BGMVolume, 10);
+        audio_play_sound(global.BGM, 1, true);
+    }
+}
+
 Debug_KILLKEY = keyboard_check_pressed(ord("K"));
 if(instance_exists(obj_player)){
     if(debug_mode){

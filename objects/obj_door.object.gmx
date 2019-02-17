@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>sprite_index = -1;
-mask_index = spr_door;
+mask_index = spr_wall;
 key_id = 0;
 open = false;
 
@@ -76,8 +76,8 @@ canActivate = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(collision_circle(x, y, 64, obj_player, false, false) != noone){
-    if(canActivate){
+            <string>if(collision_circle(x, y, 32, obj_player, false, false) != noone){
+    if(canActivate &amp;&amp; CheckPlayerDirection(self)){
         if(obj_player.Activate &amp;&amp; !open){
             if(CheckInventoryForItem(key_id)){
                 show_debug_message("Door open");

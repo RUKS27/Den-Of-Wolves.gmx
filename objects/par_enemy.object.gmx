@@ -67,6 +67,7 @@ enum e_lookdir {
 
 lookDir = e_lookdir.forward;
 
+sprite = spr_player;
 mask_index = spr_player;
 </string>
           </argument>
@@ -145,6 +146,7 @@ switch(e_state){
     break;
     
     case e_states.dead:
+        
         mask_index = -1;
     break;
 }
@@ -170,7 +172,7 @@ switch(e_state){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>draw_sprite(sprite, 1, x, y);
 </string>
           </argument>
         </arguments>

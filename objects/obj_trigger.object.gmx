@@ -58,8 +58,11 @@ t_type = t_types.collision;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(place_meeting(x, y, obj_player) &amp;&amp; t_type = t_types.collision){
-    toggled = true;
+            <string>if(place_meeting(x, y, obj_player)){
+    if(t_type = t_types.collision) toggled = true;
+    else if(t_type = t_types.toggle &amp;&amp; obj_player.Activate){
+        toggled = true;
+    }
 }
 
 if(toggled){

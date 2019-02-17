@@ -6,4 +6,7 @@ with(enemy_instance){
     show_debug_message("He dead.");
 }
 
+weapon_uses--;
+obj_player.p_state = p_states.normal;
+
 exit;
