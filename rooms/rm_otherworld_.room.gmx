@@ -10,7 +10,36 @@
   <persistent>0</persistent>
   <colour>0</colour>
   <showcolour>-1</showcolour>
-  <code>global.roomDarkness = 0.3;</code>
+  <code>global.roomDarkness = 0.3;
+
+a = instance_create(0,0,obj_path_manager)
+with(a)
+{
+    paths[0]= rm_otherworld_Path1;
+    paths[1]= rm_otherworld_Path2;
+    paths[2]= rm_otherworld_Path3;
+    paths[3]= rm_otherworld_Path4;
+    paths[4]= rm_otherworld_Path5;  
+    paths[5]= rm_otherworld_Path6;
+    paths[6]= rm_otherworld_Path7;
+    paths[7]= rm_otherworld_Path8;
+    paths[8]= rm_otherworld_Path9;
+    paths[9]= rm_otherworld_Path10;
+    paths[10]= rm_otherworld_Path11;
+    paths[11]= rm_otherworld_Path12;
+    paths[12]= rm_otherworld_Path13;
+    paths[13]= rm_otherworld_Path14;
+    paths[14]= rm_otherworld_Path15;
+    paths[15]= rm_otherworld_Path16;
+    paths[16]= rm_otherworld_Path17;
+    paths[17]= rm_otherworld_Path18;
+    paths[18]= rm_otherworld_Path19;
+    paths[19]= rm_otherworld_Path20;
+    paths[20]= rm_otherworld_Path21;
+    
+    event_user(0);
+
+}</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
