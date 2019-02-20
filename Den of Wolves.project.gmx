@@ -67,21 +67,46 @@
     <background>background\ts_village</background>
   </backgrounds>
   <paths name="paths">
-    <path>paths\testroompath</path>
-    <path>paths\testroombranch1</path>
-    <path>paths\testRoomPath1</path>
-    <path>paths\testRoomPath2</path>
-    <path>paths\testRoomPath3</path>
-    <path>paths\testRoomPath4</path>
-    <path>paths\testRoomPath5</path>
-    <path>paths\testRoomPath6</path>
-    <path>paths\testRoomPath7</path>
-    <path>paths\testRoomPath8</path>
-    <path>paths\testRoomPath9</path>
-    <path>paths\testRoomPath10</path>
-    <path>paths\testRoomPath11</path>
-    <path>paths\testRoomPath12</path>
-    <path>paths\testRoomPath13</path>
+    <paths name="testroom">
+      <path>paths\testroompath</path>
+      <path>paths\testRoomPath1</path>
+      <path>paths\testRoomPath2</path>
+      <path>paths\testRoomPath4</path>
+      <path>paths\testRoomPath5</path>
+      <path>paths\testRoomPath8</path>
+      <path>paths\testRoomPath6</path>
+      <path>paths\testRoomPath7</path>
+      <path>paths\testRoomPath11</path>
+      <path>paths\testRoomPath13</path>
+      <path>paths\testRoomPath9</path>
+      <path>paths\testRoomPath12</path>
+      <path>paths\testRoomPath10</path>
+      <path>paths\testRoomPath3</path>
+      <path>paths\testroombranch1</path>
+    </paths>
+    <paths name="rm_otherworld_">
+      <path>paths\rm_otherworld_Path1</path>
+      <path>paths\rm_otherworld_Path4</path>
+      <path>paths\rm_otherworld_Path11</path>
+      <path>paths\rm_otherworld_Path14</path>
+      <path>paths\rm_otherworld_Path12</path>
+      <path>paths\rm_otherworld_Path13</path>
+      <path>paths\rm_otherworld_Path5</path>
+      <path>paths\rm_otherworld_Path15</path>
+      <path>paths\rm_otherworld_Path16</path>
+      <path>paths\rm_otherworld_Path21</path>
+      <path>paths\rm_otherworld_Path20</path>
+      <path>paths\rm_otherworld_Path19</path>
+      <path>paths\rm_otherworld_Path18</path>
+      <path>paths\rm_otherworld_Path17</path>
+      <path>paths\rm_otherworld_Path7</path>
+      <path>paths\rm_otherworld_Path8</path>
+      <path>paths\rm_otherworld_Path9</path>
+      <path>paths\rm_otherworld_Path10</path>
+      <path>paths\rm_otherworld_Path6</path>
+      <path>paths\rm_otherworld_Path3</path>
+      <path>paths\rm_otherworld_Path2</path>
+    </paths>
   </paths>
   <scripts name="scripts">
     <script>scripts\GetDialogue.gml</script>
@@ -233,6 +258,13 @@
   </timelines>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
+    <rooms name="Otherworld">
+      <room>rooms\rm_otherworld_</room>
+      <room>rooms\rm_otherworld_sideroom</room>
+      <room>rooms\rm_otherworld_entrance</room>
+      <room>rooms\rm_otherworld_cell</room>
+      <room>rooms\rm_otherworld_portal</room>
+    </rooms>
     <room>rooms\test_path_finding</room>
     <rooms name="Levels">
       <rooms name="OUTDATED">
@@ -241,13 +273,6 @@
       <room>rooms\rm_hallway</room>
       <rooms name="Village">
         <room>rooms\rm_</room>
-      </rooms>
-      <rooms name="Otherworld">
-        <room>rooms\rm_otherworld_sideroom</room>
-        <room>rooms\rm_otherworld_entrance</room>
-        <room>rooms\rm_otherworld_cell</room>
-        <room>rooms\rm_otherworld_portal</room>
-        <room>rooms\rm_otherworld_</room>
       </rooms>
     </rooms>
     <room>rooms\rm_debug</room>
